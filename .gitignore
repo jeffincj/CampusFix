@@ -13,3 +13,6 @@ backend/media/
 # Node
 node_modules/
 frontend/dist/
+
+# Trained ML models (rebuild with: python manage.py train_models)
+backend/ai/ml/artifacts/

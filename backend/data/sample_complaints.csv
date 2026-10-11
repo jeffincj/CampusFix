@@ -1,0 +1,301 @@
+id,title,description,category,urgency,language,location,block,created_at,resolution_days,synthetic
+1,ഹോസ്റ്റലിൽ വെള്ളമില്ല,B Block Hostel ബാത്ത്റൂമിൽ രാവിലെ മുതൽ വെള്ളം വരുന്നില്ല.,HOSTEL,high,ml,B Block Hostel,B Block,2026-08-16T08:51,3.3,yes
+2,Washroom not cleaned,The washrooms in Main Mess have not been cleaned for 6 days and smell very bad.,SANITATION,medium,en,Main Mess,Mess Hall,2026-08-16T12:18,3.3,yes
+3,Insect found in food,We found an insect in the sambar at Main Mess during lunch. This is a hygiene issue.,MESS,critical,en,Main Mess,Mess Hall,2026-08-16T17:17,0.5,yes
+4,Cannot log in to portal,"I cannot log in to the student portal, it says invalid password even after reset.",IT,medium,en,A Block Hostel,A Block,2026-08-16T17:48,1.7,yes
+5,Gas smell in lab,"There is a strong gas smell in CSE Lab, students feel dizzy.",LAB,critical,en,CSE Lab,Academic Block 1,2026-08-16T23:28,3.2,yes
+6,Food poisoning after dinner,Several students got stomach pain and vomiting after dinner at Main Mess yesterday.,MESS,critical,en,Main Mess,Mess Hall,2026-08-17T06:11,0.4,yes
+7,Ragging incident,Some seniors are ragging first years near Sports Ground. Please take action.,SECURITY,critical,en,Sports Ground,Ground,2026-08-17T08:42,0.3,yes
+8,கொசு தொல்லை,"A Block Hostel-ல் கொசு தொல்லை அதிகம், புகை மருந்து அடிக்கவும்.",SANITATION,medium,ta,A Block Hostel,A Block,2026-08-17T13:11,1.7,yes
+9,உணவில் பூச்சி,மதிய உணவில் சாம்பாரில் பூச்சி இருந்தது. Main Mess சுத்தம் இல்லை.,MESS,high,ta,Main Mess,Mess Hall,2026-08-17T14:07,0.8,yes
+10,അത്താഴത്തിന് ശേഷം വയറുവേദന,ഇന്നലെ Main Mess-ലെ അത്താഴത്തിന് ശേഷം പല വിദ്യാർത്ഥികൾക്കും വയറുവേദനയും ഛർദ്ദിയും ഉണ്ടായി.,MESS,critical,ml,Main Mess,Mess Hall,2026-08-17T16:50,0.3,yes
+11,Bus breakdown,"Bus number 7 broke down on the way, students missed the exam.",TRANSPORT,critical,en,Bus Bay,Transport Yard,2026-08-17T23:36,1.1,yes
+12,சாப்பாடு தரம் மோசம்,"Main Mess-ல் இன்று கொடுத்த சாப்பாடு பழையதாக இருந்தது, சாதம் சரியாக வேகவில்லை.",MESS,medium,ta,Main Mess,Mess Hall,2026-08-18T08:46,0.8,yes
+13,Projector not working,"The projector in CSE Lab is not working for 4 days, lectures are affected.",LAB,medium,en,CSE Lab,Academic Block 1,2026-08-18T10:35,5.3,yes
+14,Food poisoning after dinner,Several students got stomach pain and vomiting after dinner at Main Mess yesterday.,MESS,critical,en,Main Mess,Mess Hall,2026-08-18T10:41,0.6,yes
+15,Tap leaking,The tap in the washroom near Physics Lab is leaking continuously and water is wasted.,MAINTENANCE,low,en,Physics Lab,Academic Block 2,2026-08-18T12:31,2.9,yes
+16,കൊതുക് ശല്യം,"Main Mess-ൽ കൊതുക് ശല്യം കൂടുതലാണ്, ഫോഗിംഗ് ചെയ്യണം.",SANITATION,medium,ml,Main Mess,Mess Hall,2026-08-18T18:52,2.4,yes
+17,Rash driving,"The driver of bus 4 drives very rashly, it is not safe.",TRANSPORT,medium,en,Bus Bay,Transport Yard,2026-08-18T20:09,6.0,yes
+18,Garbage not collected,"Garbage bins near C Block Hostel are overflowing, nobody collected them.",SANITATION,medium,en,C Block Hostel,C Block,2026-08-18T20:43,1.1,yes
+19,கொசு தொல்லை,"Library-ல் கொசு தொல்லை அதிகம், புகை மருந்து அடிக்கவும்.",SANITATION,medium,ta,Library,Library,2026-08-18T20:52,1.9,yes
+20,സ്വിച്ചിൽ നിന്ന് ഷോക്ക്,C Block Hostel-ലെ സ്വിച്ച് ബോർഡിൽ നിന്ന് ഷോക്ക് അടിച്ചു. വയറുകൾ പുറത്താണ്.,MAINTENANCE,critical,ml,C Block Hostel,C Block,2026-08-19T00:13,0.6,yes
+21,ഇന്റർനെറ്റ് വളരെ സ്ലോ ആണ്,വൈകുന്നേരം A Block Hostel-ൽ ഇന്റർനെറ്റ് വേഗത വളരെ കുറവാണ്.,IT,medium,ml,A Block Hostel,A Block,2026-08-19T00:46,1.5,yes
+22,சுவிட்சில் மின்சார அதிர்ச்சி,Physics Lab சுவிட்ச் போர்டில் மின்சார அதிர்ச்சி அடித்தது. கம்பிகள் வெளியே தெரிகின்றன.,MAINTENANCE,critical,ta,Physics Lab,Academic Block 2,2026-08-19T01:21,1.4,yes
+23,കൊതുക് ശല്യം,"Main Mess-ൽ കൊതുക് ശല്യം കൂടുതലാണ്, ഫോഗിംഗ് ചെയ്യണം.",SANITATION,medium,ml,Main Mess,Mess Hall,2026-08-19T18:27,1.1,yes
+24,കറന്റ് ഇല്ല,Library-ൽ 4 മണിക്കൂറായി കറന്റ് ഇല്ല.,MAINTENANCE,high,ml,Library,Library,2026-08-19T22:36,1.6,yes
+25,ടാപ്പ് ലീക്ക് ആകുന്നു,C Block Hostel-ന് അടുത്തുള്ള വാഷ്റൂമിലെ ടാപ്പ് തുടർച്ചയായി ലീക്ക് ആകുന്നു.,MAINTENANCE,low,ml,C Block Hostel,C Block,2026-08-20T05:08,3.1,yes
+26,அறையில் மின்விசிறி வேலை செய்யவில்லை,C Block Hostel அறை 221-ல் மின்விசிறி 4 நாட்களாக வேலை செய்யவில்லை. இரவில் தூங்க முடியவில்லை.,HOSTEL,high,ta,C Block Hostel,C Block,2026-08-20T09:01,2.7,yes
+27,Lab system boot aagala,"CSE Lab la half systems boot aagala, practicals la share panrom.",LAB,medium,mixed,CSE Lab,Academic Block 1,2026-08-20T12:53,4.4,yes
+28,കൊതുക് ശല്യം,"Sports Ground-ൽ കൊതുക് ശല്യം കൂടുതലാണ്, ഫോഗിംഗ് ചെയ്യണം.",SANITATION,medium,ml,Sports Ground,Ground,2026-08-20T15:40,1.1,yes
+29,മാലിന്യം നീക്കം ചെയ്തിട്ടില്ല,C Block Hostel-ന് അടുത്തുള്ള മാലിന്യ ബിന്നുകൾ നിറഞ്ഞു കവിയുന്നു.,SANITATION,medium,ml,C Block Hostel,C Block,2026-08-20T18:01,1.9,yes
+30,Rats in the building,Rats are seen every night in Main Mess.,SANITATION,high,en,Main Mess,Mess Hall,2026-08-20T21:28,0.8,yes
+31,Mess il food cold aanu,"Main Mess il dinner always cold aanu, chappathi kazhikkan pattunnilla.",MESS,low,mixed,Main Mess,Mess Hall,2026-08-21T11:08,3.1,yes
+32,No water supply in hostel,There is no water supply in the bathrooms of B Block Hostel since morning. We cannot bathe before class.,HOSTEL,high,en,B Block Hostel,B Block,2026-08-21T11:47,3.1,yes
+33,Washroom not cleaned,The washrooms in A Block Hostel have not been cleaned for 5 days and smell very bad.,SANITATION,low,en,A Block Hostel,A Block,2026-08-21T13:00,2.4,yes
+34,LAN port not working,The LAN port in room 190 at A Block Hostel is not working.,IT,low,en,A Block Hostel,A Block,2026-08-21T15:23,1.2,yes
+35,ടാപ്പ് ലീക്ക് ആകുന്നു,B Block Hostel-ന് അടുത്തുള്ള വാഷ്റൂമിലെ ടാപ്പ് തുടർച്ചയായി ലീക്ക് ആകുന്നു.,MAINTENANCE,medium,ml,B Block Hostel,B Block,2026-08-21T18:18,2.8,yes
+36,കട്ടിൽ പൊട്ടിയിരിക്കുന്നു,"Girls Hostel മുറി 228-ലെ കട്ടിൽ പൊട്ടിയിരിക്കുന്നു, ദയവായി മാറ്റി തരണം.",HOSTEL,low,ml,Girls Hostel,Girls Hostel,2026-08-21T18:24,6.1,yes
+37,ലാബിലെ കമ്പ്യൂട്ടറുകൾ പ്രവർത്തിക്കുന്നില്ല,CSE Lab-ലെ പകുതി കമ്പ്യൂട്ടറുകളും ഓണാകുന്നില്ല. പ്രാക്ടിക്കൽ ക്ലാസിൽ ബുദ്ധിമുട്ടാണ്.,LAB,low,ml,CSE Lab,Academic Block 1,2026-08-21T20:01,8.9,yes
+38,Room fan work aagala,"Girls Hostel room 349 la fan 2 days ah work aagala, romba heat ah iruku.",HOSTEL,medium,mixed,Girls Hostel,Girls Hostel,2026-08-22T07:42,4.0,yes
+39,குப்பை அள்ளப்படவில்லை,A Block Hostel அருகே குப்பைத் தொட்டிகள் நிரம்பி வழிகின்றன.,SANITATION,medium,ta,A Block Hostel,A Block,2026-08-22T17:44,1.8,yes
+40,വൈഫൈ പ്രവർത്തിക്കുന്നില്ല,Library-ൽ 5 ദിവസമായി വൈഫൈ പ്രവർത്തിക്കുന്നില്ല. ഓൺലൈൻ ക്ലാസിൽ കയറാൻ പറ്റുന്നില്ല.,IT,high,ml,Library,Library,2026-08-22T19:38,1.1,yes
+41,ലാബിലെ കമ്പ്യൂട്ടറുകൾ പ്രവർത്തിക്കുന്നില്ല,Physics Lab-ലെ പകുതി കമ്പ്യൂട്ടറുകളും ഓണാകുന്നില്ല. പ്രാക്ടിക്കൽ ക്ലാസിൽ ബുദ്ധിമുട്ടാണ്.,LAB,medium,ml,Physics Lab,Academic Block 2,2026-08-22T21:46,8.1,yes
+42,சாப்பாடு தரம் மோசம்,"Main Mess-ல் இன்று கொடுத்த சாப்பாடு பழையதாக இருந்தது, சாதம் சரியாக வேகவில்லை.",MESS,medium,ta,Main Mess,Mess Hall,2026-08-22T22:02,2.7,yes
+43,Dark path near hostel,"The path near Main Gate is completely dark at night, girls feel unsafe.",SECURITY,high,en,Main Gate,Main Gate,2026-08-23T09:03,1.3,yes
+44,ഭക്ഷണത്തിന്റെ ഗുണനിലവാരം മോശം,"Main Mess-ൽ ഇന്ന് നൽകിയ ഭക്ഷണം പഴകിയതായിരുന്നു, ചോറ് ശരിയായി വെന്തിട്ടില്ല.",MESS,medium,ml,Main Mess,Mess Hall,2026-08-23T15:37,2.1,yes
+45,Fan not working in room,The ceiling fan in my room at B Block Hostel has not been working for 6 days. It is very hot at night.,HOSTEL,medium,en,B Block Hostel,B Block,2026-08-23T19:30,3.7,yes
+46,No water supply in hostel,There is no water supply in the bathrooms of B Block Hostel since morning. We cannot bathe before class.,HOSTEL,high,en,B Block Hostel,B Block,2026-08-23T21:17,3.4,yes
+47,Mess timing issue,"Breakfast at Main Mess closes before 8 am, students with early lab cannot eat.",MESS,low,en,Main Mess,Mess Hall,2026-08-24T13:08,2.0,yes
+48,Room door lock broken,"The door lock of room 381 in C Block Hostel is broken, we cannot lock the room.",HOSTEL,high,en,C Block Hostel,C Block,2026-08-24T21:28,1.5,yes
+49,കട്ടിൽ പൊട്ടിയിരിക്കുന്നു,"C Block Hostel മുറി 151-ലെ കട്ടിൽ പൊട്ടിയിരിക്കുന്നു, ദയവായി മാറ്റി തരണം.",HOSTEL,low,ml,C Block Hostel,C Block,2026-08-25T11:55,3.6,yes
+50,Tube light not working,"Tube lights in the corridor of B Block Hostel are not working, it is dark at night.",MAINTENANCE,medium,en,B Block Hostel,B Block,2026-08-25T20:03,2.5,yes
+51,കറന്റ് ഇല്ല,B Block Hostel-ൽ 2 മണിക്കൂറായി കറന്റ് ഇല്ല.,MAINTENANCE,high,ml,B Block Hostel,B Block,2026-08-26T07:59,1.1,yes
+52,ലാബിൽ ഗ്യാസിന്റെ മണം,"CSE Lab-ൽ ശക്തമായ ഗ്യാസിന്റെ മണം, വിദ്യാർത്ഥികൾക്ക് തലകറക്കം.",LAB,critical,ml,CSE Lab,Academic Block 1,2026-08-26T08:00,3.3,yes
+53,ലാബിൽ ഗ്യാസിന്റെ മണം,"CSE Lab-ൽ ശക്തമായ ഗ്യാസിന്റെ മണം, വിദ്യാർത്ഥികൾക്ക് തലകറക്കം.",LAB,critical,ml,CSE Lab,Academic Block 1,2026-08-26T11:15,2.4,yes
+54,Rash driving,"The driver of bus 1 drives very rashly, it is not safe.",TRANSPORT,high,en,Main Gate,Main Gate,2026-08-26T18:36,2.9,yes
+55,இணையம் மிகவும் மெதுவாக உள்ளது,மாலை நேரத்தில் A Block Hostel-ல் இணைய வேகம் மிகவும் குறைவாக உள்ளது.,IT,medium,ta,A Block Hostel,A Block,2026-08-26T21:04,1.3,yes
+56,LAN port not working,The LAN port in room 334 at B Block Hostel is not working.,IT,low,en,B Block Hostel,B Block,2026-08-27T09:24,3.7,yes
+57,Tube light வேலை செய்யல,"C Block Hostel corridor-ல tube light வேலை செய்யல, night இருட்டா இருக்கு.",MAINTENANCE,medium,mixed,C Block Hostel,C Block,2026-08-27T13:09,1.4,yes
+58,Hostel il vellam illa,"C Block Hostel bathroom il morning muthal water varunilla, please check cheyyu.",HOSTEL,critical,mixed,C Block Hostel,C Block,2026-08-27T20:15,1.9,yes
+59,Washroom clean pannala,"C Block Hostel washroom 6 days ah clean pannala, romba smell.",SANITATION,medium,mixed,C Block Hostel,C Block,2026-08-28T12:08,1.3,yes
+60,Tube light not working,"Tube lights in the corridor of C Block Hostel are not working, it is dark at night.",MAINTENANCE,medium,en,C Block Hostel,C Block,2026-08-28T19:00,3.9,yes
+61,Tube light not working,"Tube lights in the corridor of Girls Hostel are not working, it is dark at night.",MAINTENANCE,medium,en,Girls Hostel,Girls Hostel,2026-08-28T19:55,2.1,yes
+62,விடுதியில் தண்ணீர் இல்லை,C Block Hostel குளியலறையில் காலை முதல் தண்ணீர் வரவில்லை.,HOSTEL,high,ta,C Block Hostel,C Block,2026-08-29T09:21,2.3,yes
+63,Bus breakdown,"Bus number 4 broke down on the way, students missed the exam.",TRANSPORT,high,en,Bus Bay,Transport Yard,2026-08-29T09:34,2.3,yes
+64,பேருந்து பழுது,"12 எண் பேருந்து வழியில் பழுதடைந்தது, தேர்வுக்கு தாமதமானது.",TRANSPORT,high,ta,Bus Bay,Transport Yard,2026-08-29T12:06,4.5,yes
+65,Room fan work aagala,"B Block Hostel room 278 la fan 6 days ah work aagala, romba heat ah iruku.",HOSTEL,medium,mixed,B Block Hostel,B Block,2026-08-29T12:32,2.5,yes
+66,മുറിയിലെ ഫാൻ പ്രവർത്തിക്കുന്നില്ല,B Block Hostel മുറി 236-ലെ ഫാൻ 5 ദിവസമായി പ്രവർത്തിക്കുന്നില്ല. രാത്രി ഉറങ്ങാൻ പറ്റുന്നില്ല.,HOSTEL,medium,ml,B Block Hostel,B Block,2026-08-29T17:29,4.5,yes
+67,Broken cot and cupboard,"My cot is broken and the cupboard door does not close in B Block Hostel, room 414.",HOSTEL,low,en,B Block Hostel,B Block,2026-08-29T20:19,7.2,yes
+68,Wifi work aagala,"A Block Hostel la 5 days ah wifi work aagala, assignment submit panna mudiyala.",IT,high,mixed,A Block Hostel,A Block,2026-08-29T22:44,1.2,yes
+69,പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല,"സ്റ്റുഡന്റ് പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല, പാസ്‌വേഡ് തെറ്റാണെന്ന് കാണിക്കുന്നു.",IT,medium,ml,A Block Hostel,A Block,2026-08-30T04:50,2.3,yes
+70,പുറത്തുനിന്നുള്ളവർ ക്യാമ്പസിൽ കയറുന്നു,രാത്രി Sports Ground വഴി പുറത്തുനിന്നുള്ളവർ പരിശോധനയില്ലാതെ കയറുന്നു.,SECURITY,high,ml,Sports Ground,Ground,2026-08-30T07:28,1.7,yes
+71,Phone stolen,My phone was stolen from Main Gate yesterday evening. Please check the CCTV.,SECURITY,critical,en,Main Gate,Main Gate,2026-08-30T08:51,1.4,yes
+72,காலை உணவு நேரம்,Main Mess காலை உணவு 8 மணிக்கு முன்பே மூடிவிடுகிறார்கள்.,MESS,low,ta,Main Mess,Mess Hall,2026-08-30T09:38,1.6,yes
+73,Mosquito problem,"There are too many mosquitoes in C Block Hostel, please arrange fogging.",SANITATION,medium,en,C Block Hostel,C Block,2026-08-30T18:29,2.3,yes
+74,Very slow internet,"Internet speed in A Block Hostel is very slow in the evening, pages do not load.",IT,medium,en,A Block Hostel,A Block,2026-08-30T20:31,1.4,yes
+75,Garbage not collected,"Garbage bins near Main Mess are overflowing, nobody collected them.",SANITATION,medium,en,Main Mess,Mess Hall,2026-08-30T22:11,1.9,yes
+76,மின்சாரம் இல்லை,C Block Hostel-ல் 6 மணி நேரமாக மின்சாரம் இல்லை.,MAINTENANCE,high,ta,C Block Hostel,C Block,2026-08-30T22:30,2.4,yes
+77,പ്രൊജക്ടർ പ്രവർത്തിക്കുന്നില്ല,CSE Lab-ലെ പ്രൊജക്ടർ 5 ദിവസമായി പ്രവർത്തിക്കുന്നില്ല.,LAB,medium,ml,CSE Lab,Academic Block 1,2026-08-31T15:39,3.8,yes
+78,காலை உணவு நேரம்,Main Mess காலை உணவு 8 மணிக்கு முன்பே மூடிவிடுகிறார்கள்.,MESS,low,ta,Main Mess,Mess Hall,2026-08-31T16:49,1.1,yes
+79,Internet ரொம்ப slow,Library-ல evening time internet ரொம்ப slow ஆக இருக்கு.,IT,medium,mixed,Library,Library,2026-08-31T18:48,1.6,yes
+80,Gas smell in lab,"There is a strong gas smell in CSE Lab, students feel dizzy.",LAB,critical,en,CSE Lab,Academic Block 1,2026-08-31T19:49,4.5,yes
+81,Room fan work aagala,"B Block Hostel room 397 la fan 6 days ah work aagala, romba heat ah iruku.",HOSTEL,medium,mixed,B Block Hostel,B Block,2026-09-01T07:42,3.6,yes
+82,ലാബിൽ ഗ്യാസിന്റെ മണം,"Physics Lab-ൽ ശക്തമായ ഗ്യാസിന്റെ മണം, വിദ്യാർത്ഥികൾക്ക് തലകറക്കം.",LAB,critical,ml,Physics Lab,Academic Block 2,2026-09-01T08:13,2.9,yes
+83,Lab equipment broken,The equipment in CSE Lab is broken and we could not finish the experiment.,LAB,medium,en,CSE Lab,Academic Block 1,2026-09-01T09:23,4.9,yes
+84,கைபேசி திருடப்பட்டது,நேற்று மாலை Girls Hostel-ல் என் கைபேசி திருடப்பட்டது. CCTV பார்க்கவும்.,SECURITY,high,ta,Girls Hostel,Girls Hostel,2026-09-01T16:44,0.4,yes
+85,சுவிட்சில் மின்சார அதிர்ச்சி,B Block Hostel சுவிட்ச் போர்டில் மின்சார அதிர்ச்சி அடித்தது. கம்பிகள் வெளியே தெரிகின்றன.,MAINTENANCE,critical,ta,B Block Hostel,B Block,2026-09-01T18:15,1.0,yes
+86,பேருந்து பழுது,"12 எண் பேருந்து வழியில் பழுதடைந்தது, தேர்வுக்கு தாமதமானது.",TRANSPORT,high,ta,Bus Bay,Transport Yard,2026-09-01T19:14,3.6,yes
+87,குப்பை அள்ளப்படவில்லை,Main Mess அருகே குப்பைத் தொட்டிகள் நிரம்பி வழிகின்றன.,SANITATION,medium,ta,Main Mess,Mess Hall,2026-09-01T21:28,1.2,yes
+88,No water supply in hostel,There is no water supply in the bathrooms of A Block Hostel since morning. We cannot bathe before class.,HOSTEL,critical,en,A Block Hostel,A Block,2026-09-02T11:01,1.1,yes
+89,போர்ட்டலில் உள்நுழைய முடியவில்லை,"மாணவர் போர்ட்டலில் உள்நுழைய முடியவில்லை, கடவுச்சொல் தவறு என்று வருகிறது.",IT,medium,ta,A Block Hostel,A Block,2026-09-02T15:29,1.3,yes
+90,Broken cot and cupboard,"My cot is broken and the cupboard door does not close in A Block Hostel, room 289.",HOSTEL,low,en,A Block Hostel,A Block,2026-09-02T22:45,3.4,yes
+91,Internet ரொம்ப slow,CSE Lab-ல evening time internet ரொம்ப slow ஆக இருக்கு.,IT,medium,mixed,CSE Lab,Academic Block 1,2026-09-02T22:53,1.1,yes
+92,இணையம் மிகவும் மெதுவாக உள்ளது,மாலை நேரத்தில் A Block Hostel-ல் இணைய வேகம் மிகவும் குறைவாக உள்ளது.,IT,medium,ta,A Block Hostel,A Block,2026-09-03T08:29,1.4,yes
+93,Garbage not collected,"Garbage bins near C Block Hostel are overflowing, nobody collected them.",SANITATION,medium,en,C Block Hostel,C Block,2026-09-03T15:26,1.2,yes
+94,Phone stolen,My phone was stolen from Main Gate yesterday evening. Please check the CCTV.,SECURITY,medium,en,Main Gate,Main Gate,2026-09-03T16:39,1.0,yes
+95,கட்டில் உடைந்துள்ளது,"C Block Hostel அறை 220-ல் கட்டில் உடைந்துள்ளது, தயவுசெய்து மாற்றவும்.",HOSTEL,low,ta,C Block Hostel,C Block,2026-09-03T17:59,3.7,yes
+96,No water supply in hostel,There is no water supply in the bathrooms of C Block Hostel since morning. We cannot bathe before class.,HOSTEL,high,en,C Block Hostel,C Block,2026-09-03T23:33,1.8,yes
+97,Projector not working,"The projector in CSE Lab is not working for 2 days, lectures are affected.",LAB,medium,en,CSE Lab,Academic Block 1,2026-09-04T00:41,4.5,yes
+98,Rats in the building,Rats are seen every night in A Block Hostel.,SANITATION,high,en,A Block Hostel,A Block,2026-09-04T03:48,0.6,yes
+99,പ്രൊജക്ടർ പ്രവർത്തിക്കുന്നില്ല,CSE Lab-ലെ പ്രൊജക്ടർ 6 ദിവസമായി പ്രവർത്തിക്കുന്നില്ല.,LAB,medium,ml,CSE Lab,Academic Block 1,2026-09-04T07:49,8.7,yes
+100,ஆய்வக கணினிகள் வேலை செய்யவில்லை,CSE Lab-ல் பாதி கணினிகள் ஆன் ஆகவில்லை. செய்முறை வகுப்பில் சிரமம்.,LAB,medium,ta,CSE Lab,Academic Block 1,2026-09-04T10:54,4.8,yes
+101,ബസ് വഴിയിൽ കേടായി,"6 നമ്പർ ബസ് വഴിയിൽ കേടായി, പരീക്ഷയ്ക്ക് വൈകി.",TRANSPORT,high,ml,Bus Bay,Transport Yard,2026-09-04T14:24,1.6,yes
+102,Mess il food cold aanu,"Main Mess il dinner always cold aanu, chappathi kazhikkan pattunnilla.",MESS,low,mixed,Main Mess,Mess Hall,2026-09-04T17:04,1.0,yes
+103,മുറിയിലെ ഫാൻ പ്രവർത്തിക്കുന്നില്ല,B Block Hostel മുറി 241-ലെ ഫാൻ 2 ദിവസമായി പ്രവർത്തിക്കുന്നില്ല. രാത്രി ഉറങ്ങാൻ പറ്റുന്നില്ല.,HOSTEL,medium,ml,B Block Hostel,B Block,2026-09-05T10:08,4.5,yes
+104,Bus breakdown,"Bus number 8 broke down on the way, students missed the exam.",TRANSPORT,medium,en,Bus Bay,Transport Yard,2026-09-05T19:15,6.2,yes
+105,சாப்பாட்டில் insect,"Lunch sambar-ல insect இருந்தது, Main Mess hygiene சரியில்ல.",MESS,high,mixed,Main Mess,Mess Hall,2026-09-06T09:51,1.2,yes
+106,ഭക്ഷണത്തിൽ പ്രാണി,ഉച്ചഭക്ഷണത്തിലെ സാമ്പാറിൽ പ്രാണിയെ കണ്ടു. Main Mess വൃത്തിയില്ല.,MESS,high,ml,Main Mess,Mess Hall,2026-09-06T10:19,1.3,yes
+107,Tap leaking,The tap in the washroom near Girls Hostel is leaking continuously and water is wasted.,MAINTENANCE,low,en,Girls Hostel,Girls Hostel,2026-09-06T12:08,2.9,yes
+108,ஓட்டுநர் வேகமாக ஓட்டுகிறார்,"11 பேருந்து ஓட்டுநர் மிகவும் வேகமாக ஓட்டுகிறார், பாதுகாப்பு இல்லை.",TRANSPORT,high,ta,Main Gate,Main Gate,2026-09-06T12:23,3.2,yes
+109,குழாய் கசிவு,B Block Hostel அருகே கழிவறையில் குழாய் தொடர்ந்து கசிகிறது.,MAINTENANCE,low,ta,B Block Hostel,B Block,2026-09-06T15:56,5.8,yes
+110,College bus always late,The college bus on route 7 reaches Main Gate 30 minutes late every day.,TRANSPORT,medium,en,Main Gate,Main Gate,2026-09-06T17:59,7.6,yes
+111,Lab equipment broken,The equipment in CSE Lab is broken and we could not finish the experiment.,LAB,medium,en,CSE Lab,Academic Block 1,2026-09-07T16:12,4.5,yes
+112,Insect found in food,We found an insect in the sambar at Main Mess during lunch. This is a hygiene issue.,MESS,high,en,Main Mess,Mess Hall,2026-09-07T16:23,0.6,yes
+113,Path இருட்டா இருக்கு,"Main Gate பக்கத்துல path night-ல ரொம்ப இருட்டா இருக்கு, safe இல்ல.",SECURITY,high,mixed,Main Gate,Main Gate,2026-09-07T19:43,0.4,yes
+114,Lab equipment உடைஞ்சிருக்கு,"Physics Lab-ல equipment உடைஞ்சிருக்கு, experiment finish பண்ண முடியல.",LAB,medium,mixed,Physics Lab,Academic Block 2,2026-09-08T00:54,3.9,yes
+115,கட்டில் உடைந்துள்ளது,"B Block Hostel அறை 372-ல் கட்டில் உடைந்துள்ளது, தயவுசெய்து மாற்றவும்.",HOSTEL,low,ta,B Block Hostel,B Block,2026-09-08T07:11,5.4,yes
+116,പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല,"സ്റ്റുഡന്റ് പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല, പാസ്‌വേഡ് തെറ്റാണെന്ന് കാണിക്കുന്നു.",IT,high,ml,B Block Hostel,B Block,2026-09-08T09:39,0.6,yes
+117,Room fan work aagala,"A Block Hostel room 138 la fan 6 days ah work aagala, romba heat ah iruku.",HOSTEL,medium,mixed,A Block Hostel,A Block,2026-09-08T10:59,2.2,yes
+118,ലാബിൽ ഗ്യാസിന്റെ മണം,"CSE Lab-ൽ ശക്തമായ ഗ്യാസിന്റെ മണം, വിദ്യാർത്ഥികൾക്ക് തലകറക്കം.",LAB,critical,ml,CSE Lab,Academic Block 1,2026-09-08T12:31,1.6,yes
+119,உணவில் பூச்சி,மதிய உணவில் சாம்பாரில் பூச்சி இருந்தது. Main Mess சுத்தம் இல்லை.,MESS,high,ta,Main Mess,Mess Hall,2026-09-08T15:10,0.8,yes
+120,Mess food romba mosam,"Main Mess la innaiku food stale ah irundhuchu, rice sariya vegala.",MESS,medium,mixed,Main Mess,Mess Hall,2026-09-08T19:53,1.0,yes
+121,Very slow internet,"Internet speed in CSE Lab is very slow in the evening, pages do not load.",IT,medium,en,CSE Lab,Academic Block 1,2026-09-08T22:21,2.1,yes
+122,Bus driver rash aayi odikkunnu,"Bus 3 driver valare rash aayi odikkunnu, safe alla.",TRANSPORT,high,mixed,Main Gate,Main Gate,2026-09-09T04:03,2.1,yes
+123,கட்டில் உடைந்துள்ளது,"Girls Hostel அறை 380-ல் கட்டில் உடைந்துள்ளது, தயவுசெய்து மாற்றவும்.",HOSTEL,low,ta,Girls Hostel,Girls Hostel,2026-09-09T09:27,4.0,yes
+124,குப்பை அள்ளப்படவில்லை,A Block Hostel அருகே குப்பைத் தொட்டிகள் நிரம்பி வழிகின்றன.,SANITATION,medium,ta,A Block Hostel,A Block,2026-09-09T09:35,1.3,yes
+125,Broken cot and cupboard,"My cot is broken and the cupboard door does not close in B Block Hostel, room 205.",HOSTEL,low,en,B Block Hostel,B Block,2026-09-09T10:58,3.3,yes
+126,Mess il food cold aanu,"Main Mess il dinner always cold aanu, chappathi kazhikkan pattunnilla.",MESS,low,mixed,Main Mess,Mess Hall,2026-09-09T12:51,2.8,yes
+127,Room door lock broken,"The door lock of room 240 in A Block Hostel is broken, we cannot lock the room.",HOSTEL,critical,en,A Block Hostel,A Block,2026-09-09T13:38,1.6,yes
+128,Lab il projector work cheyyunnilla,Physics Lab il projector 2 divasamayi work cheyyunnilla.,LAB,medium,mixed,Physics Lab,Academic Block 2,2026-09-09T17:04,7.7,yes
+129,கட்டில் உடைந்துள்ளது,"Girls Hostel அறை 111-ல் கட்டில் உடைந்துள்ளது, தயவுசெய்து மாற்றவும்.",HOSTEL,low,ta,Girls Hostel,Girls Hostel,2026-09-10T00:22,2.8,yes
+130,Bus daily late ah varudhu,Route 10 bus daily 30 mins late ah Bus Bay ku varudhu.,TRANSPORT,medium,mixed,Bus Bay,Transport Yard,2026-09-10T18:27,3.3,yes
+131,Rats in the building,Rats are seen every night in C Block Hostel.,SANITATION,high,en,C Block Hostel,C Block,2026-09-10T19:20,0.9,yes
+132,Room door lock broken,"The door lock of room 327 in A Block Hostel is broken, we cannot lock the room.",HOSTEL,high,en,A Block Hostel,A Block,2026-09-10T19:50,2.4,yes
+133,കറന്റ് ഇല്ല,C Block Hostel-ൽ 5 മണിക്കൂറായി കറന്റ് ഇല്ല.,MAINTENANCE,critical,ml,C Block Hostel,C Block,2026-09-11T09:38,0.7,yes
+134,പുറത്തുനിന്നുള്ളവർ ക്യാമ്പസിൽ കയറുന്നു,രാത്രി Sports Ground വഴി പുറത്തുനിന്നുള്ളവർ പരിശോധനയില്ലാതെ കയറുന്നു.,SECURITY,high,ml,Sports Ground,Ground,2026-09-11T10:29,0.7,yes
+135,சுவிட்சில் மின்சார அதிர்ச்சி,C Block Hostel சுவிட்ச் போர்டில் மின்சார அதிர்ச்சி அடித்தது. கம்பிகள் வெளியே தெரிகின்றன.,MAINTENANCE,critical,ta,C Block Hostel,C Block,2026-09-11T11:17,2.0,yes
+136,Garbage not collected,"Garbage bins near Library are overflowing, nobody collected them.",SANITATION,medium,en,Library,Library,2026-09-11T12:39,1.5,yes
+137,Rats in the building,Rats are seen every night in Library.,SANITATION,high,en,Library,Library,2026-09-11T15:44,2.0,yes
+138,ஆய்வக உபகரணம் உடைந்துள்ளது,CSE Lab-ல் உபகரணங்கள் உடைந்துள்ளதால் சோதனையை முடிக்க முடியவில்லை.,LAB,medium,ta,CSE Lab,Academic Block 1,2026-09-11T16:44,3.1,yes
+139,Outsiders entering campus,Outsiders are entering through Main Gate at night without any check.,SECURITY,high,en,Main Gate,Main Gate,2026-09-12T10:48,1.0,yes
+140,College bus always late,The college bus on route 3 reaches Bus Bay 30 minutes late every day.,TRANSPORT,high,en,Bus Bay,Transport Yard,2026-09-12T13:26,3.2,yes
+141,No water supply in hostel,There is no water supply in the bathrooms of B Block Hostel since morning. We cannot bathe before class.,HOSTEL,high,en,B Block Hostel,B Block,2026-09-12T15:27,3.1,yes
+142,Power cut,There is no electricity in Physics Lab for 6 hours. Fans and lights are off.,MAINTENANCE,high,en,Physics Lab,Academic Block 2,2026-09-12T16:45,1.7,yes
+143,Fan not working in room,The ceiling fan in my room at B Block Hostel has not been working for 2 days. It is very hot at night.,HOSTEL,medium,en,B Block Hostel,B Block,2026-09-12T17:30,2.4,yes
+144,Food quality is poor,The food served at Main Mess today was stale and the rice was undercooked.,MESS,medium,en,Main Mess,Mess Hall,2026-09-12T22:23,1.2,yes
+145,இணையம் மிகவும் மெதுவாக உள்ளது,மாலை நேரத்தில் CSE Lab-ல் இணைய வேகம் மிகவும் குறைவாக உள்ளது.,IT,medium,ta,CSE Lab,Academic Block 1,2026-09-12T22:37,1.9,yes
+146,Wi-Fi not working,Wi-Fi is not working in CSE Lab for 4 days. We cannot attend online classes.,IT,high,en,CSE Lab,Academic Block 1,2026-09-13T08:33,1.5,yes
+147,Food poisoning after dinner,Several students got stomach pain and vomiting after dinner at Main Mess yesterday.,MESS,critical,en,Main Mess,Mess Hall,2026-09-13T10:50,0.3,yes
+148,விடுதியில் தண்ணீர் இல்லை,B Block Hostel குளியலறையில் காலை முதல் தண்ணீர் வரவில்லை.,HOSTEL,medium,ta,B Block Hostel,B Block,2026-09-13T11:39,2.5,yes
+149,Food quality is poor,The food served at Main Mess today was stale and the rice was undercooked.,MESS,medium,en,Main Mess,Mess Hall,2026-09-13T14:28,1.0,yes
+150,ലാബിൽ ഗ്യാസിന്റെ മണം,"CSE Lab-ൽ ശക്തമായ ഗ്യാസിന്റെ മണം, വിദ്യാർത്ഥികൾക്ക് തലകറക്കം.",LAB,critical,ml,CSE Lab,Academic Block 1,2026-09-13T18:54,1.6,yes
+151,Current illa,"A Block Hostel la 2 hours ah current illa, fan light ellam off.",MAINTENANCE,high,mixed,A Block Hostel,A Block,2026-09-14T08:08,0.9,yes
+152,கல்லூரி பேருந்து தாமதம்,வழித்தடம் 3 பேருந்து தினமும் 30 நிமிடம் தாமதமாக Main Gate வருகிறது.,TRANSPORT,medium,ta,Main Gate,Main Gate,2026-09-14T09:56,4.1,yes
+153,No water supply in hostel,There is no water supply in the bathrooms of B Block Hostel since morning. We cannot bathe before class.,HOSTEL,high,en,B Block Hostel,B Block,2026-09-14T11:29,1.6,yes
+154,LAN port not working,The LAN port in room 147 at Girls Hostel is not working.,IT,low,en,Girls Hostel,Girls Hostel,2026-09-14T11:42,1.8,yes
+155,அறையில் மின்விசிறி வேலை செய்யவில்லை,A Block Hostel அறை 144-ல் மின்விசிறி 3 நாட்களாக வேலை செய்யவில்லை. இரவில் தூங்க முடியவில்லை.,HOSTEL,medium,ta,A Block Hostel,A Block,2026-09-14T14:48,2.9,yes
+156,Mess timing issue,"Breakfast at Main Mess closes before 8 am, students with early lab cannot eat.",MESS,low,en,Main Mess,Mess Hall,2026-09-14T19:52,1.2,yes
+157,Tap leaking,The tap in the washroom near B Block Hostel is leaking continuously and water is wasted.,MAINTENANCE,low,en,B Block Hostel,B Block,2026-09-14T22:35,3.0,yes
+158,Wifi kittunnilla,"B Block Hostel il wifi kittunnilla, assignment submit cheyyan pattunnilla.",IT,high,mixed,B Block Hostel,B Block,2026-09-15T10:07,1.3,yes
+159,Hostel room lock problem,"A Block Hostel room 200 லாக் broken ஆகிவிட்டது, room lock பண்ண முடியல.",HOSTEL,high,mixed,A Block Hostel,A Block,2026-09-15T10:41,1.0,yes
+160,குழாய் கசிவு,Girls Hostel அருகே கழிவறையில் குழாய் தொடர்ந்து கசிகிறது.,MAINTENANCE,low,ta,Girls Hostel,Girls Hostel,2026-09-15T14:15,3.0,yes
+161,Phone stolen,My phone was stolen from Girls Hostel yesterday evening. Please check the CCTV.,SECURITY,high,en,Girls Hostel,Girls Hostel,2026-09-15T15:54,0.6,yes
+162,Dark path near hostel,"The path near Girls Hostel is completely dark at night, girls feel unsafe.",SECURITY,high,en,Girls Hostel,Girls Hostel,2026-09-16T05:54,0.9,yes
+163,Washroom clean pannala,"A Block Hostel washroom 5 days ah clean pannala, romba smell.",SANITATION,medium,mixed,A Block Hostel,A Block,2026-09-16T15:03,1.7,yes
+164,இணையம் மிகவும் மெதுவாக உள்ளது,மாலை நேரத்தில் A Block Hostel-ல் இணைய வேகம் மிகவும் குறைவாக உள்ளது.,IT,low,ta,A Block Hostel,A Block,2026-09-16T20:23,2.3,yes
+165,Mess food romba mosam,"Main Mess la innaiku food stale ah irundhuchu, rice sariya vegala.",MESS,medium,mixed,Main Mess,Mess Hall,2026-09-16T21:07,0.8,yes
+166,வெளியாட்கள் நுழைகிறார்கள்,இரவில் Girls Hostel வழியாக வெளியாட்கள் சோதனை இல்லாமல் நுழைகிறார்கள்.,SECURITY,high,ta,Girls Hostel,Girls Hostel,2026-09-17T14:28,1.1,yes
+167,കോളേജ് ബസ് എപ്പോഴും വൈകുന്നു,റൂട്ട് 7 ബസ് ദിവസവും 30 മിനിറ്റ് വൈകിയാണ് Bus Bay-ൽ എത്തുന്നത്.,TRANSPORT,high,ml,Bus Bay,Transport Yard,2026-09-17T17:41,4.2,yes
+168,கொசு romba அதிகம்,"Main Mess-ல mosquito romba அதிகம், fogging பண்ணுங்க.",SANITATION,medium,mixed,Main Mess,Mess Hall,2026-09-18T05:27,0.9,yes
+169,ഭക്ഷണത്തിൽ പ്രാണി,ഉച്ചഭക്ഷണത്തിലെ സാമ്പാറിൽ പ്രാണിയെ കണ്ടു. Main Mess വൃത്തിയില്ല.,MESS,high,ml,Main Mess,Mess Hall,2026-09-18T09:26,0.8,yes
+170,Outsiders entering campus,Outsiders are entering through Main Gate at night without any check.,SECURITY,high,en,Main Gate,Main Gate,2026-09-18T09:55,0.9,yes
+171,Wifi work aagala,"Girls Hostel la 5 days ah wifi work aagala, assignment submit panna mudiyala.",IT,high,mixed,Girls Hostel,Girls Hostel,2026-09-18T15:44,0.8,yes
+172,അത്താഴത്തിന് ശേഷം വയറുവേദന,ഇന്നലെ Main Mess-ലെ അത്താഴത്തിന് ശേഷം പല വിദ്യാർത്ഥികൾക്കും വയറുവേദനയും ഛർദ്ദിയും ഉണ്ടായി.,MESS,critical,ml,Main Mess,Mess Hall,2026-09-18T15:52,0.7,yes
+173,காலை உணவு நேரம்,Main Mess காலை உணவு 8 மணிக்கு முன்பே மூடிவிடுகிறார்கள்.,MESS,low,ta,Main Mess,Mess Hall,2026-09-18T18:52,1.4,yes
+174,விடுதியில் தண்ணீர் இல்லை,B Block Hostel குளியலறையில் காலை முதல் தண்ணீர் வரவில்லை.,HOSTEL,high,ta,B Block Hostel,B Block,2026-09-18T19:21,3.2,yes
+175,வைஃபை வேலை செய்யவில்லை,A Block Hostel-ல் 3 நாட்களாக வைஃபை வேலை செய்யவில்லை. ஆன்லைன் வகுப்பில் சேர முடியவில்லை.,IT,critical,ta,A Block Hostel,A Block,2026-09-18T20:23,0.7,yes
+176,Food poisoning after dinner,Several students got stomach pain and vomiting after dinner at Main Mess yesterday.,MESS,critical,en,Main Mess,Mess Hall,2026-09-18T22:26,0.4,yes
+177,Phone stolen,My phone was stolen from Girls Hostel yesterday evening. Please check the CCTV.,SECURITY,high,en,Girls Hostel,Girls Hostel,2026-09-19T12:36,1.1,yes
+178,Ragging incident,Some seniors are ragging first years near Sports Ground. Please take action.,SECURITY,critical,en,Sports Ground,Ground,2026-09-19T20:19,0.4,yes
+179,சுவிட்சில் மின்சார அதிர்ச்சி,C Block Hostel சுவிட்ச் போர்டில் மின்சார அதிர்ச்சி அடித்தது. கம்பிகள் வெளியே தெரிகின்றன.,MAINTENANCE,critical,ta,C Block Hostel,C Block,2026-09-20T08:39,0.9,yes
+180,Internet ரொம்ப slow,B Block Hostel-ல evening time internet ரொம்ப slow ஆக இருக்கு.,IT,medium,mixed,B Block Hostel,B Block,2026-09-20T10:07,1.8,yes
+181,Lab computers not working,Half of the computers in CSE Lab do not boot. We share systems during practicals.,LAB,medium,en,CSE Lab,Academic Block 1,2026-09-20T10:58,5.7,yes
+182,Garbage edukkunnilla,"Sports Ground near garbage bin full aayi, aarum edukkunnilla.",SANITATION,medium,mixed,Sports Ground,Ground,2026-09-20T12:52,1.0,yes
+183,சாப்பாடு தரம் மோசம்,"Main Mess-ல் இன்று கொடுத்த சாப்பாடு பழையதாக இருந்தது, சாதம் சரியாக வேகவில்லை.",MESS,medium,ta,Main Mess,Mess Hall,2026-09-20T19:36,1.6,yes
+184,Insect found in food,We found an insect in the sambar at Main Mess during lunch. This is a hygiene issue.,MESS,high,en,Main Mess,Mess Hall,2026-09-20T22:14,1.2,yes
+185,அறையில் மின்விசிறி வேலை செய்யவில்லை,B Block Hostel அறை 178-ல் மின்விசிறி 3 நாட்களாக வேலை செய்யவில்லை. இரவில் தூங்க முடியவில்லை.,HOSTEL,high,ta,B Block Hostel,B Block,2026-09-21T07:15,2.7,yes
+186,Garbage not collected,"Garbage bins near A Block Hostel are overflowing, nobody collected them.",SANITATION,medium,en,A Block Hostel,A Block,2026-09-21T07:23,1.5,yes
+187,Tap leaking,The tap in the washroom near B Block Hostel is leaking continuously and water is wasted.,MAINTENANCE,low,en,B Block Hostel,B Block,2026-09-21T10:35,3.6,yes
+188,Washroom not cleaned,The washrooms in Main Mess have not been cleaned for 3 days and smell very bad.,SANITATION,medium,en,Main Mess,Mess Hall,2026-09-21T11:50,1.5,yes
+189,No water supply in hostel,There is no water supply in the bathrooms of Girls Hostel since morning. We cannot bathe before class.,HOSTEL,high,en,Girls Hostel,Girls Hostel,2026-09-21T12:42,2.0,yes
+190,Hostel room lock problem,"B Block Hostel room 190 லாக் broken ஆகிவிட்டது, room lock பண்ண முடியல.",HOSTEL,critical,mixed,B Block Hostel,B Block,2026-09-21T12:53,0.6,yes
+191,No water supply in hostel,There is no water supply in the bathrooms of B Block Hostel since morning. We cannot bathe before class.,HOSTEL,high,en,B Block Hostel,B Block,2026-09-21T12:59,1.7,yes
+192,Tap leaking,The tap in the washroom near B Block Hostel is leaking continuously and water is wasted.,MAINTENANCE,medium,en,B Block Hostel,B Block,2026-09-21T16:36,2.2,yes
+193,Very slow internet,"Internet speed in Girls Hostel is very slow in the evening, pages do not load.",IT,low,en,Girls Hostel,Girls Hostel,2026-09-21T17:07,2.0,yes
+194,Broken cot and cupboard,"My cot is broken and the cupboard door does not close in C Block Hostel, room 164.",HOSTEL,low,en,C Block Hostel,C Block,2026-09-21T17:20,4.3,yes
+195,Phone thirudu poiduchu,"Nethu evening Sports Ground la en phone thirudu poiduchu, CCTV check pannunga.",SECURITY,medium,mixed,Sports Ground,Ground,2026-09-21T18:25,0.9,yes
+196,Tap leaking,The tap in the washroom near Physics Lab is leaking continuously and water is wasted.,MAINTENANCE,low,en,Physics Lab,Academic Block 2,2026-09-21T22:00,1.7,yes
+197,കട്ടിൽ പൊട്ടിയിരിക്കുന്നു,"C Block Hostel മുറി 350-ലെ കട്ടിൽ പൊട്ടിയിരിക്കുന്നു, ദയവായി മാറ്റി തരണം.",HOSTEL,low,ml,C Block Hostel,C Block,2026-09-22T09:03,5.2,yes
+198,ബസിൽ വലിയ തിരക്ക്,"11 ബസിൽ വലിയ തിരക്കാണ്, കുട്ടികൾ ഫുട്ബോർഡിൽ നിൽക്കുന്നു.",TRANSPORT,high,ml,Bus Bay,Transport Yard,2026-09-22T10:06,2.1,yes
+199,Dark path near hostel,"The path near Girls Hostel is completely dark at night, girls feel unsafe.",SECURITY,high,en,Girls Hostel,Girls Hostel,2026-09-22T10:06,0.6,yes
+200,Wi-Fi not working,Wi-Fi is not working in A Block Hostel for 6 days. We cannot attend online classes.,IT,high,en,A Block Hostel,A Block,2026-09-23T03:23,1.0,yes
+201,Mosquito problem,"There are too many mosquitoes in A Block Hostel, please arrange fogging.",SANITATION,medium,en,A Block Hostel,A Block,2026-09-23T08:45,1.1,yes
+202,Rash driving,"The driver of bus 5 drives very rashly, it is not safe.",TRANSPORT,medium,en,Bus Bay,Transport Yard,2026-09-23T13:09,4.7,yes
+203,Broken cot and cupboard,"My cot is broken and the cupboard door does not close in A Block Hostel, room 266.",HOSTEL,low,en,A Block Hostel,A Block,2026-09-23T21:15,5.3,yes
+204,Room fan work aagala,"B Block Hostel room 298 la fan 6 days ah work aagala, romba heat ah iruku.",HOSTEL,low,mixed,B Block Hostel,B Block,2026-09-24T04:27,4.5,yes
+205,விடுதியில் தண்ணீர் இல்லை,Girls Hostel குளியலறையில் காலை முதல் தண்ணீர் வரவில்லை.,HOSTEL,high,ta,Girls Hostel,Girls Hostel,2026-09-24T09:46,1.4,yes
+206,Bus breakdown,"Bus number 6 broke down on the way, students missed the exam.",TRANSPORT,critical,en,Bus Bay,Transport Yard,2026-09-24T19:46,1.5,yes
+207,റാഗിംഗ്,Girls Hostel-ന് സമീപം ചില സീനിയേഴ്സ് ഒന്നാം വർഷ വിദ്യാർത്ഥികളെ റാഗ് ചെയ്യുന്നു.,SECURITY,critical,ml,Girls Hostel,Girls Hostel,2026-09-24T21:25,0.4,yes
+208,College bus always late,The college bus on route 6 reaches Bus Bay 30 minutes late every day.,TRANSPORT,medium,en,Bus Bay,Transport Yard,2026-09-24T22:04,5.1,yes
+209,Mosquito problem,"There are too many mosquitoes in Main Mess, please arrange fogging.",SANITATION,medium,en,Main Mess,Mess Hall,2026-09-24T22:46,1.6,yes
+210,Broken cot and cupboard,"My cot is broken and the cupboard door does not close in B Block Hostel, room 214.",HOSTEL,low,en,B Block Hostel,B Block,2026-09-25T11:37,5.0,yes
+211,പ്രൊജക്ടർ പ്രവർത്തിക്കുന്നില്ല,CSE Lab-ലെ പ്രൊജക്ടർ 3 ദിവസമായി പ്രവർത്തിക്കുന്നില്ല.,LAB,medium,ml,CSE Lab,Academic Block 1,2026-09-25T13:03,3.9,yes
+212,കറന്റ് ഇല്ല,Library-ൽ 3 മണിക്കൂറായി കറന്റ് ഇല്ല.,MAINTENANCE,high,ml,Library,Library,2026-09-25T15:49,1.3,yes
+213,Food poisoning after dinner,Several students got stomach pain and vomiting after dinner at Main Mess yesterday.,MESS,high,en,Main Mess,Mess Hall,2026-09-26T12:38,0.8,yes
+214,Gas smell in lab,"There is a strong gas smell in CSE Lab, students feel dizzy.",LAB,critical,en,CSE Lab,Academic Block 1,2026-09-26T12:46,1.9,yes
+215,പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല,"സ്റ്റുഡന്റ് പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല, പാസ്‌വേഡ് തെറ്റാണെന്ന് കാണിക്കുന്നു.",IT,medium,ml,A Block Hostel,A Block,2026-09-26T13:52,1.9,yes
+216,Broken cot and cupboard,"My cot is broken and the cupboard door does not close in B Block Hostel, room 111.",HOSTEL,low,en,B Block Hostel,B Block,2026-09-26T16:00,4.2,yes
+217,Tube light not working,"Tube lights in the corridor of C Block Hostel are not working, it is dark at night.",MAINTENANCE,medium,en,C Block Hostel,C Block,2026-09-26T18:37,2.7,yes
+218,Bus overcrowded,"Bus 1 is overcrowded, students stand on the footboard near Bus Bay.",TRANSPORT,medium,en,Bus Bay,Transport Yard,2026-09-27T08:18,5.1,yes
+219,ടാപ്പ് ലീക്ക് ആകുന്നു,C Block Hostel-ന് അടുത്തുള്ള വാഷ്റൂമിലെ ടാപ്പ് തുടർച്ചയായി ലീക്ക് ആകുന്നു.,MAINTENANCE,low,ml,C Block Hostel,C Block,2026-09-27T15:42,4.0,yes
+220,Room door lock broken,"The door lock of room 225 in B Block Hostel is broken, we cannot lock the room.",HOSTEL,high,en,B Block Hostel,B Block,2026-09-28T07:42,2.0,yes
+221,പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല,"സ്റ്റുഡന്റ് പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല, പാസ്‌വേഡ് തെറ്റാണെന്ന് കാണിക്കുന്നു.",IT,medium,ml,Girls Hostel,Girls Hostel,2026-09-28T14:39,2.0,yes
+222,Current illa,"B Block Hostel la 6 hours ah current illa, fan light ellam off.",MAINTENANCE,high,mixed,B Block Hostel,B Block,2026-09-28T15:09,1.9,yes
+223,Electric shock from switch,I got an electric shock from the switch board in Girls Hostel. Wires are exposed.,MAINTENANCE,critical,en,Girls Hostel,Girls Hostel,2026-09-28T16:25,0.7,yes
+224,സ്വിച്ചിൽ നിന്ന് ഷോക്ക്,C Block Hostel-ലെ സ്വിച്ച് ബോർഡിൽ നിന്ന് ഷോക്ക് അടിച്ചു. വയറുകൾ പുറത്താണ്.,MAINTENANCE,critical,ml,C Block Hostel,C Block,2026-09-28T22:17,0.7,yes
+225,Tap leaking,The tap in the washroom near A Block Hostel is leaking continuously and water is wasted.,MAINTENANCE,low,en,A Block Hostel,A Block,2026-09-29T01:21,3.7,yes
+226,വൈഫൈ പ്രവർത്തിക്കുന്നില്ല,A Block Hostel-ൽ 4 ദിവസമായി വൈഫൈ പ്രവർത്തിക്കുന്നില്ല. ഓൺലൈൻ ക്ലാസിൽ കയറാൻ പറ്റുന്നില്ല.,IT,high,ml,A Block Hostel,A Block,2026-09-29T10:08,1.1,yes
+227,വാഷ്റൂം വൃത്തിയാക്കിയിട്ടില്ല,"Main Mess-ലെ വാഷ്റൂമുകൾ 2 ദിവസമായി വൃത്തിയാക്കിയിട്ടില്ല, ദുർഗന്ധമാണ്.",SANITATION,medium,ml,Main Mess,Mess Hall,2026-09-29T12:12,1.6,yes
+228,ഹോസ്റ്റലിൽ വെള്ളമില്ല,C Block Hostel ബാത്ത്റൂമിൽ രാവിലെ മുതൽ വെള്ളം വരുന്നില്ല.,HOSTEL,critical,ml,C Block Hostel,C Block,2026-09-29T16:16,0.8,yes
+229,Broken cot and cupboard,"My cot is broken and the cupboard door does not close in A Block Hostel, room 336.",HOSTEL,low,en,A Block Hostel,A Block,2026-09-29T18:41,6.8,yes
+230,காலை உணவு நேரம்,Main Mess காலை உணவு 8 மணிக்கு முன்பே மூடிவிடுகிறார்கள்.,MESS,low,ta,Main Mess,Mess Hall,2026-09-29T20:49,1.1,yes
+231,Bus daily late ah varudhu,Route 12 bus daily 30 mins late ah Bus Bay ku varudhu.,TRANSPORT,medium,mixed,Bus Bay,Transport Yard,2026-09-29T22:54,4.5,yes
+232,Washroom clean pannala,"Main Mess washroom 3 days ah clean pannala, romba smell.",SANITATION,medium,mixed,Main Mess,Mess Hall,2026-09-30T11:27,1.2,yes
+233,College bus always late,The college bus on route 6 reaches Main Gate 30 minutes late every day.,TRANSPORT,medium,en,Main Gate,Main Gate,2026-09-30T17:05,5.5,yes
+234,Food quality is poor,The food served at Main Mess today was stale and the rice was undercooked.,MESS,medium,en,Main Mess,Mess Hall,2026-09-30T19:39,1.2,yes
+235,போர்ட்டலில் உள்நுழைய முடியவில்லை,"மாணவர் போர்ட்டலில் உள்நுழைய முடியவில்லை, கடவுச்சொல் தவறு என்று வருகிறது.",IT,medium,ta,B Block Hostel,B Block,2026-10-01T07:50,1.1,yes
+236,ராகிங் சம்பவம்,Sports Ground அருகே சில மூத்த மாணவர்கள் முதலாம் ஆண்டு மாணவர்களை ராகிங் செய்கிறார்கள்.,SECURITY,critical,ta,Sports Ground,Ground,2026-10-01T08:37,0.3,yes
+237,இணையம் மிகவும் மெதுவாக உள்ளது,மாலை நேரத்தில் B Block Hostel-ல் இணைய வேகம் மிகவும் குறைவாக உள்ளது.,IT,medium,ta,B Block Hostel,B Block,2026-10-01T12:58,1.7,yes
+238,கல்லூரி பேருந்து தாமதம்,வழித்தடம் 1 பேருந்து தினமும் 30 நிமிடம் தாமதமாக Bus Bay வருகிறது.,TRANSPORT,high,ta,Bus Bay,Transport Yard,2026-10-01T19:42,3.7,yes
+239,Mess il food cold aanu,"Main Mess il dinner always cold aanu, chappathi kazhikkan pattunnilla.",MESS,low,mixed,Main Mess,Mess Hall,2026-10-01T22:19,1.9,yes
+240,கழிவறை சுத்தம் செய்யப்படவில்லை,"C Block Hostel கழிவறைகள் 2 நாட்களாக சுத்தம் செய்யப்படவில்லை, துர்நாற்றம் வீசுகிறது.",SANITATION,medium,ta,C Block Hostel,C Block,2026-10-02T09:24,1.5,yes
+241,പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല,"സ്റ്റുഡന്റ് പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല, പാസ്‌വേഡ് തെറ്റാണെന്ന് കാണിക്കുന്നു.",IT,medium,ml,A Block Hostel,A Block,2026-10-02T15:51,1.6,yes
+242,வைஃபை வேலை செய்யவில்லை,A Block Hostel-ல் 4 நாட்களாக வைஃபை வேலை செய்யவில்லை. ஆன்லைன் வகுப்பில் சேர முடியவில்லை.,IT,medium,ta,A Block Hostel,A Block,2026-10-02T19:13,1.9,yes
+243,கட்டில் உடைந்துள்ளது,"C Block Hostel அறை 228-ல் கட்டில் உடைந்துள்ளது, தயவுசெய்து மாற்றவும்.",HOSTEL,low,ta,C Block Hostel,C Block,2026-10-02T19:42,5.0,yes
+244,Tap leaking,The tap in the washroom near Library is leaking continuously and water is wasted.,MAINTENANCE,low,en,Library,Library,2026-10-03T09:28,2.3,yes
+245,Tube light not working,"Tube lights in the corridor of A Block Hostel are not working, it is dark at night.",MAINTENANCE,medium,en,A Block Hostel,A Block,2026-10-03T17:18,2.5,yes
+246,குழாய் கசிவு,B Block Hostel அருகே கழிவறையில் குழாய் தொடர்ந்து கசிகிறது.,MAINTENANCE,low,ta,B Block Hostel,B Block,2026-10-04T05:24,3.4,yes
+247,No water supply in hostel,There is no water supply in the bathrooms of B Block Hostel since morning. We cannot bathe before class.,HOSTEL,high,en,B Block Hostel,B Block,2026-10-04T05:34,3.4,yes
+248,சாப்பாடு தரம் மோசம்,"Main Mess-ல் இன்று கொடுத்த சாப்பாடு பழையதாக இருந்தது, சாதம் சரியாக வேகவில்லை.",MESS,medium,ta,Main Mess,Mess Hall,2026-10-04T07:42,1.2,yes
+249,Lab equipment உடைஞ்சிருக்கு,"Physics Lab-ல equipment உடைஞ்சிருக்கு, experiment finish பண்ண முடியல.",LAB,medium,mixed,Physics Lab,Academic Block 2,2026-10-04T08:07,5.8,yes
+250,Mosquito problem,"There are too many mosquitoes in C Block Hostel, please arrange fogging.",SANITATION,medium,en,C Block Hostel,C Block,2026-10-04T08:11,2.1,yes
+251,காலை உணவு நேரம்,Main Mess காலை உணவு 8 மணிக்கு முன்பே மூடிவிடுகிறார்கள்.,MESS,low,ta,Main Mess,Mess Hall,2026-10-04T15:24,2.9,yes
+252,ഇന്റർനെറ്റ് വളരെ സ്ലോ ആണ്,വൈകുന്നേരം A Block Hostel-ൽ ഇന്റർനെറ്റ് വേഗത വളരെ കുറവാണ്.,IT,medium,ml,A Block Hostel,A Block,2026-10-04T19:45,1.8,yes
+253,Bus overcrowded,"Bus 7 is overcrowded, students stand on the footboard near Bus Bay.",TRANSPORT,medium,en,Bus Bay,Transport Yard,2026-10-04T20:50,6.7,yes
+254,Tap leak aavunnu,C Block Hostel washroom il tap continuous aayi leak aavunnu.,MAINTENANCE,low,mixed,C Block Hostel,C Block,2026-10-05T04:41,2.7,yes
+255,Tap leak aavunnu,A Block Hostel washroom il tap continuous aayi leak aavunnu.,MAINTENANCE,low,mixed,A Block Hostel,A Block,2026-10-05T12:06,2.4,yes
+256,Food poisoning after dinner,Several students got stomach pain and vomiting after dinner at Main Mess yesterday.,MESS,critical,en,Main Mess,Mess Hall,2026-10-05T12:19,0.2,yes
+257,Lab equipment broken,The equipment in Physics Lab is broken and we could not finish the experiment.,LAB,medium,en,Physics Lab,Academic Block 2,2026-10-05T12:57,8.0,yes
+258,சாப்பாடு தரம் மோசம்,"Main Mess-ல் இன்று கொடுத்த சாப்பாடு பழையதாக இருந்தது, சாதம் சரியாக வேகவில்லை.",MESS,medium,ta,Main Mess,Mess Hall,2026-10-05T14:10,1.1,yes
+259,Gas smell in lab,"There is a strong gas smell in CSE Lab, students feel dizzy.",LAB,critical,en,CSE Lab,Academic Block 1,2026-10-05T16:32,1.2,yes
+260,ഇന്റർനെറ്റ് വളരെ സ്ലോ ആണ്,വൈകുന്നേരം B Block Hostel-ൽ ഇന്റർനെറ്റ് വേഗത വളരെ കുറവാണ്.,IT,medium,ml,B Block Hostel,B Block,2026-10-05T20:05,1.8,yes
+261,Outsiders entering campus,Outsiders are entering through Main Gate at night without any check.,SECURITY,high,en,Main Gate,Main Gate,2026-10-05T23:27,0.9,yes
+262,പ്രൊജക്ടർ പ്രവർത്തിക്കുന്നില്ല,CSE Lab-ലെ പ്രൊജക്ടർ 2 ദിവസമായി പ്രവർത്തിക്കുന്നില്ല.,LAB,low,ml,CSE Lab,Academic Block 1,2026-10-06T01:13,11.7,yes
+263,Insect found in food,We found an insect in the sambar at Main Mess during lunch. This is a hygiene issue.,MESS,high,en,Main Mess,Mess Hall,2026-10-06T07:57,0.7,yes
+264,പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല,"സ്റ്റുഡന്റ് പോർട്ടലിൽ ലോഗിൻ ചെയ്യാൻ കഴിയുന്നില്ല, പാസ്‌വേഡ് തെറ്റാണെന്ന് കാണിക്കുന്നു.",IT,medium,ml,B Block Hostel,B Block,2026-10-06T08:14,1.1,yes
+265,Lab computers not working,Half of the computers in CSE Lab do not boot. We share systems during practicals.,LAB,medium,en,CSE Lab,Academic Block 1,2026-10-06T08:14,4.9,yes
+266,Tap leaking,The tap in the washroom near B Block Hostel is leaking continuously and water is wasted.,MAINTENANCE,low,en,B Block Hostel,B Block,2026-10-06T12:28,3.6,yes
+267,Mosquito problem,"There are too many mosquitoes in Main Mess, please arrange fogging.",SANITATION,medium,en,Main Mess,Mess Hall,2026-10-06T13:38,1.4,yes
+268,காலை உணவு நேரம்,Main Mess காலை உணவு 8 மணிக்கு முன்பே மூடிவிடுகிறார்கள்.,MESS,low,ta,Main Mess,Mess Hall,2026-10-06T14:40,1.4,yes
+269,கட்டில் உடைந்துள்ளது,"C Block Hostel அறை 223-ல் கட்டில் உடைந்துள்ளது, தயவுசெய்து மாற்றவும்.",HOSTEL,low,ta,C Block Hostel,C Block,2026-10-06T18:15,3.9,yes
+270,Fan not working in room,The ceiling fan in my room at B Block Hostel has not been working for 3 days. It is very hot at night.,HOSTEL,low,en,B Block Hostel,B Block,2026-10-06T19:41,2.7,yes
+271,ബസ് വഴിയിൽ കേടായി,"8 നമ്പർ ബസ് വഴിയിൽ കേടായി, പരീക്ഷയ്ക്ക് വൈകി.",TRANSPORT,high,ml,Bus Bay,Transport Yard,2026-10-07T08:36,3.5,yes
+272,Room door lock broken,"The door lock of room 326 in B Block Hostel is broken, we cannot lock the room.",HOSTEL,high,en,B Block Hostel,B Block,2026-10-07T10:55,2.8,yes
+273,Wifi work aagala,"B Block Hostel la 5 days ah wifi work aagala, assignment submit panna mudiyala.",IT,high,mixed,B Block Hostel,B Block,2026-10-07T21:04,1.8,yes
+274,ടാപ്പ് ലീക്ക് ആകുന്നു,C Block Hostel-ന് അടുത്തുള്ള വാഷ്റൂമിലെ ടാപ്പ് തുടർച്ചയായി ലീക്ക് ആകുന്നു.,MAINTENANCE,low,ml,C Block Hostel,C Block,2026-10-07T21:05,1.9,yes
+275,Wifi work aagala,"B Block Hostel la 2 days ah wifi work aagala, assignment submit panna mudiyala.",IT,high,mixed,B Block Hostel,B Block,2026-10-07T21:12,0.9,yes
+276,Wi-Fi not working,Wi-Fi is not working in B Block Hostel for 2 days. We cannot attend online classes.,IT,high,en,B Block Hostel,B Block,2026-10-07T21:13,0.9,yes
+277,Wi-Fi not working,Wi-Fi is not working in A Block Hostel for 5 days. We cannot attend online classes.,IT,high,en,A Block Hostel,A Block,2026-10-07T21:24,0.8,yes
+278,Wifi work aagala,"A Block Hostel la 5 days ah wifi work aagala, assignment submit panna mudiyala.",IT,high,mixed,A Block Hostel,A Block,2026-10-07T21:26,0.8,yes
+279,Wifi work aagala,"A Block Hostel la 2 days ah wifi work aagala, assignment submit panna mudiyala.",IT,high,mixed,A Block Hostel,A Block,2026-10-07T21:27,1.1,yes
+280,Wifi work aagala,"B Block Hostel la 5 days ah wifi work aagala, assignment submit panna mudiyala.",IT,high,mixed,B Block Hostel,B Block,2026-10-07T21:27,0.6,yes
+281,வைஃபை வேலை செய்யவில்லை,A Block Hostel-ல் 6 நாட்களாக வைஃபை வேலை செய்யவில்லை. ஆன்லைன் வகுப்பில் சேர முடியவில்லை.,IT,high,ta,A Block Hostel,A Block,2026-10-07T21:32,0.8,yes
+282,Wi-Fi not working,Wi-Fi is not working in B Block Hostel for 6 days. We cannot attend online classes.,IT,high,en,B Block Hostel,B Block,2026-10-07T21:38,1.0,yes
+283,Wi-Fi not working,Wi-Fi is not working in B Block Hostel for 5 days. We cannot attend online classes.,IT,high,en,B Block Hostel,B Block,2026-10-07T21:41,0.9,yes
+284,Wi-Fi not working,Wi-Fi is not working in A Block Hostel for 4 days. We cannot attend online classes.,IT,high,en,A Block Hostel,A Block,2026-10-07T21:43,0.9,yes
+285,Wi-Fi not working,Wi-Fi is not working in B Block Hostel for 6 days. We cannot attend online classes.,IT,high,en,B Block Hostel,B Block,2026-10-07T21:46,0.9,yes
+286,Wi-Fi not working,Wi-Fi is not working in A Block Hostel for 3 days. We cannot attend online classes.,IT,medium,en,A Block Hostel,A Block,2026-10-07T21:47,3.5,yes
+287,வைஃபை வேலை செய்யவில்லை,A Block Hostel-ல் 3 நாட்களாக வைஃபை வேலை செய்யவில்லை. ஆன்லைன் வகுப்பில் சேர முடியவில்லை.,IT,high,ta,A Block Hostel,A Block,2026-10-07T21:53,1.0,yes
+288,Mosquito problem,"There are too many mosquitoes in Main Mess, please arrange fogging.",SANITATION,medium,en,Main Mess,Mess Hall,2026-10-08T08:54,2.4,yes
+289,குப்பை அள்ளப்படவில்லை,Library அருகே குப்பைத் தொட்டிகள் நிரம்பி வழிகின்றன.,SANITATION,medium,ta,Library,Library,2026-10-08T09:57,2.2,yes
+290,അത്താഴത്തിന് ശേഷം വയറുവേദന,ഇന്നലെ Main Mess-ലെ അത്താഴത്തിന് ശേഷം പല വിദ്യാർത്ഥികൾക്കും വയറുവേദനയും ഛർദ്ദിയും ഉണ്ടായി.,MESS,critical,ml,Main Mess,Mess Hall,2026-10-08T10:53,0.8,yes
+291,ஆய்வக கணினிகள் வேலை செய்யவில்லை,CSE Lab-ல் பாதி கணினிகள் ஆன் ஆகவில்லை. செய்முறை வகுப்பில் சிரமம்.,LAB,medium,ta,CSE Lab,Academic Block 1,2026-10-08T22:04,4.5,yes
+292,Lab system boot aagala,"CSE Lab la half systems boot aagala, practicals la share panrom.",LAB,medium,mixed,CSE Lab,Academic Block 1,2026-10-09T09:22,3.5,yes
+293,காலை உணவு நேரம்,Main Mess காலை உணவு 8 மணிக்கு முன்பே மூடிவிடுகிறார்கள்.,MESS,low,ta,Main Mess,Mess Hall,2026-10-09T12:11,1.1,yes
+294,சாப்பாட்டில் insect,"Lunch sambar-ல insect இருந்தது, Main Mess hygiene சரியில்ல.",MESS,critical,mixed,Main Mess,Mess Hall,2026-10-09T12:30,0.3,yes
+295,Insect found in food,We found an insect in the sambar at Main Mess during lunch. This is a hygiene issue.,MESS,high,en,Main Mess,Mess Hall,2026-10-09T12:36,1.0,yes
+296,ഭക്ഷണത്തിന്റെ ഗുണനിലവാരം മോശം,"Main Mess-ൽ ഇന്ന് നൽകിയ ഭക്ഷണം പഴകിയതായിരുന്നു, ചോറ് ശരിയായി വെന്തിട്ടില്ല.",MESS,medium,ml,Main Mess,Mess Hall,2026-10-09T13:04,1.1,yes
+297,Tube light வேலை செய்யல,"C Block Hostel corridor-ல tube light வேலை செய்யல, night இருட்டா இருக்கு.",MAINTENANCE,high,mixed,C Block Hostel,C Block,2026-10-09T20:27,2.3,yes
+298,ഹോസ്റ്റലിൽ വെള്ളമില്ല,C Block Hostel ബാത്ത്റൂമിൽ രാവിലെ മുതൽ വെള്ളം വരുന്നില്ല.,HOSTEL,high,ml,C Block Hostel,C Block,2026-10-09T21:37,1.5,yes
+299,Room door lock broken,"The door lock of room 131 in A Block Hostel is broken, we cannot lock the room.",HOSTEL,high,en,A Block Hostel,A Block,2026-10-09T23:16,2.6,yes
+300,இணையம் மிகவும் மெதுவாக உள்ளது,மாலை நேரத்தில் A Block Hostel-ல் இணைய வேகம் மிகவும் குறைவாக உள்ளது.,IT,medium,ta,A Block Hostel,A Block,2026-10-09T23:38,1.8,yes

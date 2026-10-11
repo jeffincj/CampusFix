@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # Our apps
     "accounts",
     "complaints",
+    "ai",
     "web",
 ]
 

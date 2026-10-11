@@ -83,3 +83,27 @@ def api_as():
         return client
 
     return make
+
+
+# --- ML helpers (Phase 4) -------------------------------------------------------
+
+@pytest.fixture
+def ml_dir(tmp_path, monkeypatch):
+    """Save trained models into a temporary folder, never into the real artifacts folder."""
+    monkeypatch.setenv("ML_ARTIFACT_DIR", str(tmp_path))
+    return tmp_path
+
+
+@pytest.fixture(scope="session")
+def sample_rows():
+    from ai.ml.common import SAMPLE_CSV, load_rows
+
+    return load_rows([SAMPLE_CSV])
+
+
+@pytest.fixture(scope="session")
+def trained_classifier(sample_rows):
+    """One classifier trained on the synthetic CSV, shared by all tests (training takes ~1s)."""
+    from ai.ml import train_classifier
+
+    return train_classifier.train(sample_rows)
