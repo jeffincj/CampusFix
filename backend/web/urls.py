@@ -11,7 +11,9 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("login/", views.CampusLoginView.as_view(), name="login"),
     path("logout/", views.CampusLogoutView.as_view(), name="logout"),
-    path("dashboard/", views.dashboard, name="dashboard"),
+    path("dashboard/", views.dashboard_app, name="dashboard_app"),  # React dashboard (staff/admin)
+    path("dashboard/<path:path>", views.dashboard_app),
+    path("home/", views.dashboard, name="dashboard"),  # student/role landing page
     # Complaints
     path("complaints/", complaint_views.complaint_list, name="complaint_list"),
     path("complaints/new/", complaint_views.complaint_create, name="complaint_create"),

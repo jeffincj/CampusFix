@@ -149,6 +149,9 @@ USE_TZ = True
 # --- Static files -----------------------------------------------------------
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"  # collectstatic puts files here for production
+# The React dashboard build (npm run build) lands in frontend_dist/dashboard/ and is served as static files.
+FRONTEND_DIST = BASE_DIR / "frontend_dist"
+STATICFILES_DIRS = [FRONTEND_DIST] if FRONTEND_DIST.exists() else []
 
 # Uploaded files (rule PDFs)
 MEDIA_URL = "media/"

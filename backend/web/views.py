@@ -1,8 +1,10 @@
 """Student-facing HTML pages: home, register, login, logout, dashboard."""
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
+from django.http import FileResponse, HttpResponse
 from django.shortcuts import redirect, render
 
 from accounts.forms import LoginForm, StudentRegisterForm
@@ -62,3 +64,18 @@ def dashboard(request):
         "recent": complaints[:5],
     }
     return render(request, "web/dashboard.html", context)
+
+
+def dashboard_app(request, path=""):
+    """
+    Serve the React dashboard (built with "npm run build"). Every /dashboard/... URL returns
+    the same index.html; React Router then shows the right page in the browser.
+    """
+    index = settings.FRONTEND_DIST / "dashboard" / "index.html"
+    if not index.exists():
+        return HttpResponse(
+            "The dashboard is not built yet. Run 'npm run build' in frontend/, "
+            "or use the Vite dev server: http://localhost:5173/dashboard/",
+            status=503, content_type="text/plain",
+        )
+    return FileResponse(open(index, "rb"), content_type="text/html")

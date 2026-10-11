@@ -15,9 +15,11 @@
     <p>You are signed in as <strong>staff</strong> of
        <strong>{{ user.department|default:"(no department yet — ask an admin)" }}</strong>.
        You see and update your department's complaints.</p>
+    <p><a class="button" href="/dashboard/">Open the officials' dashboard →</a></p>
   {% elif user.is_admin %}
     <p>You are signed in as <strong>admin</strong>. You see every complaint.
       {% if user.is_staff %}Manage users and departments in the <a href="{% url 'admin:index' %}">Django admin</a>.{% endif %}</p>
+    <p><a class="button" href="/dashboard/">Open the officials' dashboard →</a></p>
   {% endif %}
 
   <!-- Count of complaints per status -->
