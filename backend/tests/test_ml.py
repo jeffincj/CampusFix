@@ -174,3 +174,10 @@ def test_train_models_if_needed(ml_dir):
     assert ModelMetric.objects.count() == 2
     call_command("train_models", "--if-needed", stdout=io.StringIO())  # second run does nothing
     assert ModelMetric.objects.count() == 2
+
+
+@pytest.mark.django_db
+def test_llm_evaluation_skipped_without_key(capsys):
+    evaluate.main(llm_sample=5)  # LLM_PROVIDER=none in tests
+    assert "LLM evaluation skipped" in capsys.readouterr().out
+    assert not ModelMetric.objects.filter(model_name="llm_intake").exists()

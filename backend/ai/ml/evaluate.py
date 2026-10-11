@@ -112,8 +112,14 @@ def main(csv_paths=None, llm_sample=0):
     rows = load_rows(csv_paths)
     results = {"classifier": evaluate_classifier(rows), "time_model": evaluate_time_model(rows)}
     if llm_sample:
-        results["llm_intake"] = evaluate_llm(rows, llm_sample)
-        print(f"LLM intake: accuracy={results['llm_intake']['accuracy']} on {llm_sample} rows")
+        from ai.llm_client import get_client
+
+        if not get_client().enabled:
+            # Without a key every call would fail and the metrics page would show 0% for the LLM.
+            print("LLM evaluation skipped: set LLM_PROVIDER=anthropic and ANTHROPIC_API_KEY in .env first.")
+        else:
+            results["llm_intake"] = evaluate_llm(rows, llm_sample)
+            print(f"LLM intake: accuracy={results['llm_intake']['accuracy']} on {llm_sample} rows")
     c, t = results["classifier"], results["time_model"]
     print(f"Classifier: accuracy={c['accuracy']} precision={c['precision']} recall={c['recall']} f1={c['f1']}")
     print(f"Time model: MAE={t['mae_days']} days (baseline {t['baseline_mae_days']}), R2={t['r2']}")
