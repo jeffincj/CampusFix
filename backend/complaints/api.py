@@ -19,6 +19,8 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.response import Response
 
+from ai.pipeline import GuardrailError, submit_complaint
+
 from . import services
 from .models import Complaint, Department
 from .permissions import IsStaffOrAdmin, IsStudent
@@ -104,8 +106,12 @@ class ComplaintViewSet(
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        complaint = services.create_complaint(request.user, **serializer.validated_data)
-        return Response(ComplaintDetailSerializer(complaint).data, status=status.HTTP_201_CREATED)
+        try:
+            # The full AI pipeline: guardrails, LLM intake, classifier, duplicates, time prediction.
+            result = submit_complaint(request.user, **serializer.validated_data)
+        except GuardrailError as error:
+            return Response({"detail": error.result.message, "code": error.result.code}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(ComplaintDetailSerializer(result.complaint).data, status=status.HTTP_201_CREATED)
 
     # --- partial update -------------------------------------------------------
 

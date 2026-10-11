@@ -13,5 +13,3 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 
 # Don't let rate limits break tests that log in many times.
 REST_FRAMEWORK = {**REST_FRAMEWORK, "DEFAULT_THROTTLE_RATES": {"auth": "10000/min"}}  # noqa: F405
-
-# Trained models go to a temporary folder in tests (see tests/conftest.py).

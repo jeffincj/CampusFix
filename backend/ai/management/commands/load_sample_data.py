@@ -14,7 +14,9 @@ from django.db import transaction
 from django.utils import timezone
 
 from accounts.models import User
-from ai.ml.common import SAMPLE_CSV, load_rows, parse_datetime
+from ai import embeddings
+from ai.ml import train_classifier, train_time_model
+from ai.ml.common import SAMPLE_CSV, complaint_text, load_rows, parse_datetime
 from complaints.models import Complaint, ComplaintStatusHistory
 from complaints.services import department_for_category
 
@@ -44,11 +46,36 @@ class Command(BaseCommand):
         # Move the newest complaint to "now". Shift by whole hours so hourly patterns (spikes) stay intact.
         shift = timedelta(hours=(timezone.make_naive(now) - newest) // timedelta(hours=1))
 
-        for i, row in enumerate(rows):
+        linked = 0
+        for i, row in enumerate(rows):  # rows are in date order, so duplicates link to earlier complaints
             created_at = timezone.make_aware(parse_datetime(row["created_at"]) + shift)
-            self.create_complaint(row, students[i % len(students)], created_at, now)
+            complaint = self.create_complaint(row, students[i % len(students)], created_at, now)
+            linked += self.add_ai_fields(complaint, row, created_at)
 
-        self.stdout.write(self.style.SUCCESS(f"Loaded {len(rows)} synthetic complaints for {len(students)} students."))
+        self.stdout.write(self.style.SUCCESS(
+            f"Loaded {len(rows)} synthetic complaints for {len(students)} students ({linked} linked as duplicates)."
+        ))
+
+    def add_ai_fields(self, complaint, row, created_at):
+        """Classifier opinion, predicted days, embedding and duplicate link (if the models are trained)."""
+        text = complaint_text(row["title"], row["description"])
+        prediction = train_classifier.predict(text)
+        if prediction:
+            complaint.ml_category, complaint.ml_confidence = prediction.label, round(prediction.confidence, 4)
+        complaint.ai_source = "sample"
+        complaint.predicted_days = train_time_model.predict_days(
+            complaint.category, complaint.urgency, complaint.block, timezone.localtime(created_at), text
+        )
+        vector = embeddings.embed_text(text)
+        complaint.embedding, complaint.embedding_model = embeddings.to_bytes(vector), embeddings.get_embedder().name
+        complaint.save(update_fields=["ml_category", "ml_confidence", "ai_source", "predicted_days",
+                                      "embedding", "embedding_model"])
+        if complaint.status in embeddings.OPEN_STATUSES:
+            found = embeddings.find_duplicate(complaint, vector)
+            if found:
+                embeddings.link_duplicate(found[0], complaint, found[1])
+                return 1
+        return 0
 
     def synthetic_student(self, number):
         user, created = User.objects.get_or_create(

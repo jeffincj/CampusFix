@@ -31,6 +31,7 @@ class ComplaintSerializer(serializers.ModelSerializer):
             "id", "title", "description", "category", "department", "department_name",
             "urgency", "location", "block", "summary", "language",
             "status", "status_display", "needs_review", "duplicate_count", "predicted_days",
+            "llm_category", "ml_category", "ml_confidence", "ai_source",
             "student", "created_at", "updated_at", "resolved_at",
         ]
         read_only_fields = fields
@@ -40,10 +41,16 @@ class ComplaintDetailSerializer(ComplaintSerializer):
     """Detail view: everything above plus the status timeline."""
 
     history = StatusHistorySerializer(many=True, read_only=True)
+    duplicate_of = serializers.SerializerMethodField()
 
     class Meta(ComplaintSerializer.Meta):
-        fields = ComplaintSerializer.Meta.fields + ["history"]
+        fields = ComplaintSerializer.Meta.fields + ["history", "duplicate_of"]
         read_only_fields = fields
+
+    def get_duplicate_of(self, complaint):
+        """If this complaint was merged into an earlier one: {"id", "similarity"}."""
+        link = complaint.duplicate_of.first()
+        return {"id": link.original_id, "similarity": link.similarity} if link else None
 
 
 class ComplaintCreateSerializer(serializers.ModelSerializer):

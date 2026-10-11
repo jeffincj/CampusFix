@@ -17,6 +17,9 @@
     {% if complaint.resolved_at %}<dt>Resolved</dt><dd>{{ complaint.resolved_at|date:"d M Y, H:i" }}</dd>{% endif %}
   </dl>
   <p class="description">{{ complaint.description|linebreaksbr }}</p>
+  {% if complaint.predicted_days %}
+    <p class="muted">Expected fix time: about {{ complaint.predicted_days|floatformat:1 }} day{{ complaint.predicted_days|pluralize }} (AI estimate).</p>
+  {% endif %}
 
   {% if can_edit %}
   <div class="actions">
@@ -25,6 +28,21 @@
   </div>
   {% endif %}
 </section>
+
+{% if not user.is_student %}
+<section class="card">
+  <h3>AI routing</h3>
+  <dl class="details">
+    <dt>Summary</dt><dd>{{ complaint.summary|default:"—" }}</dd>
+    <dt>Language</dt><dd>{{ complaint.language|default:"—" }}</dd>
+    <dt>Decided by</dt><dd>{{ complaint.ai_source|default:"—" }}</dd>
+    <dt>LLM said</dt><dd>{{ complaint.llm_category|default:"—" }}</dd>
+    <dt>Classifier said</dt><dd>{{ complaint.ml_category|default:"—" }}{% if complaint.ml_confidence %} ({{ complaint.ml_confidence|floatformat:2 }}){% endif %}</dd>
+    <dt>Duplicates merged</dt><dd>{{ complaint.duplicate_count }}</dd>
+  </dl>
+  {% if complaint.needs_review %}<div class="alert alert-warning">The LLM and the classifier disagree. Please check the category.</div>{% endif %}
+</section>
+{% endif %}
 
 {% if can_update_status %}
 <section class="card">

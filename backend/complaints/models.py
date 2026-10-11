@@ -72,6 +72,12 @@ class Complaint(models.Model):
     needs_review = models.BooleanField(default=False)  # True when LLM and classifier disagree
     duplicate_count = models.PositiveIntegerField(default=0)  # how many later complaints were merged into this one
     predicted_days = models.FloatField(null=True, blank=True)  # predicted resolution time
+    llm_category = models.CharField(max_length=20, blank=True)  # what the LLM said
+    ml_category = models.CharField(max_length=20, blank=True)  # what the classifier said
+    ml_confidence = models.FloatField(null=True, blank=True)
+    ai_source = models.CharField(max_length=20, blank=True)  # who decided the category: llm | classifier | student
+    embedding = models.BinaryField(null=True, blank=True, editable=False)  # float32 vector for duplicate search
+    embedding_model = models.CharField(max_length=80, blank=True)
 
     # Workflow
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.OPEN)

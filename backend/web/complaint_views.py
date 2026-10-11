@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
 from accounts.decorators import role_required
+from ai.pipeline import GuardrailError, submit_complaint
 from complaints import services
 from complaints.forms import ComplaintForm, FeedbackForm, StatusUpdateForm
 from complaints.models import Complaint
@@ -25,9 +26,16 @@ def complaint_create(request):
     if request.method == "POST":
         form = ComplaintForm(request.POST)
         if form.is_valid():
-            complaint = services.create_complaint(request.user, **form.cleaned_data)
-            messages.success(request, f"Complaint #{complaint.pk} submitted. You can track it here.")
-            return redirect("web:complaint_detail", pk=complaint.pk)
+            try:
+                result = submit_complaint(request.user, **form.cleaned_data)  # the AI pipeline
+            except GuardrailError as error:
+                form.add_error(None, error.result.message)  # shown at the top of the form
+            else:
+                complaint = result.complaint
+                messages.success(request, f"Complaint #{complaint.pk} submitted. You can track it here.")
+                if result.duplicate_of:
+                    messages.info(request, "Another student already reported this problem. We linked the two complaints so it gets fixed faster.")
+                return redirect("web:complaint_detail", pk=complaint.pk)
     else:
         form = ComplaintForm()
     return render(request, "web/complaint_form.html", {"form": form, "is_edit": False})

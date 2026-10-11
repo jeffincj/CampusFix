@@ -12,7 +12,7 @@ class ComplaintForm(forms.ModelForm):
         model = Complaint
         fields = ["title", "description", "category", "location", "block"]
         labels = {
-            "category": "Category (optional)",
+            "category": "Category (optional, our AI decides)",
             "block": "Block / building (optional)",
         }
         help_texts = {

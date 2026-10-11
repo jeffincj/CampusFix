@@ -78,9 +78,42 @@ def evaluate_time_model(rows, save=True):
     return metrics
 
 
-def main(csv_paths=None):
+def evaluate_llm(rows, sample_size=40, client=None, save=True):
+    """
+    Run the LLM intake on a sample of the SAME test split as the classifier, so the two
+    accuracies can be compared fairly. Costs API calls, so it is opt-in (--llm-sample).
+    """
+    import time
+
+    from ai import intake
+
+    _, test_rows = split(rows)
+    sample = test_rows[:sample_size]
+    true_labels, predicted, latencies, failures = [], [], [], 0
+    for row in sample:
+        started = time.monotonic()
+        try:
+            result = intake.extract(f"{row['title']}. {row['description']}", client=client)
+            predicted.append(result["category"])
+        except intake.IntakeError:
+            failures += 1
+            predicted.append("FAILED")
+        latencies.append((time.monotonic() - started) * 1000)
+        true_labels.append(row["category"])
+    metrics = classification_metrics(true_labels, predicted, sorted(set(r["category"] for r in rows)))
+    metrics.update({"failures": failures, "avg_latency_ms": round(sum(latencies) / len(latencies))})
+    if save:
+        ModelMetric.objects.create(model_name="llm_intake", metrics=metrics, n_test=len(sample),
+                                   notes=f"sample of {len(sample)} test rows")
+    return metrics
+
+
+def main(csv_paths=None, llm_sample=0):
     rows = load_rows(csv_paths)
     results = {"classifier": evaluate_classifier(rows), "time_model": evaluate_time_model(rows)}
+    if llm_sample:
+        results["llm_intake"] = evaluate_llm(rows, llm_sample)
+        print(f"LLM intake: accuracy={results['llm_intake']['accuracy']} on {llm_sample} rows")
     c, t = results["classifier"], results["time_model"]
     print(f"Classifier: accuracy={c['accuracy']} precision={c['precision']} recall={c['recall']} f1={c['f1']}")
     print(f"Time model: MAE={t['mae_days']} days (baseline {t['baseline_mae_days']}), R2={t['r2']}")
