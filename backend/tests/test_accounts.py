@@ -126,7 +126,7 @@ def test_dashboard_requires_login(client):
 @pytest.mark.parametrize(
     "role, expected_text",
     [
-        (User.Role.STUDENT, b"submit new complaints"),
+        (User.Role.STUDENT, b"+ New complaint"),
         (User.Role.STAFF, b"signed in as <strong>staff</strong>"),
         (User.Role.ADMIN, b"signed in as <strong>admin</strong>"),
     ],

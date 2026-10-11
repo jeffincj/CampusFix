@@ -1,0 +1,13 @@
+{% extends "web/base.html" %}
+{% block title %}CampusFix · Delete complaint{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h2>Delete complaint #{{ complaint.pk }}?</h2>
+  <p>“{{ complaint.title }}” will be removed. This cannot be undone.</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="button button-danger">Yes, delete</button>
+    <a class="button button-secondary" href="{% url 'web:complaint_detail' complaint.pk %}">Cancel</a>
+  </form>
+</section>
+{% endblock %}

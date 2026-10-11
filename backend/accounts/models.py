@@ -1,5 +1,6 @@
 """Custom user model with a role (student, staff, admin)."""
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -16,9 +17,19 @@ class User(AbstractUser):
 
     role = models.CharField(max_length=10, choices=Role.choices, default=Role.STUDENT)
     email = models.EmailField(unique=True)  # one account per email
+    # Staff belong to one department and only see its complaints.
+    department = models.ForeignKey(
+        "complaints.Department", on_delete=models.SET_NULL, null=True, blank=True, related_name="staff"
+    )
 
     class Meta:
         db_table = "users"  # table name required by the project spec
+
+    def clean(self):
+        # Runs on admin/model-form validation: staff must have a department.
+        super().clean()
+        if self.role == self.Role.STAFF and not self.department_id:
+            raise ValidationError({"department": "Staff users must belong to a department."})
 
     def save(self, *args, **kwargs):
         # A Django superuser (createsuperuser) is always an admin in our app.

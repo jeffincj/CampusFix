@@ -7,7 +7,8 @@
   <title>{% block title %}CampusFix{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
 </head>
-<body>
+<!-- data-status-url tells status.js where to poll for live status updates -->
+<body {% if user.is_authenticated %}data-status-url="{% url 'web:complaint_status_json' %}"{% endif %}>
   <!-- Top navigation bar -->
   <header class="navbar">
     <a href="{% url 'web:home' %}" class="brand">CampusFix</a>
@@ -15,6 +16,7 @@
       {% if user.is_authenticated %}
         <span class="who">{{ user.username }} · {{ user.get_role_display }}</span>
         <a href="{% url 'web:dashboard' %}">Dashboard</a>
+        <a href="{% url 'web:complaint_list' %}">Complaints</a>
         <!-- Logout must be a POST form (with CSRF token), not a plain link -->
         <form method="post" action="{% url 'web:logout' %}" class="inline-form">
           {% csrf_token %}
@@ -39,6 +41,7 @@
   <footer class="footer">CampusFix · AI complaint system for our campus</footer>
 
   <script src="{% static 'web/js/forms.js' %}"></script>
+  <script src="{% static 'web/js/status.js' %}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

@@ -6,6 +6,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import redirect, render
 
 from accounts.forms import LoginForm, StudentRegisterForm
+from complaints.models import Complaint
+from complaints.services import visible_complaints
 
 
 def home(request):
@@ -48,8 +50,15 @@ class CampusLogoutView(LogoutView):
 @login_required
 def dashboard(request):
     """
-    Role-aware landing page after login.
-    Students will submit/track complaints here (Phase 2).
-    Staff and admins will use the React dashboard (Phase 7).
+    Role-aware landing page after login: counts per status and the latest
+    complaints this user can see (own / department / all).
+    Staff and admins also get the React dashboard in Phase 7.
     """
-    return render(request, "web/dashboard.html")
+    complaints = visible_complaints(request.user)
+    counts = {status: complaints.filter(status=status).count() for status in Complaint.Status.values}
+    context = {
+        "counts": counts,
+        "total": sum(counts.values()),
+        "recent": complaints[:5],
+    }
+    return render(request, "web/dashboard.html", context)

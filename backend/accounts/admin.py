@@ -7,8 +7,8 @@ from .models import User
 
 @admin.register(User)
 class CampusUserAdmin(UserAdmin):
-    list_display = ("username", "email", "role", "is_active", "date_joined")
-    list_filter = ("role", "is_active")
+    list_display = ("username", "email", "role", "department", "is_active", "date_joined")
+    list_filter = ("role", "department", "is_active")
     # Add the role field to the built-in admin edit/create pages.
-    fieldsets = UserAdmin.fieldsets + (("CampusFix", {"fields": ("role",)}),)
-    add_fieldsets = UserAdmin.add_fieldsets + (("CampusFix", {"fields": ("email", "role")}),)
+    fieldsets = UserAdmin.fieldsets + (("CampusFix", {"fields": ("role", "department")}),)
+    add_fieldsets = UserAdmin.add_fieldsets + (("CampusFix", {"fields": ("email", "role", "department")}),)

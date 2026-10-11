@@ -1,0 +1,4 @@
+{% comment %}
+  Coloured status label. data-status-for lets status.js find and refresh it live.
+{% endcomment %}
+<span class="badge status-{{ complaint.status }}" data-status-for="{{ complaint.pk }}">{{ complaint.get_status_display }}</span>

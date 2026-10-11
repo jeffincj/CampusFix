@@ -94,3 +94,56 @@ a { color: var(--primary); }
 .alert-success { background: #e8f5e9; color: var(--success); }
 .alert-error { background: #fdecea; color: var(--error); }
 .alert-info, .alert-warning { background: #e8f0fe; color: var(--primary-dark); }
+
+/* --- Phase 2: complaints ------------------------------------------------- */
+
+.card + .card { margin-top: 20px; }
+.card.wide { max-width: 640px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.card-header h2, .card-header h3 { margin: 0.4em 0; }
+
+/* Dashboard counters */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 16px; }
+.stat {
+  display: flex; flex-direction: column; align-items: center; padding: 14px;
+  border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--text);
+}
+.stat strong { font-size: 1.6rem; }
+.stat span { color: var(--muted); font-size: 0.85rem; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.table th, .table td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); }
+.table th { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+
+/* Filters and inline forms */
+.filters, .inline-fields { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+.filters select, .filters input, .inline-fields select, .inline-fields input {
+  padding: 8px; border: 1px solid var(--border); border-radius: 6px; font: inherit;
+}
+.filters input[type="search"], .inline-fields input { flex: 1; min-width: 180px; }
+.pagination { display: flex; gap: 16px; justify-content: center; margin-top: 16px; }
+
+/* Status badges: one colour per status */
+.badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+.status-open { background: #e8f0fe; color: #1858c4; }
+.status-in_progress { background: #fff4e5; color: #b26a00; }
+.status-resolved { background: #e8f5e9; color: #2e7d32; }
+.status-closed { background: #eceff1; color: #455a64; }
+.status-rejected { background: #fdecea; color: #c62828; }
+.badge.changed { animation: flash 1.5s ease-in-out 2; }
+@keyframes flash { 50% { box-shadow: 0 0 0 4px #ffd54f; } }
+
+/* Complaint detail */
+.details { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 12px 0; }
+.details dt { color: var(--muted); }
+.details dd { margin: 0; }
+.description { background: var(--bg); padding: 12px; border-radius: 8px; }
+.actions { display: flex; gap: 8px; margin-top: 12px; }
+.button-danger { background: var(--error); }
+.button-danger:hover { background: #a31f1f; }
+.timeline { list-style: none; padding-left: 0; margin: 0; }
+.timeline li { padding: 8px 0 8px 14px; border-left: 3px solid var(--border); margin-left: 6px; }
+.rating ul, .rating div { display: flex; gap: 12px; list-style: none; padding: 0; margin: 0 0 12px; }
+.rating label { font-weight: 400; }

@@ -2,18 +2,38 @@
 {% block title %}CampusFix · Dashboard{% endblock %}
 {% block content %}
 <section class="card">
-  <h2>Hello, {{ user.first_name|default:user.username }}</h2>
+  <div class="card-header">
+    <h2>Hello, {{ user.first_name|default:user.username }}</h2>
+    {% if user.is_student %}
+      <a class="button" href="{% url 'web:complaint_create' %}">+ New complaint</a>
+    {% endif %}
+  </div>
 
   {% if user.is_student %}
-    <p>From here you will submit new complaints and track their status.</p>
-    <div class="placeholder">Complaint submission and tracking arrive in Phase 2.</div>
+    <p>Submit new complaints and track their status. Statuses refresh automatically.</p>
   {% elif user.is_staff_member %}
-    <p>You are signed in as <strong>staff</strong>. You will see and update your department's complaints.</p>
-    <div class="placeholder">The officials' dashboard (React) arrives in Phase 7.</div>
+    <p>You are signed in as <strong>staff</strong> of
+       <strong>{{ user.department|default:"(no department yet — ask an admin)" }}</strong>.
+       You see and update your department's complaints.</p>
   {% elif user.is_admin %}
-    <p>You are signed in as <strong>admin</strong>.
-      {% if user.is_staff %}Manage users in the <a href="{% url 'admin:index' %}">Django admin</a>.{% endif %}</p>
-    <div class="placeholder">Charts, reports and metrics arrive in later phases.</div>
+    <p>You are signed in as <strong>admin</strong>. You see every complaint.
+      {% if user.is_staff %}Manage users and departments in the <a href="{% url 'admin:index' %}">Django admin</a>.{% endif %}</p>
   {% endif %}
+
+  <!-- Count of complaints per status -->
+  <div class="stats">
+    <a class="stat" href="{% url 'web:complaint_list' %}"><strong>{{ total }}</strong><span>Total</span></a>
+    <a class="stat" href="{% url 'web:complaint_list' %}?status=open"><strong>{{ counts.open }}</strong><span>Open</span></a>
+    <a class="stat" href="{% url 'web:complaint_list' %}?status=in_progress"><strong>{{ counts.in_progress }}</strong><span>In progress</span></a>
+    <a class="stat" href="{% url 'web:complaint_list' %}?status=resolved"><strong>{{ counts.resolved }}</strong><span>Resolved</span></a>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h3>Latest complaints</h3>
+    <a href="{% url 'web:complaint_list' %}">See all →</a>
+  </div>
+  {% include "web/_complaint_table.html" with complaints=recent %}
 </section>
 {% endblock %}

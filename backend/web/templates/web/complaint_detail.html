@@ -1,0 +1,70 @@
+{% extends "web/base.html" %}
+{% block title %}CampusFix · Complaint #{{ complaint.pk }}{% endblock %}
+{% block content %}
+<section class="card" data-live-status>
+  <div class="card-header">
+    <h2>#{{ complaint.pk }} · {{ complaint.title }}</h2>
+    {% include "web/_status_badge.html" %}
+  </div>
+
+  <dl class="details">
+    <dt>Category</dt><dd>{{ complaint.get_category_display|default:"Not set yet" }}</dd>
+    <dt>Department</dt><dd>{{ complaint.department|default:"Not assigned yet" }}</dd>
+    <dt>Urgency</dt><dd>{{ complaint.get_urgency_display }}</dd>
+    <dt>Location</dt><dd>{{ complaint.location|default:"—" }}{% if complaint.block %} ({{ complaint.block }}){% endif %}</dd>
+    {% if not user.is_student %}<dt>Student</dt><dd>{{ complaint.student.get_full_name|default:complaint.student.username }}</dd>{% endif %}
+    <dt>Submitted</dt><dd>{{ complaint.created_at|date:"d M Y, H:i" }}</dd>
+    {% if complaint.resolved_at %}<dt>Resolved</dt><dd>{{ complaint.resolved_at|date:"d M Y, H:i" }}</dd>{% endif %}
+  </dl>
+  <p class="description">{{ complaint.description|linebreaksbr }}</p>
+
+  {% if can_edit %}
+  <div class="actions">
+    <a class="button button-secondary" href="{% url 'web:complaint_edit' complaint.pk %}">Edit</a>
+    <a class="button button-danger" href="{% url 'web:complaint_delete' complaint.pk %}">Delete</a>
+  </div>
+  {% endif %}
+</section>
+
+{% if can_update_status %}
+<section class="card">
+  <h3>Update status</h3>
+  <form method="post" action="{% url 'web:complaint_update_status' complaint.pk %}" class="inline-fields">
+    {% csrf_token %}
+    {{ status_form.status }}
+    {{ status_form.note }}
+    <button type="submit" class="button">Update</button>
+  </form>
+</section>
+{% endif %}
+
+{% if can_give_feedback %}
+<section class="card">
+  <h3>How was the fix?</h3>
+  <form method="post" action="{% url 'web:complaint_feedback' complaint.pk %}">
+    {% csrf_token %}
+    <div class="rating">{{ feedback_form.rating }}</div>
+    {% include "web/_field.html" with field=feedback_form.comment %}
+    <button type="submit" class="button">Send feedback</button>
+  </form>
+</section>
+{% elif feedback %}
+<section class="card">
+  <h3>Feedback</h3>
+  <p><strong>{{ feedback.rating }}/5</strong> {{ feedback.comment }}</p>
+</section>
+{% endif %}
+
+<section class="card">
+  <h3>Status timeline</h3>
+  <ol class="timeline">
+    {% for entry in history %}
+    <li>
+      <span class="badge status-{{ entry.new_status }}">{{ entry.get_new_status_display }}</span>
+      <span class="muted">{{ entry.created_at|date:"d M Y, H:i" }}{% if entry.changed_by %} · by {{ entry.changed_by.username }}{% endif %}</span>
+      {% if entry.note %}<div>{{ entry.note }}</div>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endblock %}

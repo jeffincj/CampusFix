@@ -1,0 +1,29 @@
+{% comment %} Table of complaints, reused by the dashboard and the list page. {% endcomment %}
+{% if complaints %}
+<div class="table-wrap">
+  <table class="table" data-live-status>
+    <thead>
+      <tr>
+        <th>#</th><th>Title</th><th>Category</th><th>Location</th>
+        {% if not user.is_student %}<th>Student</th>{% endif %}
+        <th>Status</th><th>Submitted</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for complaint in complaints %}
+      <tr>
+        <td>{{ complaint.pk }}</td>
+        <td><a href="{% url 'web:complaint_detail' complaint.pk %}">{{ complaint.title }}</a></td>
+        <td>{{ complaint.get_category_display|default:"—" }}</td>
+        <td>{{ complaint.location|default:"—" }}</td>
+        {% if not user.is_student %}<td>{{ complaint.student.username }}</td>{% endif %}
+        <td>{% include "web/_status_badge.html" %}</td>
+        <td>{{ complaint.created_at|date:"d M Y, H:i" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+  <p class="muted">No complaints yet.</p>
+{% endif %}

@@ -12,6 +12,8 @@ const rules = {
   username: (value) =>
     /^[\w.@+-]+$/.test(value) ? "" : "Use only letters, numbers and @ . + - _",
   password: (value) => (value.length >= 8 ? "" : "Password must be at least 8 characters."),
+  minlength10: (value) =>
+    value.trim().length >= 10 ? "" : "Please describe the problem in at least 10 characters.",
 };
 
 // Which checks to run for each field name, per form type.
@@ -26,6 +28,10 @@ const formRules = {
   login: {
     username: ["required"],
     password: ["required"],
+  },
+  complaint: {
+    title: ["required"],
+    description: ["required", "minlength10"],
   },
 };
 
