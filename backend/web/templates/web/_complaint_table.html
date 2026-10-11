@@ -26,5 +26,9 @@
   </table>
 </div>
 {% else %}
-  <p class="muted">{% translate "No complaints yet." %}</p>
+  <div class="empty">
+    <span class="feature-icon">{% include "web/_icon.html" with name="inbox" %}</span>
+    <p>{% translate "No complaints yet." %}</p>
+    {% if user.is_student %}<a class="button" href="{% url 'web:complaint_create' %}">{% translate "Report a problem" %}</a>{% endif %}
+  </div>
 {% endif %}

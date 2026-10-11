@@ -8,6 +8,11 @@
     {% include "web/_status_badge.html" %}
   </div>
 
+  <!-- Progress tracker -->
+  <ol class="stepper" aria-label="{% translate 'Progress' %}">
+    {% for step in steps %}<li class="{{ step.state }}">{{ step.label }}</li>{% endfor %}
+  </ol>
+
   <dl class="details">
     <dt>{% translate "Category" %}</dt><dd>{{ complaint.get_category_display|default:_("Not set yet") }}</dd>
     <dt>{% translate "Department" %}</dt><dd>{% if complaint.department %}{% translate complaint.department.name %}{% else %}{% translate "Not assigned yet" %}{% endif %}</dd>
@@ -21,15 +26,15 @@
 
   {% if can_edit %}
   <div class="actions">
-    <a class="button button-secondary" href="{% url 'web:complaint_edit' complaint.pk %}">{% translate "Edit" %}</a>
-    <a class="button button-danger" href="{% url 'web:complaint_delete' complaint.pk %}">{% translate "Delete" %}</a>
+    <a class="button button-secondary" href="{% url 'web:complaint_edit' complaint.pk %}">{% include "web/_icon.html" with name="edit" %} {% translate "Edit" %}</a>
+    <a class="button button-danger" href="{% url 'web:complaint_delete' complaint.pk %}">{% include "web/_icon.html" with name="trash" %} {% translate "Delete" %}</a>
   </div>
   {% endif %}
 </section>
 
 <!-- What the AI decided, explained in plain words (everyone sees this) -->
 <section class="card ai-card">
-  <h3>🤖 {% translate "How CampusFix AI understood your complaint" %}</h3>
+  <h3 class="ai-title"><span class="feature-icon">{% include "web/_icon.html" with name="sparkles" %}</span>{% translate "How CampusFix AI understood your complaint" %}</h3>
   <ul class="ai-facts">
     <li>
       <span class="ai-label">{% translate "Sent to" %}</span>

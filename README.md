@@ -50,7 +50,7 @@ predicts how long the fix will take. Staff and admins work from a React dashboar
 | FAISS + embeddings | duplicate detection, document search |
 | pypdf | reading rule PDFs |
 | Matplotlib | weekly PDF report (and the sample rule PDFs) |
-| pytest | 213 tests (backend) |
+| pytest | 224 tests (backend) |
 | Docker, docker-compose, gunicorn, WhiteNoise | running and deploying |
 
 ## Architecture
@@ -206,6 +206,16 @@ hard-coded. Main ones:
 and follow it at `/complaints/`. Statuses refresh by themselves every 15 seconds. After a fix
 they can rate it 1–5.
 
+- **Live AI preview**: while a student types a complaint, a side panel shows what the AI
+  understands (department + confidence, urgency, language, location), warns about spam/abuse
+  before submitting, and tells them if someone already reported the same problem.
+  (Fast local models only; the LLM runs on submit.)
+- **Voice input**: a 🎤 button on the description uses the browser's speech recognition in the
+  page language (en-IN, ta-IN, ml-IN). It appears only in browsers that support it (Chrome, Edge).
+- **Progress tracker**: Submitted → In progress → Resolved → Closed on every complaint page.
+- **Campus pulse**: the home page shows live numbers (complaints this week, % resolved,
+  average days to fix, most reported problem).
+- **Light / dark mode** toggle (remembered in the browser) on both the student site and the dashboard.
 - **AI card**: every complaint page shows "How CampusFix AI understood your complaint": the
   department it was sent to, problem type, urgency, language detected, expected fix time, who
   decided (LLM, classifier or the student), the AI summary, and whether it was merged with
@@ -232,7 +242,8 @@ python manage.py compile_translations   # pure Python, works on Windows without 
   category.
 - **Charts**: totals, complaints per category, per block, weekly trend; every chart has a
   table view. Admins download the **weekly PDF report** here.
-- **Hotspots**: DBSCAN clusters ("18 Wi-Fi complaints at A/B Block hostels").
+- **Hotspots**: DBSCAN clusters ("18 Wi-Fi complaints at A/B Block hostels"), drawn on an SVG
+  **campus map** (circle size = number of complaints; hover a circle or a card to link them).
 - **Spike alerts**: hours with unusually many complaints.
 - **Assistant**: ask "how many open IT complaints?" or "when do hostel gates close?".
 - **AI metrics** (admin): classifier vs LLM accuracy, confusion matrix, time-model error,
@@ -341,7 +352,7 @@ curl -s localhost:8000/api/complaints/?status=open -H "Authorization: Bearer $TO
 
 ```bash
 cd backend
-pytest -q            # 213 tests, ~20 s, in-memory SQLite, no MySQL or API key needed
+pytest -q            # 224 tests, ~20 s, in-memory SQLite, no MySQL or API key needed
 ```
 
 Tests never call the real LLM: a `FakeLLM` in `tests/conftest.py` returns scripted replies
@@ -360,6 +371,7 @@ Tests never call the real LLM: a `FakeLLM` in `tests/conftest.py` returns script
 | `test_rag_agent.py` | PDF ingest, retrieval, tools, agent loop, chat + documents API |
 | `test_reports.py` | weekly PDF, report API, health check, dashboard serving |
 | `test_i18n.py` | language switcher (EN/TA/ML), translated pages, messages and statuses, student AI card |
+| `test_ui_features.py` | live AI preview endpoint, campus pulse, progress tracker |
 
 The dashboard is built with `npm run build` (fails on errors).
 

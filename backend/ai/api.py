@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from complaints.permissions import IsAdmin, IsStaffOrAdmin
 from complaints.services import visible_complaints
 
+from .campus import PLACES
 from .ml.hotspots import hotspots_for
 from .ml.spikes import spikes_for
 from .models import LLMCallLog, ModelMetric
@@ -30,7 +31,9 @@ class HotspotsView(APIView):
         days = int_param(request, "days", 30, 1, 365)
         min_samples = int_param(request, "min_samples", 4, 2, 50)
         clusters = hotspots_for(visible_complaints(request.user), days=days, min_samples=min_samples)
-        return Response({"days": days, "hotspots": clusters})
+        # The campus map (place -> block + x/y metres), so the dashboard can draw the hotspots on it.
+        campus = [{"name": name, "block": block, "x": x, "y": y} for name, (block, x, y, _) in PLACES.items()]
+        return Response({"days": days, "hotspots": clusters, "campus": campus})
 
 
 class SpikesView(APIView):

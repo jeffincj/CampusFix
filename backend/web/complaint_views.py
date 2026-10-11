@@ -11,6 +11,9 @@ from django.utils.translation import gettext_lazy
 from django.views.decorators.http import require_POST
 
 from accounts.decorators import role_required
+from ai import embeddings, guardrails, intake
+from ai.campus import locate
+from ai.ml.train_classifier import predict as classify
 from ai.pipeline import GuardrailError, submit_complaint
 from complaints import services
 from complaints.forms import ComplaintForm, FeedbackForm, StatusUpdateForm
@@ -40,6 +43,22 @@ def ai_card(complaint):
         "duplicate_similarity": round(link.similarity * 100) if link else None,
         "others_reported": complaint.duplicate_count,
     }
+
+
+def progress_steps(complaint):
+    """
+    Steps for the progress tracker on the complaint page.
+    Each step: label + state ("done", "current" or "todo"). A rejected complaint ends early.
+    """
+    order = ["open", "in_progress", "resolved", "closed"]
+    labels = [_("Submitted"), _("In progress"), _("Resolved"), _("Closed")]
+    if complaint.status == "rejected":
+        return [{"label": labels[0], "state": "done"}, {"label": _("Rejected"), "state": "rejected"}]
+    current = order.index(complaint.status)
+    return [
+        {"label": label, "state": "done" if i < current else "current" if i == current else "todo"}
+        for i, label in enumerate(labels)
+    ]
 
 
 def get_visible_complaint(user, pk):
@@ -106,6 +125,7 @@ def complaint_detail(request, pk):
         "can_give_feedback": services.can_give_feedback(user, complaint),
         "feedback": getattr(complaint, "feedback", None),
         "ai": ai_card(complaint),
+        "steps": progress_steps(complaint),
     }
     if context["can_update_status"]:
         context["status_form"] = StatusUpdateForm(complaint=complaint)
@@ -204,3 +224,48 @@ def complaint_status_json(request):
         for c in rows
     ]
     return JsonResponse({"complaints": data})
+
+
+@require_POST
+@role_required("student")
+def complaint_preview(request):
+    """
+    Live AI preview while the student types (called by preview.js, nothing is saved).
+    Uses only the fast local models: classifier, rules, embeddings. The LLM runs on submit.
+    """
+    title = request.POST.get("title", "")[:200]
+    description = request.POST.get("description", "")[:3000]
+    location = request.POST.get("location", "")[:200]
+    text = f"{title}. {description}".strip(". ")
+    if len(text) < 10:
+        return JsonResponse({"ready": False})
+
+    prediction = classify(text)
+    check = guardrails.check_complaint(title, description, None, prediction.confidence if prediction else None)
+    rules = intake.rule_based_intake(text, location)
+    place = locate(location, text)
+
+    result = {
+        "ready": True,
+        "allowed": check.allowed,
+        "warning": check.message,
+        "category": None,
+        "urgency": rules["urgency"],
+        "urgency_label": str(Complaint.Urgency(rules["urgency"]).label),
+        "language": str(LANGUAGE_NAMES.get(rules["language"], "")),
+        "location": place[0] if place else location,
+        "similar_reported": False,
+    }
+    if prediction:
+        department = services.department_for_category(prediction.label)
+        result.update({
+            "category": str(Complaint.Category(prediction.label).label),
+            "department": _(department.name) if department else "",
+            "confidence": round(prediction.confidence * 100),
+        })
+
+    # Has someone already reported this? (same check as the real duplicate detection)
+    probe = Complaint(block=place[1] if place else "")
+    found = embeddings.find_duplicate(probe, embeddings.embed_text(text))
+    result["similar_reported"] = bool(found)
+    return JsonResponse(result)

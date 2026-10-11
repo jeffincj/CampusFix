@@ -5,7 +5,7 @@
 <section class="card">
   <div class="card-header">
     <h2>{% if user.is_student %}{% translate "My complaints" %}{% elif user.is_staff_member %}{% blocktranslate trimmed with department=user.department %}{{ department }} complaints{% endblocktranslate %}{% else %}{% translate "All complaints" %}{% endif %}</h2>
-    {% if user.is_student %}<a class="button" href="{% url 'web:complaint_create' %}">{% translate "+ New complaint" %}</a>{% endif %}
+    {% if user.is_student %}<a class="button" href="{% url 'web:complaint_create' %}">{% include "web/_icon.html" with name="plus" %} {% translate "New complaint" %}</a>{% endif %}
   </div>
 
   <!-- Filters: sent as ?status=...&q=... -->

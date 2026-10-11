@@ -2,11 +2,13 @@
 import { useEffect, useState } from "react";
 import { api } from "../api.js";
 import { categoryLabel, formatDate } from "../constants.js";
+import CampusMap from "../components/CampusMap.jsx";
 
 export default function Hotspots() {
   const [days, setDays] = useState(30);
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
+  const [active, setActive] = useState(null); // hotspot highlighted on both the map and the list
 
   useEffect(() => {
     api(`/hotspots/?days=${days}`).then(setData).catch((err) => setError(err.message));
@@ -29,9 +31,16 @@ export default function Hotspots() {
       {error && <div className="alert error">{error}</div>}
       {data && data.hotspots.length === 0 && <p className="muted">No hotspots in this period.</p>}
 
+      {data && data.hotspots.length > 0 && (
+        <section className="card">
+          <CampusMap campus={data.campus} hotspots={data.hotspots} active={active} onActivate={setActive} />
+        </section>
+      )}
+
       <div className="list">
         {data?.hotspots.map((h, i) => (
-          <article key={i} className="card hotspot">
+          <article key={i} className={`card hotspot ${active === i ? "active" : ""}`}
+                   onMouseEnter={() => setActive(i)} onMouseLeave={() => setActive(null)}>
             <div className="hotspot-count">
               <strong>{h.count}</strong>
               <span className="muted small">complaints</span>

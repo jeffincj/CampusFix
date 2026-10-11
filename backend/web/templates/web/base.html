@@ -6,27 +6,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}CampusFix{% endblock %}</title>
+  <!-- Apply the saved theme before the page paints, so there is no white flash in dark mode -->
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("campusfix-theme"); } catch (e) {}
+      var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
 </head>
 <!-- data-status-url tells status.js where to poll for live status updates -->
 <body {% if user.is_authenticated %}data-status-url="{% url 'web:complaint_status_json' %}"{% endif %}>
   <!-- Top navigation bar -->
   <header class="navbar">
-    <a href="{% url 'web:home' %}" class="brand">CampusFix</a>
+    <a href="{% url 'web:home' %}" class="brand">
+      <span class="brand-mark">{% include "web/_icon.html" with name="logo" %}</span> CampusFix
+    </a>
     <nav>
+      {% with path=request.path %}
       {% if user.is_authenticated %}
-        <span class="who">{{ user.username }} · {{ user.get_role_display }}</span>
-        <a href="{% url 'web:dashboard' %}">{% translate "Dashboard" %}</a>
-        <a href="{% url 'web:complaint_list' %}">{% translate "Complaints" %}</a>
+        <a class="nav-link {% if path == '/home/' %}active{% endif %}" href="{% url 'web:dashboard' %}">{% include "web/_icon.html" with name="home" %}<span>{% translate "Dashboard" %}</span></a>
+        <a class="nav-link {% if '/complaints/' in path %}active{% endif %}" href="{% url 'web:complaint_list' %}">{% include "web/_icon.html" with name="list" %}<span>{% translate "Complaints" %}</span></a>
+        <span class="who"><span class="avatar">{{ user.username|slice:":1" }}</span>{{ user.username }} · {{ user.get_role_display }}</span>
         <!-- Logout must be a POST form (with CSRF token), not a plain link -->
         <form method="post" action="{% url 'web:logout' %}" class="inline-form">
           {% csrf_token %}
-          <button type="submit" class="link-button">{% translate "Logout" %}</button>
+          <button type="submit" class="icon-button" title="{% translate 'Logout' %}" aria-label="{% translate 'Logout' %}">{% include "web/_icon.html" with name="logout" %}</button>
         </form>
       {% else %}
-        <a href="{% url 'web:login' %}">{% translate "Login" %}</a>
-        <a href="{% url 'web:register' %}">{% translate "Register" %}</a>
+        <a class="nav-link {% if path == '/login/' %}active{% endif %}" href="{% url 'web:login' %}">{% translate "Login" %}</a>
+        <a class="button" href="{% url 'web:register' %}">{% translate "Register" %}</a>
       {% endif %}
+      {% endwith %}
+
+      <!-- Light / dark mode (saved in the browser) -->
+      <button type="button" class="icon-button theme-toggle" data-theme-toggle title="{% translate 'Light / dark mode' %}" aria-label="{% translate 'Light / dark mode' %}">
+        <span class="sun">{% include "web/_icon.html" with name="sun" %}</span><span class="moon">{% include "web/_icon.html" with name="moon" %}</span>
+      </button>
 
       <!-- Language switcher: posts to Django's set_language view, which saves the choice in a cookie -->
       <form action="{% url 'set_language' %}" method="post" class="inline-form lang-form">
@@ -55,17 +75,20 @@
 
   <footer class="footer">{% translate "CampusFix · AI complaint system for our campus" %}</footer>
 
-  <!-- Messages used by forms.js, in the page language -->
+  <!-- Messages used by forms.js / preview.js, in the page language -->
   {% translate "This field is required." as m_required %}{% translate "Enter a valid email address." as m_email %}
   {% translate "Use only letters, numbers and @ . + - _" as m_username %}{% translate "Password must be at least 8 characters." as m_password %}
   {% translate "Please describe the problem in at least 10 characters." as m_min10 %}{% translate "Passwords do not match." as m_mismatch %}
+  {% translate "Listening… speak now" as m_listening %}{% translate "Speak" as m_speak %}
   <script id="i18n-messages" type="application/json">{
     "required": "{{ m_required|escapejs }}",
     "email": "{{ m_email|escapejs }}",
     "username": "{{ m_username|escapejs }}",
     "password": "{{ m_password|escapejs }}",
     "minlength10": "{{ m_min10|escapejs }}",
-    "mismatch": "{{ m_mismatch|escapejs }}"
+    "mismatch": "{{ m_mismatch|escapejs }}",
+    "listening": "{{ m_listening|escapejs }}",
+    "speak": "{{ m_speak|escapejs }}"
   }</script>
   <script src="{% static 'web/js/forms.js' %}"></script>
   <script src="{% static 'web/js/status.js' %}"></script>

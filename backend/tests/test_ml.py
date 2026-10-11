@@ -141,7 +141,9 @@ def test_load_sample_data_and_analytics_api(api_as, admin_user, it_staff, studen
     assert list(closed.history.values_list("new_status", flat=True)) == ["open", "in_progress", "resolved", "closed"]
 
     admin = api_as(admin_user)
-    hotspots = admin.get("/api/hotspots/").data["hotspots"]
+    hotspot_data = admin.get("/api/hotspots/").data
+    hotspots = hotspot_data["hotspots"]
+    assert {"name": "Main Gate", "block": "Main Gate", "x": 0, "y": 0} in hotspot_data["campus"]
     assert hotspots and hotspots[0]["count"] >= hotspots[-1]["count"]
     spikes = admin.get("/api/spikes/").data["spikes"]
     assert spikes and spikes[0]["categories"][0]["category"] == "IT"  # the synthetic Wi-Fi outage

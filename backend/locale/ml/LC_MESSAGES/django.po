@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-11 22:32+0530\n"
+"POT-Creation-Date: 2026-10-11 22:49+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,6 @@ msgstr "പേരിന്റെ ആദ്യഭാഗം"
 msgid "Last name"
 msgstr "കുടുംബപ്പേര്"
 
-#| msgid "Use only letters, numbers and @ . + - _"
 msgid "Letters, numbers and @ . + - _ only."
 msgstr "അക്ഷരങ്ങൾ, അക്കങ്ങൾ, @ . + - _ എന്നിവ മാത്രം."
 
@@ -41,7 +40,6 @@ msgstr ""
 "കുറഞ്ഞത് 8 അക്ഷരങ്ങൾ. വളരെ സാധാരണമായതോ, അക്കങ്ങൾ മാത്രമുള്ളതോ, നിങ്ങളുടെ "
 "പേരിനോട് സാമ്യമുള്ളതോ ആകരുത്."
 
-#| msgid "Passwords do not match."
 msgid "Password confirmation"
 msgstr "പാസ്‌വേഡ് സ്ഥിരീകരണം"
 
@@ -230,6 +228,9 @@ msgstr "നിങ്ങളുടെ തിരഞ്ഞെടുപ്പ്"
 msgid "Sample data"
 msgstr "സാമ്പിൾ ഡാറ്റ"
 
+msgid "Submitted"
+msgstr "സമർപ്പിച്ചത്"
+
 #, python-format
 msgid "Complaint #%(id)s submitted. You can track it here."
 msgstr "പരാതി #%(id)s സമർപ്പിച്ചു. അതിന്റെ നില ഇവിടെ കാണാം."
@@ -308,11 +309,11 @@ msgstr "വിഭാഗം"
 msgid "Status"
 msgstr "നില"
 
-msgid "Submitted"
-msgstr "സമർപ്പിച്ചത്"
-
 msgid "No complaints yet."
 msgstr "ഇതുവരെ പരാതികളൊന്നുമില്ല."
+
+msgid "Report a problem"
+msgstr "ഒരു പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക"
 
 msgid "Dashboard"
 msgstr "ഡാഷ്ബോർഡ്"
@@ -328,6 +329,9 @@ msgstr "ലോഗിൻ"
 
 msgid "Register"
 msgstr "രജിസ്റ്റർ ചെയ്യുക"
+
+msgid "Light / dark mode"
+msgstr "ലൈറ്റ് / ഡാർക്ക് മോഡ്"
 
 msgid "Language"
 msgstr "ഭാഷ"
@@ -353,6 +357,12 @@ msgstr "പാസ്‌വേഡ് കുറഞ്ഞത് 8 അക്ഷര�
 msgid "Passwords do not match."
 msgstr "പാസ്‌വേഡുകൾ പൊരുത്തപ്പെടുന്നില്ല."
 
+msgid "Listening… speak now"
+msgstr "കേൾക്കുന്നു… ഇപ്പോൾ സംസാരിക്കൂ"
+
+msgid "Speak"
+msgstr "സംസാരിക്കൂ"
+
 msgid "Delete complaint"
 msgstr "പരാതി ഇല്ലാതാക്കുക"
 
@@ -373,6 +383,10 @@ msgstr "റദ്ദാക്കുക"
 #, python-format
 msgid "Complaint #%(id)s"
 msgstr "പരാതി #%(id)s"
+
+#| msgid "In progress"
+msgid "Progress"
+msgstr "പുരോഗതി"
 
 msgid "Not set yet"
 msgstr "ഇതുവരെ നിശ്ചയിച്ചിട്ടില്ല"
@@ -481,9 +495,6 @@ msgstr "%(name)s മുഖേന"
 msgid "Edit complaint"
 msgstr "പരാതി തിരുത്തുക"
 
-msgid "Report a problem"
-msgstr "ഒരു പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക"
-
 #, python-format
 msgid "Edit complaint #%(id)s"
 msgstr "പരാതി #%(id)s തിരുത്തുക"
@@ -501,6 +512,31 @@ msgstr "മാറ്റങ്ങൾ സേവ് ചെയ്യുക"
 msgid "Submit complaint"
 msgstr "പരാതി സമർപ്പിക്കുക"
 
+msgid "Live AI preview"
+msgstr "തത്സമയ AI പ്രിവ്യൂ"
+
+msgid "Start typing. The AI shows what it understands before you submit."
+msgstr ""
+"ടൈപ്പ് ചെയ്യാൻ തുടങ്ങൂ. നിങ്ങൾ സമർപ്പിക്കുന്നതിന് മുമ്പുതന്നെ AI "
+"മനസ്സിലാക്കിയത് കാണിക്കും."
+
+msgid "confidence"
+msgstr "ഉറപ്പ്"
+
+msgid ""
+"Someone may have already reported this. If so, your complaint will be linked"
+" to theirs."
+msgstr ""
+"ആരെങ്കിലും ഇത് ഇതിനകം റിപ്പോർട്ട് ചെയ്തിട്ടുണ്ടാകാം. അങ്ങനെയെങ്കിൽ, "
+"നിങ്ങളുടെ പരാതി അവരുടേതുമായി ബന്ധിപ്പിക്കും."
+
+msgid ""
+"Preview from the fast local AI models. The full AI check runs when you "
+"submit."
+msgstr ""
+"വേഗതയേറിയ ലോക്കൽ AI മോഡലുകളുടെ പ്രിവ്യൂ. പൂർണ്ണ AI പരിശോധന സമർപ്പിക്കുമ്പോൾ "
+"നടക്കും."
+
 msgid "My complaints"
 msgstr "എന്റെ പരാതികൾ"
 
@@ -511,8 +547,9 @@ msgstr "%(department)s പരാതികൾ"
 msgid "All complaints"
 msgstr "എല്ലാ പരാതികളും"
 
-msgid "+ New complaint"
-msgstr "+ പുതിയ പരാതി"
+#| msgid "+ New complaint"
+msgid "New complaint"
+msgstr "പുതിയ പരാതി"
 
 msgid "All statuses"
 msgstr "എല്ലാ നിലകളും"
@@ -554,14 +591,14 @@ msgstr ""
 "നിങ്ങൾ %(department)s ജീവനക്കാരനായി ലോഗിൻ ചെയ്തിരിക്കുന്നു. നിങ്ങളുടെ "
 "വകുപ്പിന്റെ പരാതികൾ കാണാനും പുതുക്കാനും കഴിയും."
 
-msgid "Open the officials' dashboard →"
-msgstr "ഉദ്യോഗസ്ഥരുടെ ഡാഷ്ബോർഡ് തുറക്കുക →"
-
 msgid "You are signed in as admin. You see every complaint."
 msgstr "നിങ്ങൾ അഡ്മിനായി ലോഗിൻ ചെയ്തിരിക്കുന്നു. എല്ലാ പരാതികളും കാണാം."
 
 msgid "Django admin"
 msgstr "Django അഡ്മിൻ"
+
+msgid "Open the officials' dashboard →"
+msgstr "ഉദ്യോഗസ്ഥരുടെ ഡാഷ്ബോർഡ് തുറക്കുക →"
 
 msgid "Total"
 msgstr "ആകെ"
@@ -574,6 +611,9 @@ msgstr "എല്ലാം കാണുക →"
 
 msgid "Home"
 msgstr "ഹോം"
+
+msgid "AI-powered · English · தமிழ் · മലയാളം"
+msgstr "AI അധിഷ്ഠിതം · English · தமிழ் · മലയാളം"
 
 msgid "Report campus problems in your own language"
 msgstr "ക്യാമ്പസ് പ്രശ്നങ്ങൾ നിങ്ങളുടെ സ്വന്തം ഭാഷയിൽ റിപ്പോർട്ട് ചെയ്യൂ"
@@ -588,6 +628,25 @@ msgstr ""
 
 msgid "Create a student account"
 msgstr "വിദ്യാർത്ഥി അക്കൗണ്ട് സൃഷ്ടിക്കുക"
+
+msgid "Campus pulse"
+msgstr "ക്യാമ്പസ് സ്പന്ദനം"
+
+#| msgid "No complaints yet."
+msgid "complaints this week"
+msgstr "ഈ ആഴ്ചത്തെ പരാതികൾ"
+
+msgid "resolved (last 30 days)"
+msgstr "പരിഹരിച്ചവ (കഴിഞ്ഞ 30 ദിവസം)"
+
+msgid "days to fix, on average"
+msgstr "പരിഹരിക്കാൻ ശരാശരി ദിവസങ്ങൾ"
+
+msgid "most reported this week"
+msgstr "ഈ ആഴ്ച കൂടുതൽ റിപ്പോർട്ട് ചെയ്തത്"
+
+msgid "How it works"
+msgstr "ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു"
 
 msgid "1. Write it your way"
 msgstr "1. നിങ്ങളുടെ രീതിയിൽ എഴുതൂ"
@@ -619,6 +678,13 @@ msgstr ""
 "മറ്റുള്ളവരും ഇതേ പ്രശ്നം റിപ്പോർട്ട് ചെയ്താൽ പരാതികൾ ലയിപ്പിക്കും. നിങ്ങളുടെ"
 " നില സ്വയം പുതുക്കപ്പെടും."
 
+#| msgid "Feedback"
+msgid "Welcome back"
+msgstr "വീണ്ടും സ്വാഗതം"
+
+msgid "Log in to report and track campus problems."
+msgstr "ക്യാമ്പസ് പ്രശ്നങ്ങൾ റിപ്പോർട്ട് ചെയ്യാനും അറിയാനും ലോഗിൻ ചെയ്യുക."
+
 msgid "New student?"
 msgstr "പുതിയ വിദ്യാർത്ഥിയാണോ?"
 
@@ -627,6 +693,9 @@ msgstr "അക്കൗണ്ട് സൃഷ്ടിക്കുക"
 
 msgid "Student registration"
 msgstr "വിദ്യാർത്ഥി രജിസ്ട്രേഷൻ"
+
+msgid "It takes less than a minute."
+msgstr "ഒരു മിനിറ്റിൽ താഴെ മതി."
 
 msgid "Already have an account?"
 msgstr "ഇതിനകം അക്കൗണ്ട് ഉണ്ടോ?"

@@ -3,26 +3,53 @@
 {% block title %}CampusFix · {% translate "Home" %}{% endblock %}
 {% block content %}
 <section class="hero">
-  <h1>{% translate "Report campus problems in your own language" %}</h1>
-  <p>{% blocktranslate trimmed %}Hostel, mess, Wi-Fi, labs, transport and more. Write in English, Tamil,
-     Malayalam, or a mix. CampusFix sends your complaint to the right department.{% endblocktranslate %}</p>
-  <div class="hero-actions">
-    <a class="button" href="{% url 'web:register' %}">{% translate "Create a student account" %}</a>
-    <a class="button button-secondary" href="{% url 'web:login' %}">{% translate "Login" %}</a>
+  <div>
+    <span class="hero-badge">{% include "web/_icon.html" with name="sparkles" %} {% translate "AI-powered · English · தமிழ் · മലയാളം" %}</span>
+    <h1>{% translate "Report campus problems in your own language" %}</h1>
+    <p>{% blocktranslate trimmed %}Hostel, mess, Wi-Fi, labs, transport and more. Write in English, Tamil,
+       Malayalam, or a mix. CampusFix sends your complaint to the right department.{% endblocktranslate %}</p>
+    <div class="hero-actions">
+      <a class="button button-light" href="{% url 'web:register' %}">{% translate "Create a student account" %}</a>
+      <a class="button button-ghost" href="{% url 'web:login' %}">{% translate "Login" %}</a>
+    </div>
+  </div>
+
+  <!-- A small "what the AI does" illustration (static example) -->
+  <div class="demo-card" aria-hidden="true">
+    <div class="demo-input">“B Block hostel la wifi work aagala, assignment submit panna mudiyala 😩”</div>
+    <div class="demo-arrow">↓ CampusFix AI</div>
+    <div class="demo-result">
+      <div><span>{% translate "Sent to" %}</span><strong>{% translate "IT Services" %}</strong></div>
+      <div><span>{% translate "Urgency" %}</span><strong>{% translate "High" %}</strong></div>
+      <div><span>{% translate "Language detected" %}</span><strong>{% translate "Mixed language" %}</strong></div>
+      <div><span>{% translate "Location" %}</span><strong>B Block Hostel</strong></div>
+    </div>
   </div>
 </section>
 
-<!-- How the AI helps: shown on the home page so visitors understand the system -->
+<!-- Live numbers from the database -->
+<h2 class="section-title"><span class="live-dot"></span>{% translate "Campus pulse" %}</h2>
+<div class="pulse">
+  <div class="pulse-item"><strong>{{ pulse.this_week }}</strong><span>{% translate "complaints this week" %}</span></div>
+  <div class="pulse-item"><strong>{{ pulse.resolved_percent }}%</strong><span>{% translate "resolved (last 30 days)" %}</span></div>
+  <div class="pulse-item"><strong>{% if pulse.avg_fix_days %}{{ pulse.avg_fix_days }}{% else %}—{% endif %}</strong><span>{% translate "days to fix, on average" %}</span></div>
+  <div class="pulse-item"><strong>{{ pulse.top_category|default:"—" }}</strong><span>{% translate "most reported this week" %}</span></div>
+</div>
+
+<h2 class="section-title">{% translate "How it works" %}</h2>
 <section class="features">
   <div class="feature">
+    <span class="feature-icon">{% include "web/_icon.html" with name="globe" %}</span>
     <h3>{% translate "1. Write it your way" %}</h3>
     <p>{% translate "English, தமிழ், മലയാളം, or Tanglish/Manglish. No need to choose a department." %}</p>
   </div>
   <div class="feature">
+    <span class="feature-icon">{% include "web/_icon.html" with name="sparkles" %}</span>
     <h3>{% translate "2. AI reads it" %}</h3>
     <p>{% translate "CampusFix AI finds the department, how urgent it is and where it happened, and estimates the fix time." %}</p>
   </div>
   <div class="feature">
+    <span class="feature-icon">{% include "web/_icon.html" with name="bolt" %}</span>
     <h3>{% translate "3. Track it live" %}</h3>
     <p>{% translate "If others reported the same problem, the complaints are merged. Your status updates automatically." %}</p>
   </div>

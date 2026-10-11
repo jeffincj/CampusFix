@@ -2,8 +2,10 @@
 {% load i18n %}
 {% block title %}CampusFix · {% translate "Register" %}{% endblock %}
 {% block content %}
-<section class="card narrow">
+<section class="card auth-card">
+  <span class="brand-mark">{% include "web/_icon.html" with name="logo" %}</span>
   <h2>{% translate "Student registration" %}</h2>
+  <p class="muted">{% translate "It takes less than a minute." %}</p>
   <!-- novalidate: we use our own JS checks (forms.js), then Django checks again on the server -->
   <form method="post" novalidate data-validate="register">
     {% csrf_token %}

@@ -5,7 +5,11 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import FileResponse, HttpResponse
+from datetime import timedelta
+
+from django.db.models import Count
 from django.shortcuts import redirect, render
+from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from accounts.forms import LoginForm, StudentRegisterForm
@@ -13,11 +17,33 @@ from complaints.models import Complaint
 from complaints.services import visible_complaints
 
 
+def campus_pulse():
+    """
+    A few live numbers for the home page: complaints this week, share resolved,
+    average fix time and the most reported problem (last 30 days). Aggregates only,
+    no personal data.
+    """
+    now = timezone.now()
+    recent = Complaint.objects.filter(created_at__gte=now - timedelta(days=30))
+    total_recent = recent.count()
+    resolved = recent.filter(status__in=["resolved", "closed"])
+    durations = [(c.resolved_at - c.created_at).total_seconds() / 86400
+                 for c in resolved.exclude(resolved_at=None).only("created_at", "resolved_at")]
+    top = (Complaint.objects.filter(created_at__gte=now - timedelta(days=7)).exclude(category="")
+           .values("category").annotate(n=Count("id")).order_by("-n").first())
+    return {
+        "this_week": Complaint.objects.filter(created_at__gte=now - timedelta(days=7)).count(),
+        "resolved_percent": round(resolved.count() / total_recent * 100) if total_recent else 0,
+        "avg_fix_days": round(sum(durations) / len(durations), 1) if durations else None,
+        "top_category": Complaint.Category(top["category"]).label if top else None,
+    }
+
+
 def home(request):
     """Landing page. Logged-in users go straight to their dashboard."""
     if request.user.is_authenticated:
         return redirect("web:dashboard")
-    return render(request, "web/home.html")
+    return render(request, "web/home.html", {"pulse": campus_pulse()})
 
 
 def register(request):

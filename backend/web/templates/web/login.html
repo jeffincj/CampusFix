@@ -2,8 +2,10 @@
 {% load i18n %}
 {% block title %}CampusFix · {% translate "Login" %}{% endblock %}
 {% block content %}
-<section class="card narrow">
-  <h2>{% translate "Login" %}</h2>
+<section class="card auth-card">
+  <span class="brand-mark">{% include "web/_icon.html" with name="logo" %}</span>
+  <h2>{% translate "Welcome back" %}</h2>
+  <p class="muted">{% translate "Log in to report and track campus problems." %}</p>
   <form method="post" novalidate data-validate="login">
     {% csrf_token %}
     {% for error in form.non_field_errors %}<div class="alert alert-error">{{ error }}</div>{% endfor %}

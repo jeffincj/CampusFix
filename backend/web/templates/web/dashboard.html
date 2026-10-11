@@ -3,32 +3,33 @@
 {% block title %}CampusFix · {% translate "Dashboard" %}{% endblock %}
 {% block content %}
 <section class="card">
-  <div class="card-header">
-    <h2>{% blocktranslate trimmed with name=user.first_name|default:user.username %}Hello, {{ name }}{% endblocktranslate %}</h2>
+  <div class="welcome">
+    <div>
+      <h2>{% blocktranslate trimmed with name=user.first_name|default:user.username %}Hello, {{ name }}{% endblocktranslate %} 👋</h2>
+      {% if user.is_student %}
+        <p class="muted">{% translate "Submit new complaints and track their status. Statuses refresh automatically." %}</p>
+      {% elif user.is_staff_member %}
+        <p class="muted">{% blocktranslate trimmed with department=user.department|default:_("(no department yet, ask an admin)") %}
+          You are signed in as staff of {{ department }}. You see and update your department's complaints.
+        {% endblocktranslate %}</p>
+      {% elif user.is_admin %}
+        <p class="muted">{% translate "You are signed in as admin. You see every complaint." %}
+          {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% translate "Django admin" %}</a>{% endif %}</p>
+      {% endif %}
+    </div>
     {% if user.is_student %}
-      <a class="button" href="{% url 'web:complaint_create' %}">{% translate "+ New complaint" %}</a>
+      <a class="button" href="{% url 'web:complaint_create' %}">{% include "web/_icon.html" with name="plus" %} {% translate "New complaint" %}</a>
+    {% else %}
+      <a class="button" href="/dashboard/">{% translate "Open the officials' dashboard →" %}</a>
     {% endif %}
   </div>
 
-  {% if user.is_student %}
-    <p>{% translate "Submit new complaints and track their status. Statuses refresh automatically." %}</p>
-  {% elif user.is_staff_member %}
-    <p>{% blocktranslate trimmed with department=user.department|default:_("(no department yet, ask an admin)") %}
-      You are signed in as staff of {{ department }}. You see and update your department's complaints.
-    {% endblocktranslate %}</p>
-    <p><a class="button" href="/dashboard/">{% translate "Open the officials' dashboard →" %}</a></p>
-  {% elif user.is_admin %}
-    <p>{% translate "You are signed in as admin. You see every complaint." %}
-      {% if user.is_staff %}<a href="{% url 'admin:index' %}">{% translate "Django admin" %}</a>{% endif %}</p>
-    <p><a class="button" href="/dashboard/">{% translate "Open the officials' dashboard →" %}</a></p>
-  {% endif %}
-
   <!-- Count of complaints per status -->
   <div class="stats">
-    <a class="stat" href="{% url 'web:complaint_list' %}"><strong>{{ total }}</strong><span>{% translate "Total" %}</span></a>
-    <a class="stat" href="{% url 'web:complaint_list' %}?status=open"><strong>{{ counts.open }}</strong><span>{% translate "Open" %}</span></a>
-    <a class="stat" href="{% url 'web:complaint_list' %}?status=in_progress"><strong>{{ counts.in_progress }}</strong><span>{% translate "In progress" %}</span></a>
-    <a class="stat" href="{% url 'web:complaint_list' %}?status=resolved"><strong>{{ counts.resolved }}</strong><span>{% translate "Resolved" %}</span></a>
+    <a class="stat" href="{% url 'web:complaint_list' %}"><span class="stat-icon tone-indigo">{% include "web/_icon.html" with name="inbox" %}</span><div><strong>{{ total }}</strong><span>{% translate "Total" %}</span></div></a>
+    <a class="stat" href="{% url 'web:complaint_list' %}?status=open"><span class="stat-icon tone-blue">{% include "web/_icon.html" with name="clock" %}</span><div><strong>{{ counts.open }}</strong><span>{% translate "Open" %}</span></div></a>
+    <a class="stat" href="{% url 'web:complaint_list' %}?status=in_progress"><span class="stat-icon tone-amber">{% include "web/_icon.html" with name="bolt" %}</span><div><strong>{{ counts.in_progress }}</strong><span>{% translate "In progress" %}</span></div></a>
+    <a class="stat" href="{% url 'web:complaint_list' %}?status=resolved"><span class="stat-icon tone-green">{% include "web/_icon.html" with name="check" %}</span><div><strong>{{ counts.resolved }}</strong><span>{% translate "Resolved" %}</span></div></a>
   </div>
 </section>
 

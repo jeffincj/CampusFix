@@ -17,6 +17,7 @@ urlpatterns = [
     # Complaints
     path("complaints/", complaint_views.complaint_list, name="complaint_list"),
     path("complaints/new/", complaint_views.complaint_create, name="complaint_create"),
+    path("complaints/preview/", complaint_views.complaint_preview, name="complaint_preview"),
     path("complaints/status.json", complaint_views.complaint_status_json, name="complaint_status_json"),
     path("complaints/<int:pk>/", complaint_views.complaint_detail, name="complaint_detail"),
     path("complaints/<int:pk>/edit/", complaint_views.complaint_edit, name="complaint_edit"),

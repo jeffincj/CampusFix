@@ -1,20 +1,66 @@
 {% extends "web/base.html" %}
-{% load i18n %}
+{% load i18n static %}
 {% block title %}CampusFix · {% if is_edit %}{% translate "Edit complaint" %}{% else %}{% translate "Report a problem" %}{% endif %}{% endblock %}
 {% block content %}
-<section class="card narrow wide">
-  <h2>{% if is_edit %}{% blocktranslate trimmed with id=complaint.pk %}Edit complaint #{{ id }}{% endblocktranslate %}{% else %}{% translate "Report a problem" %}{% endif %}</h2>
+<div class="{% if not is_edit %}compose{% endif %}">
+  <section class="card {% if is_edit %}narrow wide{% endif %}">
+    <h2>{% if is_edit %}{% blocktranslate trimmed with id=complaint.pk %}Edit complaint #{{ id }}{% endblocktranslate %}{% else %}{% translate "Report a problem" %}{% endif %}</h2>
+    {% if not is_edit %}
+      <p class="muted">{% translate "Just describe the problem and where it is. CampusFix AI will find the right department and how urgent it is." %}</p>
+    {% endif %}
+    <form method="post" novalidate data-validate="complaint" {% if not is_edit %}data-preview-url="{% url 'web:complaint_preview' %}"{% endif %}>
+      {% csrf_token %}
+      {% for error in form.non_field_errors %}<div class="alert alert-error">{{ error }}</div>{% endfor %}
+      {% for field in form %}
+        {% if field.name == "description" %}
+          <!-- Description with a voice-input button (shown only if the browser supports speech recognition) -->
+          <div class="field">
+            <label for="{{ field.id_for_label }}">{{ field.label }} *</label>
+            <div class="textarea-wrap">
+              {{ field }}
+              <button type="button" class="mic-button" data-mic data-lang="{{ LANGUAGE_CODE }}" hidden>
+                {% include "web/_icon.html" with name="mic" %} <span>{% translate "Speak" %}</span>
+              </button>
+            </div>
+            <small class="helptext">{{ field.help_text }}</small>
+            {% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}
+            <small class="error js-error" data-for="{{ field.html_name }}"></small>
+          </div>
+        {% else %}
+          {% include "web/_field.html" with field=field %}
+        {% endif %}
+      {% endfor %}
+      <button type="submit" class="button full">{% if is_edit %}{% translate "Save changes" %}{% else %}{% include "web/_icon.html" with name="sparkles" %} {% translate "Submit complaint" %}{% endif %}</button>
+    </form>
+    <p class="muted"><a href="{% if is_edit %}{% url 'web:complaint_detail' complaint.pk %}{% else %}{% url 'web:dashboard' %}{% endif %}">{% translate "Cancel" %}</a></p>
+  </section>
+
   {% if not is_edit %}
-    <p class="muted">{% translate "Just describe the problem and where it is. CampusFix AI will find the right department and how urgent it is." %}</p>
+  <!-- Live AI preview: filled by preview.js while the student types -->
+  <aside class="card ai-card preview" aria-live="polite">
+    <h3 class="ai-title"><span class="feature-icon">{% include "web/_icon.html" with name="sparkles" %}</span>{% translate "Live AI preview" %}</h3>
+    <div data-preview-empty class="preview-empty">
+      <p>{% translate "Start typing. The AI shows what it understands before you submit." %}</p>
+    </div>
+    <div data-preview-loading class="preview-empty" hidden><span class="thinking"><i></i><i></i><i></i></span></div>
+    <div data-preview-result hidden>
+      <div class="preview-grid">
+        <div class="preview-row" style="display:block">
+          <span>{% translate "Sent to" %}</span>
+          <div><strong data-out="department">—</strong> <span class="muted" data-out="category"></span></div>
+          <div class="meter"><div data-out="confidence-bar"></div></div>
+          <span class="muted"><span data-out="confidence">0</span>% {% translate "confidence" %}</span>
+        </div>
+        <div class="preview-row"><span>{% translate "Urgency" %}</span><strong data-out="urgency_label">—</strong></div>
+        <div class="preview-row"><span>{% translate "Language detected" %}</span><strong data-out="language">—</strong></div>
+        <div class="preview-row"><span>{% translate "Location" %}</span><strong data-out="location">—</strong></div>
+      </div>
+      <div class="alert alert-info" data-out-show="similar_reported" hidden style="margin-top:12px">{% translate "Someone may have already reported this. If so, your complaint will be linked to theirs." %}</div>
+      <div class="alert alert-warning" data-out="warning" hidden style="margin-top:12px"></div>
+      <p class="muted" style="margin-bottom:0">{% translate "Preview from the fast local AI models. The full AI check runs when you submit." %}</p>
+    </div>
+  </aside>
   {% endif %}
-  <form method="post" novalidate data-validate="complaint">
-    {% csrf_token %}
-    {% for error in form.non_field_errors %}<div class="alert alert-error">{{ error }}</div>{% endfor %}
-    {% for field in form %}
-      {% include "web/_field.html" with field=field %}
-    {% endfor %}
-    <button type="submit" class="button full">{% if is_edit %}{% translate "Save changes" %}{% else %}{% translate "Submit complaint" %}{% endif %}</button>
-  </form>
-  <p class="muted"><a href="{% if is_edit %}{% url 'web:complaint_detail' complaint.pk %}{% else %}{% url 'web:dashboard' %}{% endif %}">{% translate "Cancel" %}</a></p>
-</section>
+</div>
 {% endblock %}
+{% block scripts %}{% if not is_edit %}<script src="{% static 'web/js/preview.js' %}"></script>{% endif %}{% endblock %}

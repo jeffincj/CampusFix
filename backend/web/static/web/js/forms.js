@@ -103,6 +103,15 @@ function setupForm(form) {
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("form[data-validate]").forEach(setupForm);
 
+  // Light / dark mode toggle. The choice is remembered in localStorage.
+  document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("campusfix-theme", next); } catch (e) { /* private mode: ignore */ }
+    });
+  });
+
   // Language switcher: change the language as soon as a new one is picked.
   document.querySelectorAll("select[data-autosubmit]").forEach((select) => {
     select.addEventListener("change", () => select.form.submit());
