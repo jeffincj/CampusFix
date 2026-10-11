@@ -1,0 +1,10 @@
+{% comment %}
+  Reusable form field: label, input, server-side errors, and an empty
+  <small> that JavaScript fills with client-side errors.
+{% endcomment %}
+<div class="field">
+  <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+  {{ field }}
+  {% for error in field.errors %}<small class="error">{{ error }}</small>{% endfor %}
+  <small class="error js-error" data-for="{{ field.html_name }}"></small>
+</div>

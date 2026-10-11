@@ -1,0 +1,18 @@
+{% extends "web/base.html" %}
+{% block title %}CampusFix · Login{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h2>Login</h2>
+  <form method="post" novalidate data-validate="login">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}<div class="alert alert-error">{{ error }}</div>{% endfor %}
+    {% for field in form %}
+      {% include "web/_field.html" with field=field %}
+    {% endfor %}
+    <!-- After login, go back to the page the user originally asked for -->
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit" class="button full">Login</button>
+  </form>
+  <p class="muted">New student? <a href="{% url 'web:register' %}">Create an account</a></p>
+</section>
+{% endblock %}

@@ -1,0 +1,96 @@
+/* CampusFix student pages: one simple stylesheet. */
+
+:root {
+  --primary: #1f6feb;
+  --primary-dark: #1858c4;
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #1c2330;
+  --muted: #5d6778;
+  --border: #d7dde8;
+  --error: #c62828;
+  --success: #2e7d32;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+a { color: var(--primary); }
+
+/* Navigation bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+.brand { font-weight: 700; font-size: 1.25rem; text-decoration: none; }
+.navbar nav { display: flex; align-items: center; gap: 16px; }
+.who { color: var(--muted); font-size: 0.9rem; }
+.inline-form { display: inline; margin: 0; }
+.link-button {
+  background: none; border: none; padding: 0;
+  color: var(--primary); font: inherit; cursor: pointer; text-decoration: underline;
+}
+
+/* Page layout */
+.container { max-width: 960px; margin: 32px auto; padding: 0 16px; }
+.footer { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 24px; }
+
+/* Cards and hero */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+}
+.card.narrow { max-width: 440px; margin: 0 auto; }
+.hero { text-align: center; padding: 48px 0; }
+.hero h1 { font-size: 2rem; margin-bottom: 8px; }
+.hero p { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.placeholder {
+  margin-top: 16px; padding: 16px;
+  border: 1px dashed var(--border); border-radius: 8px; color: var(--muted);
+}
+.muted { color: var(--muted); font-size: 0.9rem; }
+
+/* Forms */
+.field { margin-bottom: 14px; display: flex; flex-direction: column; }
+.field label { font-weight: 600; margin-bottom: 4px; }
+.field input, .field select, .field textarea {
+  padding: 10px; border: 1px solid var(--border); border-radius: 6px; font: inherit;
+}
+.field input:focus, .field textarea:focus { outline: 2px solid var(--primary); border-color: transparent; }
+.field input.invalid { border-color: var(--error); }
+.field .helptext, .field ul { color: var(--muted); font-size: 0.8rem; margin: 4px 0 0; }
+.error { color: var(--error); font-size: 0.85rem; }
+.error:empty { display: none; }
+
+/* Buttons */
+.button {
+  display: inline-block; padding: 10px 18px; border: none; border-radius: 6px;
+  background: var(--primary); color: #fff; font: inherit; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+}
+.button:hover { background: var(--primary-dark); }
+.button-secondary { background: #e7ecf5; color: var(--text); }
+.button-secondary:hover { background: #d7dfee; }
+.button.full { width: 100%; margin-top: 6px; }
+
+/* Flash messages */
+.alert { padding: 10px 14px; border-radius: 6px; margin-bottom: 16px; }
+.alert-success { background: #e8f5e9; color: var(--success); }
+.alert-error { background: #fdecea; color: var(--error); }
+.alert-info, .alert-warning { background: #e8f0fe; color: var(--primary-dark); }

@@ -1,0 +1,17 @@
+{% extends "web/base.html" %}
+{% block title %}CampusFix · Register{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h2>Student registration</h2>
+  <!-- novalidate: we use our own JS checks (forms.js), then Django checks again on the server -->
+  <form method="post" novalidate data-validate="register">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}<div class="alert alert-error">{{ error }}</div>{% endfor %}
+    {% for field in form %}
+      {% include "web/_field.html" with field=field %}
+    {% endfor %}
+    <button type="submit" class="button full">Register</button>
+  </form>
+  <p class="muted">Already have an account? <a href="{% url 'web:login' %}">Login</a></p>
+</section>
+{% endblock %}

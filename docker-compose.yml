@@ -1,0 +1,42 @@
+# Runs CampusFix locally: MySQL database + Django backend.
+# Usage: cp .env.example .env  (fill values), then  docker compose up --build
+
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    # utf8mb4 so Tamil and Malayalam text is stored correctly.
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql  # keeps data between restarts
+    ports:
+      - "3306:3306"
+    healthcheck:
+      # The backend waits until MySQL answers this ping.
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build: ./backend
+    env_file: .env
+    environment:
+      DB_ENGINE: mysql
+      DB_HOST: db  # inside Docker, MySQL is reachable by its service name
+      DB_PORT: "3306"
+    volumes:
+      - ./backend:/app  # live code reload during development
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mysql_data:

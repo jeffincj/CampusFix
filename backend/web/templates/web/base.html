@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CampusFix{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'web/css/style.css' %}">
+</head>
+<body>
+  <!-- Top navigation bar -->
+  <header class="navbar">
+    <a href="{% url 'web:home' %}" class="brand">CampusFix</a>
+    <nav>
+      {% if user.is_authenticated %}
+        <span class="who">{{ user.username }} · {{ user.get_role_display }}</span>
+        <a href="{% url 'web:dashboard' %}">Dashboard</a>
+        <!-- Logout must be a POST form (with CSRF token), not a plain link -->
+        <form method="post" action="{% url 'web:logout' %}" class="inline-form">
+          {% csrf_token %}
+          <button type="submit" class="link-button">Logout</button>
+        </form>
+      {% else %}
+        <a href="{% url 'web:login' %}">Login</a>
+        <a href="{% url 'web:register' %}">Register</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Flash messages (success / error) -->
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">CampusFix · AI complaint system for our campus</footer>
+
+  <script src="{% static 'web/js/forms.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

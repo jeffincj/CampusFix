@@ -1,0 +1,13 @@
+{% extends "web/base.html" %}
+{% block title %}CampusFix · Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Report campus problems in your own language</h1>
+  <p>Hostel, mess, Wi-Fi, labs, transport and more. Write in English, Tamil,
+     Malayalam, or a mix. CampusFix sends your complaint to the right department.</p>
+  <div class="hero-actions">
+    <a class="button" href="{% url 'web:register' %}">Create a student account</a>
+    <a class="button button-secondary" href="{% url 'web:login' %}">Login</a>
+  </div>
+</section>
+{% endblock %}
