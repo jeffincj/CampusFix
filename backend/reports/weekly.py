@@ -9,7 +9,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, time, timedelta
 
 import matplotlib.pyplot as plt
-from django.utils import timezone
+from django.utils import timezone, translation
 from matplotlib.backends.backend_pdf import PdfPages
 
 from ai.ml.hotspots import hotspots_for
@@ -19,7 +19,10 @@ from complaints.models import Complaint, DuplicateLink
 from . import charts
 
 A4 = (8.27, 11.69)
-CATEGORY_NAMES = dict(Complaint.Category.choices)
+def category_name(code, default=None):
+    """Category code -> its name as a plain string (Matplotlib can't use Django's lazy translated text)."""
+    labels = dict(Complaint.Category.choices)
+    return str(labels[code]) if code in labels else default
 
 
 def day_start(day):
@@ -63,10 +66,10 @@ def collect(queryset, end_day):
         "previous": week_numbers(queryset, previous_start, start),
         "open_now": queryset.filter(status__in=["open", "in_progress"]).count(),
         "needs_review": queryset.filter(needs_review=True, status__in=["open", "in_progress"]).count(),
-        "by_category": Counter(CATEGORY_NAMES.get(c, "Unknown") for c in this_week.values_list("category", flat=True)),
+        "by_category": Counter(category_name(c, "Unknown") for c in this_week.values_list("category", flat=True)),
         "by_block": Counter(b or "Unknown" for b in this_week.values_list("block", flat=True)),
         "days": days, "per_day": [per_day.get(d, 0) for d in days],
-        "resolve_days": {CATEGORY_NAMES.get(k, k): round(sum(v) / len(v), 1) for k, v in durations.items()},
+        "resolve_days": {category_name(k, k): round(sum(v) / len(v), 1) for k, v in durations.items()},
         "hotspots": hotspots_for(queryset, days=7)[:5],
         "spikes": spikes_for(queryset, days=7)[:5],
         "urgent_open": list(queryset.filter(status__in=["open", "in_progress"], urgency__in=["critical", "high"])
@@ -84,7 +87,7 @@ def english_line(complaint):
     elif complaint.title.isascii():
         text = complaint.title
     else:
-        text = f"{CATEGORY_NAMES.get(complaint.category, 'Campus')} problem at {complaint.location or complaint.block or 'campus'}"
+        text = f"{category_name(complaint.category, 'Campus')} problem at {complaint.location or complaint.block or 'campus'}"
     text = text if text.isascii() else text.encode("ascii", "ignore").decode()
     return text if len(text) <= 70 else text[:67] + "..."
 
@@ -127,7 +130,7 @@ def summary_page(pdf, data, title):
         fig.text(0.09, y, "No hotspots.", color=charts.MUTED); y -= 0.024
     for h in data["hotspots"]:
         places = ", ".join(p["place"] for p in h["places"][:3])
-        fig.text(0.09, y, f"{CATEGORY_NAMES.get(h['category'], h['category'])}: {h['count']} complaints ({h['open_count']} open) at {places}")
+        fig.text(0.09, y, f"{category_name(h['category'], h['category'])}: {h['count']} complaints ({h['open_count']} open) at {places}")
         y -= 0.024
 
     y -= 0.02
@@ -136,7 +139,7 @@ def summary_page(pdf, data, title):
         fig.text(0.09, y, "No spikes.", color=charts.MUTED); y -= 0.024
     for s in data["spikes"]:
         hour = datetime.fromisoformat(s["hour"])
-        top = ", ".join(f"{CATEGORY_NAMES.get(c['category'], c['category'])} {c['count']}" for c in s["categories"][:3])
+        top = ", ".join(f"{category_name(c['category'], c['category'])} {c['count']}" for c in s["categories"][:3])
         fig.text(0.09, y, f"{hour:%a %d %b, %H:00}: {s['count']} complaints in one hour ({top})")
         y -= 0.024
 
@@ -146,7 +149,7 @@ def summary_page(pdf, data, title):
         fig.text(0.09, y, "None.", color=charts.MUTED)
     for c in data["urgent_open"]:
         age = (timezone.now() - c.created_at).days
-        fig.text(0.09, y, f"#{c.id}  [{c.urgency}]  {CATEGORY_NAMES.get(c.category, '?')} · {c.block or '-'} · {age} days old")
+        fig.text(0.09, y, f"#{c.id}  [{c.urgency}]  {category_name(c.category, '?')} · {c.block or '-'} · {age} days old")
         fig.text(0.11, y - 0.017, english_line(c), color=charts.INK_2, fontsize=8)
         y -= 0.04
 
@@ -166,7 +169,15 @@ def charts_page(pdf, data, page_number, panels):
 
 
 def build_weekly_pdf(queryset=None, end_day=None, title="CampusFix"):
-    """Return the weekly report as PDF bytes."""
+    """
+    Return the weekly report as PDF bytes. Always in English: Matplotlib cannot
+    draw Tamil/Malayalam letters correctly.
+    """
+    with translation.override("en"):
+        return _build(queryset, end_day, title)
+
+
+def _build(queryset, end_day, title):
     queryset = queryset if queryset is not None else Complaint.objects.all()
     end_day = end_day or timezone.localdate()
     data = collect(queryset, end_day)

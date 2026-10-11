@@ -6,6 +6,8 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy
 from django.views.decorators.http import require_POST
 
 from accounts.decorators import role_required
@@ -13,6 +15,31 @@ from ai.pipeline import GuardrailError, submit_complaint
 from complaints import services
 from complaints.forms import ComplaintForm, FeedbackForm, StatusUpdateForm
 from complaints.models import Complaint
+
+
+# Human-friendly names for the AI fields. gettext_lazy: translated when shown, in the page language.
+LANGUAGE_NAMES = {
+    "en": gettext_lazy("English"), "ta": gettext_lazy("Tamil"), "ml": gettext_lazy("Malayalam"),
+    "mixed": gettext_lazy("Mixed language"), "other": gettext_lazy("Other"),
+}
+AI_SOURCE_NAMES = {
+    "llm": gettext_lazy("AI language model"),
+    "classifier": gettext_lazy("AI classifier (machine learning)"),
+    "student": gettext_lazy("Your choice"),
+    "sample": gettext_lazy("Sample data"),
+}
+
+
+def ai_card(complaint):
+    """What the AI decided about a complaint, in plain words for the student."""
+    link = complaint.duplicate_of.select_related("original").first()
+    return {
+        "department": complaint.department.name if complaint.department else "",
+        "language": LANGUAGE_NAMES.get(complaint.language, ""),
+        "source": AI_SOURCE_NAMES.get(complaint.ai_source, ""),
+        "duplicate_similarity": round(link.similarity * 100) if link else None,
+        "others_reported": complaint.duplicate_count,
+    }
 
 
 def get_visible_complaint(user, pk):
@@ -32,9 +59,9 @@ def complaint_create(request):
                 form.add_error(None, error.result.message)  # shown at the top of the form
             else:
                 complaint = result.complaint
-                messages.success(request, f"Complaint #{complaint.pk} submitted. You can track it here.")
+                messages.success(request, _("Complaint #%(id)s submitted. You can track it here.") % {"id": complaint.pk})
                 if result.duplicate_of:
-                    messages.info(request, "Another student already reported this problem. We linked the two complaints so it gets fixed faster.")
+                    messages.info(request, _("Another student already reported this problem. We linked the two complaints so it gets fixed faster."))
                 return redirect("web:complaint_detail", pk=complaint.pk)
     else:
         form = ComplaintForm()
@@ -78,6 +105,7 @@ def complaint_detail(request, pk):
         "can_update_status": services.can_update_status(user, complaint) and bool(services.ALLOWED_TRANSITIONS[complaint.status]),
         "can_give_feedback": services.can_give_feedback(user, complaint),
         "feedback": getattr(complaint, "feedback", None),
+        "ai": ai_card(complaint),
     }
     if context["can_update_status"]:
         context["status_form"] = StatusUpdateForm(complaint=complaint)
@@ -91,7 +119,7 @@ def complaint_edit(request, pk):
     """Students can fix their own complaint while it is still open."""
     complaint = get_visible_complaint(request.user, pk)
     if not services.can_edit(request.user, complaint):
-        raise PermissionDenied("Only open complaints can be edited.")
+        raise PermissionDenied(_("Only open complaints can be edited."))
 
     if request.method == "POST":
         form = ComplaintForm(request.POST, instance=complaint)
@@ -99,7 +127,7 @@ def complaint_edit(request, pk):
             complaint = form.save(commit=False)
             complaint.department = services.department_for_category(complaint.category)  # re-route if category changed
             complaint.save()
-            messages.success(request, "Complaint updated.")
+            messages.success(request, _("Complaint updated."))
             return redirect("web:complaint_detail", pk=complaint.pk)
     else:
         form = ComplaintForm(instance=complaint)
@@ -111,11 +139,11 @@ def complaint_delete(request, pk):
     """Students can withdraw their own open complaint. GET asks to confirm, POST deletes."""
     complaint = get_visible_complaint(request.user, pk)
     if not services.can_edit(request.user, complaint):
-        raise PermissionDenied("Only open complaints can be deleted.")
+        raise PermissionDenied(_("Only open complaints can be deleted."))
 
     if request.method == "POST":
         complaint.delete()
-        messages.success(request, "Complaint deleted.")
+        messages.success(request, _("Complaint deleted."))
         return redirect("web:complaint_list")
     return render(request, "web/complaint_confirm_delete.html", {"complaint": complaint})
 
@@ -126,14 +154,14 @@ def complaint_update_status(request, pk):
     """Staff (own department) and admins change the status."""
     complaint = get_visible_complaint(request.user, pk)
     if not services.can_update_status(request.user, complaint):
-        raise PermissionDenied("You cannot update this complaint.")
+        raise PermissionDenied(_("You cannot update this complaint."))
 
     form = StatusUpdateForm(request.POST, complaint=complaint)
     if form.is_valid():
         services.change_status(complaint, form.cleaned_data["status"], request.user, form.cleaned_data["note"])
-        messages.success(request, f"Status changed to {complaint.get_status_display()}.")
+        messages.success(request, _("Status changed to %(status)s.") % {"status": complaint.get_status_display()})
     else:
-        messages.error(request, "That status change is not allowed.")
+        messages.error(request, _("That status change is not allowed."))
     return redirect("web:complaint_detail", pk=pk)
 
 
@@ -143,7 +171,7 @@ def complaint_feedback(request, pk):
     """The owner rates a resolved complaint once."""
     complaint = get_visible_complaint(request.user, pk)
     if not services.can_give_feedback(request.user, complaint):
-        raise PermissionDenied("Feedback is not possible for this complaint.")
+        raise PermissionDenied(_("Feedback is not possible for this complaint."))
 
     form = FeedbackForm(request.POST)
     if form.is_valid():
@@ -151,9 +179,9 @@ def complaint_feedback(request, pk):
         feedback.complaint = complaint
         feedback.student = request.user
         feedback.save()
-        messages.success(request, "Thank you for your feedback!")
+        messages.success(request, _("Thank you for your feedback!"))
     else:
-        messages.error(request, "Please choose a rating from 1 to 5.")
+        messages.error(request, _("Please choose a rating from 1 to 5."))
     return redirect("web:complaint_detail", pk=pk)
 
 

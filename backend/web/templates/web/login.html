@@ -1,8 +1,9 @@
 {% extends "web/base.html" %}
-{% block title %}CampusFix · Login{% endblock %}
+{% load i18n %}
+{% block title %}CampusFix · {% translate "Login" %}{% endblock %}
 {% block content %}
 <section class="card narrow">
-  <h2>Login</h2>
+  <h2>{% translate "Login" %}</h2>
   <form method="post" novalidate data-validate="login">
     {% csrf_token %}
     {% for error in form.non_field_errors %}<div class="alert alert-error">{{ error }}</div>{% endfor %}
@@ -11,8 +12,8 @@
     {% endfor %}
     <!-- After login, go back to the page the user originally asked for -->
     <input type="hidden" name="next" value="{{ next }}">
-    <button type="submit" class="button full">Login</button>
+    <button type="submit" class="button full">{% translate "Login" %}</button>
   </form>
-  <p class="muted">New student? <a href="{% url 'web:register' %}">Create an account</a></p>
+  <p class="muted">{% translate "New student?" %} <a href="{% url 'web:register' %}">{% translate "Create an account" %}</a></p>
 </section>
 {% endblock %}

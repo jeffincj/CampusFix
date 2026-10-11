@@ -8,6 +8,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 
 # backend/ folder
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",  # serves static files (incl. the React build) in production
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",  # picks the page language (cookie -> browser -> default)
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -83,6 +85,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.request",
+                "django.template.context_processors.i18n",  # LANGUAGE_CODE etc. in templates
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
@@ -153,7 +156,15 @@ SIMPLE_JWT = {
 }
 
 # --- Language / time --------------------------------------------------------
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
+# Languages of the student website. Students choose one with the switcher in the top bar.
+LANGUAGES = [
+    ("en", _("English")),
+    ("ta", _("Tamil")),
+    ("ml", _("Malayalam")),
+]
+# Our translations: locale/<lang>/LC_MESSAGES/django.po (compile with: python manage.py compile_translations)
+LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
 USE_TZ = True

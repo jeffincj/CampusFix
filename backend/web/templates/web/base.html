@@ -1,6 +1,7 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}{% get_available_languages as LANGUAGES %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,17 +16,31 @@
     <nav>
       {% if user.is_authenticated %}
         <span class="who">{{ user.username }} · {{ user.get_role_display }}</span>
-        <a href="{% url 'web:dashboard' %}">Dashboard</a>
-        <a href="{% url 'web:complaint_list' %}">Complaints</a>
+        <a href="{% url 'web:dashboard' %}">{% translate "Dashboard" %}</a>
+        <a href="{% url 'web:complaint_list' %}">{% translate "Complaints" %}</a>
         <!-- Logout must be a POST form (with CSRF token), not a plain link -->
         <form method="post" action="{% url 'web:logout' %}" class="inline-form">
           {% csrf_token %}
-          <button type="submit" class="link-button">Logout</button>
+          <button type="submit" class="link-button">{% translate "Logout" %}</button>
         </form>
       {% else %}
-        <a href="{% url 'web:login' %}">Login</a>
-        <a href="{% url 'web:register' %}">Register</a>
+        <a href="{% url 'web:login' %}">{% translate "Login" %}</a>
+        <a href="{% url 'web:register' %}">{% translate "Register" %}</a>
       {% endif %}
+
+      <!-- Language switcher: posts to Django's set_language view, which saves the choice in a cookie -->
+      <form action="{% url 'set_language' %}" method="post" class="inline-form lang-form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <label class="sr-only" for="language-select">{% translate "Language" %}</label>
+        <select name="language" id="language-select" data-autosubmit>
+          {% for code, name in LANGUAGES %}
+            {% get_language_info for code as lang %}
+            <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>{{ lang.name_local }}</option>
+          {% endfor %}
+        </select>
+        <noscript><button type="submit">{% translate "Change" %}</button></noscript>
+      </form>
     </nav>
   </header>
 
@@ -38,8 +53,20 @@
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="footer">CampusFix · AI complaint system for our campus</footer>
+  <footer class="footer">{% translate "CampusFix · AI complaint system for our campus" %}</footer>
 
+  <!-- Messages used by forms.js, in the page language -->
+  {% translate "This field is required." as m_required %}{% translate "Enter a valid email address." as m_email %}
+  {% translate "Use only letters, numbers and @ . + - _" as m_username %}{% translate "Password must be at least 8 characters." as m_password %}
+  {% translate "Please describe the problem in at least 10 characters." as m_min10 %}{% translate "Passwords do not match." as m_mismatch %}
+  <script id="i18n-messages" type="application/json">{
+    "required": "{{ m_required|escapejs }}",
+    "email": "{{ m_email|escapejs }}",
+    "username": "{{ m_username|escapejs }}",
+    "password": "{{ m_password|escapejs }}",
+    "minlength10": "{{ m_min10|escapejs }}",
+    "mismatch": "{{ m_mismatch|escapejs }}"
+  }</script>
   <script src="{% static 'web/js/forms.js' %}"></script>
   <script src="{% static 'web/js/status.js' %}"></script>
   {% block scripts %}{% endblock %}

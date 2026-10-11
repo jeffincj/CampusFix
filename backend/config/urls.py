@@ -16,6 +16,7 @@ def health(request):
 
 urlpatterns = [
     path("healthz/", health),
+    path("i18n/", include("django.conf.urls.i18n")),  # POST /i18n/setlang/ changes the language
     path("admin/", admin.site.urls),  # Django admin panel
     path("api/", include("config.api_urls")),  # REST API (JWT)
     path("", include("web.urls")),  # student-facing HTML pages

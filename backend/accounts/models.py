@@ -2,6 +2,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
@@ -11,9 +12,9 @@ class User(AbstractUser):
     """
 
     class Role(models.TextChoices):
-        STUDENT = "student", "Student"
-        STAFF = "staff", "Staff"
-        ADMIN = "admin", "Admin"
+        STUDENT = "student", _("Student")
+        STAFF = "staff", _("Staff")
+        ADMIN = "admin", _("Admin")
 
     role = models.CharField(max_length=10, choices=Role.choices, default=Role.STUDENT)
     email = models.EmailField(unique=True)  # one account per email

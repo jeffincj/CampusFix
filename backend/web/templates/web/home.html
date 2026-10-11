@@ -1,13 +1,30 @@
 {% extends "web/base.html" %}
-{% block title %}CampusFix · Home{% endblock %}
+{% load i18n %}
+{% block title %}CampusFix · {% translate "Home" %}{% endblock %}
 {% block content %}
 <section class="hero">
-  <h1>Report campus problems in your own language</h1>
-  <p>Hostel, mess, Wi-Fi, labs, transport and more. Write in English, Tamil,
-     Malayalam, or a mix. CampusFix sends your complaint to the right department.</p>
+  <h1>{% translate "Report campus problems in your own language" %}</h1>
+  <p>{% blocktranslate trimmed %}Hostel, mess, Wi-Fi, labs, transport and more. Write in English, Tamil,
+     Malayalam, or a mix. CampusFix sends your complaint to the right department.{% endblocktranslate %}</p>
   <div class="hero-actions">
-    <a class="button" href="{% url 'web:register' %}">Create a student account</a>
-    <a class="button button-secondary" href="{% url 'web:login' %}">Login</a>
+    <a class="button" href="{% url 'web:register' %}">{% translate "Create a student account" %}</a>
+    <a class="button button-secondary" href="{% url 'web:login' %}">{% translate "Login" %}</a>
+  </div>
+</section>
+
+<!-- How the AI helps: shown on the home page so visitors understand the system -->
+<section class="features">
+  <div class="feature">
+    <h3>{% translate "1. Write it your way" %}</h3>
+    <p>{% translate "English, தமிழ், മലയാളം, or Tanglish/Manglish. No need to choose a department." %}</p>
+  </div>
+  <div class="feature">
+    <h3>{% translate "2. AI reads it" %}</h3>
+    <p>{% translate "CampusFix AI finds the department, how urgent it is and where it happened, and estimates the fix time." %}</p>
+  </div>
+  <div class="feature">
+    <h3>{% translate "3. Track it live" %}</h3>
+    <p>{% translate "If others reported the same problem, the complaints are merged. Your status updates automatically." %}</p>
   </div>
 </section>
 {% endblock %}

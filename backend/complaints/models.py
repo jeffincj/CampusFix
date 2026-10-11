@@ -5,6 +5,7 @@ departments, complaints, complaint_status_history, duplicate_links, feedback.
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Department(models.Model):
@@ -28,27 +29,27 @@ class Complaint(models.Model):
 
     # Category codes match Department.code, so category -> department is a direct lookup.
     class Category(models.TextChoices):
-        HOSTEL = "HOSTEL", "Hostel"
-        MESS = "MESS", "Mess & Food"
-        IT = "IT", "Wi-Fi & IT"
-        LAB = "LAB", "Labs & Academics"
-        TRANSPORT = "TRANSPORT", "Transport"
-        MAINTENANCE = "MAINTENANCE", "Electrical & Plumbing"
-        SANITATION = "SANITATION", "Cleanliness & Sanitation"
-        SECURITY = "SECURITY", "Safety & Security"
+        HOSTEL = "HOSTEL", _("Hostel")
+        MESS = "MESS", _("Mess & Food")
+        IT = "IT", _("Wi-Fi & IT")
+        LAB = "LAB", _("Labs & Academics")
+        TRANSPORT = "TRANSPORT", _("Transport")
+        MAINTENANCE = "MAINTENANCE", _("Electrical & Plumbing")
+        SANITATION = "SANITATION", _("Cleanliness & Sanitation")
+        SECURITY = "SECURITY", _("Safety & Security")
 
     class Urgency(models.TextChoices):
-        LOW = "low", "Low"
-        MEDIUM = "medium", "Medium"
-        HIGH = "high", "High"
-        CRITICAL = "critical", "Critical"
+        LOW = "low", _("Low")
+        MEDIUM = "medium", _("Medium")
+        HIGH = "high", _("High")
+        CRITICAL = "critical", _("Critical")
 
     class Status(models.TextChoices):
-        OPEN = "open", "Open"
-        IN_PROGRESS = "in_progress", "In progress"
-        RESOLVED = "resolved", "Resolved"
-        CLOSED = "closed", "Closed"
-        REJECTED = "rejected", "Rejected"
+        OPEN = "open", _("Open")
+        IN_PROGRESS = "in_progress", _("In progress")
+        RESOLVED = "resolved", _("Resolved")
+        CLOSED = "closed", _("Closed")
+        REJECTED = "rejected", _("Rejected")
 
     # Who reported it
     student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="complaints")

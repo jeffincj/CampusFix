@@ -5,15 +5,27 @@
  * JavaScript checks can be bypassed.
  */
 
+// Error messages in the page's language. Django writes them into base.html
+// (<script id="i18n-messages">); English is the fallback.
+const MESSAGES = Object.assign(
+  {
+    required: "This field is required.",
+    email: "Enter a valid email address.",
+    username: "Use only letters, numbers and @ . + - _",
+    password: "Password must be at least 8 characters.",
+    minlength10: "Please describe the problem in at least 10 characters.",
+    mismatch: "Passwords do not match.",
+  },
+  JSON.parse(document.getElementById("i18n-messages")?.textContent || "{}")
+);
+
 // Each rule returns an error message, or "" if the value is fine.
 const rules = {
-  required: (value) => (value.trim() === "" ? "This field is required." : ""),
-  email: (value) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) ? "" : "Enter a valid email address."),
-  username: (value) =>
-    /^[\w.@+-]+$/.test(value) ? "" : "Use only letters, numbers and @ . + - _",
-  password: (value) => (value.length >= 8 ? "" : "Password must be at least 8 characters."),
-  minlength10: (value) =>
-    value.trim().length >= 10 ? "" : "Please describe the problem in at least 10 characters.",
+  required: (value) => (value.trim() === "" ? MESSAGES.required : ""),
+  email: (value) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) ? "" : MESSAGES.email),
+  username: (value) => (/^[\w.@+-]+$/.test(value) ? "" : MESSAGES.username),
+  password: (value) => (value.length >= 8 ? "" : MESSAGES.password),
+  minlength10: (value) => (value.trim().length >= 10 ? "" : MESSAGES.minlength10),
 };
 
 // Which checks to run for each field name, per form type.
@@ -55,7 +67,7 @@ function validateField(form, input, checks) {
   if (input.name === "password2") {
     const first = form.querySelector('[name="password1"]');
     if (first && first.value !== input.value) {
-      showError(form, input, "Passwords do not match.");
+      showError(form, input, MESSAGES.mismatch);
       return false;
     }
   }
@@ -90,4 +102,9 @@ function setupForm(form) {
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("form[data-validate]").forEach(setupForm);
+
+  // Language switcher: change the language as soon as a new one is picked.
+  document.querySelectorAll("select[data-autosubmit]").forEach((select) => {
+    select.addEventListener("change", () => select.form.submit());
+  });
 });

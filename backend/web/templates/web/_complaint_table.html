@@ -1,12 +1,13 @@
+{% load i18n %}
 {% comment %} Table of complaints, reused by the dashboard and the list page. {% endcomment %}
 {% if complaints %}
 <div class="table-wrap">
   <table class="table" data-live-status>
     <thead>
       <tr>
-        <th>#</th><th>Title</th><th>Category</th><th>Location</th>
-        {% if not user.is_student %}<th>Student</th>{% endif %}
-        <th>Status</th><th>Submitted</th>
+        <th>#</th><th>{% translate "Title" %}</th><th>{% translate "Category" %}</th><th>{% translate "Location" %}</th>
+        {% if not user.is_student %}<th>{% translate "Student" %}</th>{% endif %}
+        <th>{% translate "Status" %}</th><th>{% translate "Submitted" %}</th>
       </tr>
     </thead>
     <tbody>
@@ -25,5 +26,5 @@
   </table>
 </div>
 {% else %}
-  <p class="muted">No complaints yet.</p>
+  <p class="muted">{% translate "No complaints yet." %}</p>
 {% endif %}

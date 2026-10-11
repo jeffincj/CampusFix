@@ -1,0 +1,638 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-11 22:32+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Email"
+msgstr "மின்னஞ்சல்"
+
+msgid "First name"
+msgstr "முதல் பெயர்"
+
+msgid "Last name"
+msgstr "கடைசி பெயர்"
+
+#| msgid "Use only letters, numbers and @ . + - _"
+msgid "Letters, numbers and @ . + - _ only."
+msgstr "எழுத்துகள், எண்கள் மற்றும் @ . + - _ மட்டும்."
+
+msgid "Password"
+msgstr "கடவுச்சொல்"
+
+msgid ""
+"At least 8 characters. Not too common, not only numbers, not similar to your"
+" name."
+msgstr ""
+"குறைந்தது 8 எழுத்துகள். மிகப் பொதுவானதாகவோ, எண்கள் மட்டுமாகவோ, உங்கள் "
+"பெயரைப் போலவோ இருக்கக்கூடாது."
+
+#| msgid "Passwords do not match."
+msgid "Password confirmation"
+msgstr "கடவுச்சொல் உறுதிப்படுத்தல்"
+
+msgid "Enter the same password again."
+msgstr "அதே கடவுச்சொல்லை மீண்டும் உள்ளிடவும்."
+
+msgid "An account with this email already exists."
+msgstr "இந்த மின்னஞ்சலுடன் ஏற்கனவே ஒரு கணக்கு உள்ளது."
+
+msgid "Username"
+msgstr "பயனர் பெயர்"
+
+msgid "Student"
+msgstr "மாணவர்"
+
+msgid "Staff"
+msgstr "பணியாளர்"
+
+msgid "Admin"
+msgstr "நிர்வாகி"
+
+msgid ""
+"Please describe only the campus problem, without instructions to the system."
+msgstr ""
+"அமைப்புக்கான கட்டளைகள் இல்லாமல், வளாகப் பிரச்சினையை மட்டும் விவரிக்கவும்."
+
+msgid ""
+"Links are not allowed in complaints. Please describe the problem in words."
+msgstr ""
+"புகார்களில் இணைப்புகள் அனுமதிக்கப்படவில்லை. பிரச்சினையை வார்த்தைகளில் "
+"விவரிக்கவும்."
+
+msgid ""
+"Your complaint looks like spam (repeated characters). Please write it "
+"normally."
+msgstr ""
+"உங்கள் புகார் ஸ்பேம் போல் தெரிகிறது (மீண்டும் மீண்டும் வரும் எழுத்துகள்). "
+"சாதாரணமாக எழுதவும்."
+
+msgid ""
+"Your complaint repeats the same word many times. Please write it normally."
+msgstr "உங்கள் புகாரில் ஒரே சொல் பலமுறை வருகிறது. சாதாரணமாக எழுதவும்."
+
+msgid "Your complaint has too few words. Please describe the problem."
+msgstr ""
+"உங்கள் புகாரில் மிகக் குறைவான சொற்கள் உள்ளன. பிரச்சினையை விவரிக்கவும்."
+
+msgid ""
+"Please remove abusive language. You can still report the problem politely."
+msgstr "தவறான மொழியை நீக்கவும். பிரச்சினையை மரியாதையாகத் தெரிவிக்கலாம்."
+
+msgid ""
+"This does not look like a campus problem. Please mention what is wrong and "
+"where (hostel, mess, Wi-Fi, lab, bus, ...)."
+msgstr ""
+"இது வளாகப் பிரச்சினை போல் தெரியவில்லை. என்ன பிரச்சினை, எங்கே என்று "
+"குறிப்பிடவும் (விடுதி, மெஸ், Wi-Fi, ஆய்வகம், பேருந்து, ...)."
+
+msgid ""
+"You have sent many complaints in the last hour. Please wait a little before "
+"sending more."
+msgstr ""
+"கடந்த ஒரு மணி நேரத்தில் பல புகார்களை அனுப்பியுள்ளீர்கள். மேலும் அனுப்பும் "
+"முன் சிறிது காத்திருக்கவும்."
+
+#, python-format
+msgid "You already reported this (complaint #%(id)s). You can track it there."
+msgstr ""
+"இதை ஏற்கனவே புகாரளித்துள்ளீர்கள் (புகார் #%(id)s). அங்கே அதன் நிலையைப் "
+"பார்க்கலாம்."
+
+msgid "I can only answer questions about campus complaints and college rules."
+msgstr ""
+"வளாகப் புகார்கள் மற்றும் கல்லூரி விதிகள் பற்றிய கேள்விகளுக்கு மட்டுமே "
+"என்னால் பதிலளிக்க முடியும்."
+
+msgid "Title"
+msgstr "தலைப்பு"
+
+msgid "Description"
+msgstr "விளக்கம்"
+
+msgid "Category (optional, our AI decides)"
+msgstr "வகை (விருப்பத்தேர்வு, எங்கள் AI முடிவு செய்யும்)"
+
+msgid "Location"
+msgstr "இடம்"
+
+msgid "Block / building (optional)"
+msgstr "பிளாக் / கட்டடம் (விருப்பத்தேர்வு)"
+
+msgid "Write in English, Tamil, Malayalam, or a mix."
+msgstr "ஆங்கிலம், தமிழ், மலையாளம் அல்லது கலந்து எழுதலாம்."
+
+msgid "Example: Room 214, near the lift"
+msgstr "உதாரணம்: அறை 214, லிஃப்ட் அருகே"
+
+msgid "Not sure"
+msgstr "தெரியவில்லை"
+
+msgid "Please describe the problem in at least 10 characters."
+msgstr "பிரச்சினையை குறைந்தது 10 எழுத்துகளில் விவரிக்கவும்."
+
+msgid "Optional note"
+msgstr "குறிப்பு (விருப்பத்தேர்வு)"
+
+msgid "Rating"
+msgstr "மதிப்பீடு"
+
+msgid "Comment"
+msgstr "கருத்து"
+
+msgid "Hostel"
+msgstr "விடுதி"
+
+msgid "Mess & Food"
+msgstr "மெஸ் & உணவு"
+
+msgid "Wi-Fi & IT"
+msgstr "Wi-Fi & IT"
+
+msgid "Labs & Academics"
+msgstr "ஆய்வகங்கள் & கல்வி"
+
+msgid "Transport"
+msgstr "போக்குவரத்து"
+
+msgid "Electrical & Plumbing"
+msgstr "மின்சாரம் & குழாய்"
+
+msgid "Cleanliness & Sanitation"
+msgstr "தூய்மை & சுகாதாரம்"
+
+msgid "Safety & Security"
+msgstr "பாதுகாப்பு"
+
+msgid "Low"
+msgstr "குறைவு"
+
+msgid "Medium"
+msgstr "நடுத்தரம்"
+
+msgid "High"
+msgstr "அதிகம்"
+
+msgid "Critical"
+msgstr "மிக அவசரம்"
+
+msgid "Open"
+msgstr "திறந்தது"
+
+msgid "In progress"
+msgstr "நடைபெறுகிறது"
+
+msgid "Resolved"
+msgstr "தீர்க்கப்பட்டது"
+
+msgid "Closed"
+msgstr "மூடப்பட்டது"
+
+msgid "Rejected"
+msgstr "நிராகரிக்கப்பட்டது"
+
+msgid "English"
+msgstr "ஆங்கிலம்"
+
+msgid "Tamil"
+msgstr "தமிழ்"
+
+msgid "Malayalam"
+msgstr "மலையாளம்"
+
+msgid "Mixed language"
+msgstr "கலப்பு மொழி"
+
+msgid "Other"
+msgstr "மற்றவை"
+
+msgid "AI language model"
+msgstr "AI மொழி மாதிரி"
+
+msgid "AI classifier (machine learning)"
+msgstr "AI வகைப்படுத்தி (இயந்திரக் கற்றல்)"
+
+msgid "Your choice"
+msgstr "உங்கள் தேர்வு"
+
+msgid "Sample data"
+msgstr "மாதிரி தரவு"
+
+#, python-format
+msgid "Complaint #%(id)s submitted. You can track it here."
+msgstr "புகார் #%(id)s சமர்ப்பிக்கப்பட்டது. அதன் நிலையை இங்கே பார்க்கலாம்."
+
+msgid ""
+"Another student already reported this problem. We linked the two complaints "
+"so it gets fixed faster."
+msgstr ""
+"இந்தப் பிரச்சினையை மற்றொரு மாணவர் ஏற்கனவே புகாரளித்துள்ளார். விரைவில் "
+"சரிசெய்ய இரண்டு புகார்களையும் இணைத்துள்ளோம்."
+
+msgid "Only open complaints can be edited."
+msgstr "திறந்த புகார்களை மட்டுமே திருத்த முடியும்."
+
+msgid "Complaint updated."
+msgstr "புகார் புதுப்பிக்கப்பட்டது."
+
+msgid "Only open complaints can be deleted."
+msgstr "திறந்த புகார்களை மட்டுமே நீக்க முடியும்."
+
+msgid "Complaint deleted."
+msgstr "புகார் நீக்கப்பட்டது."
+
+msgid "You cannot update this complaint."
+msgstr "இந்தப் புகாரை நீங்கள் புதுப்பிக்க முடியாது."
+
+#, python-format
+msgid "Status changed to %(status)s."
+msgstr "நிலை %(status)s ஆக மாற்றப்பட்டது."
+
+msgid "That status change is not allowed."
+msgstr "அந்த நிலை மாற்றம் அனுமதிக்கப்படவில்லை."
+
+msgid "Feedback is not possible for this complaint."
+msgstr "இந்தப் புகாருக்கு கருத்து தெரிவிக்க முடியாது."
+
+msgid "Thank you for your feedback!"
+msgstr "உங்கள் கருத்துக்கு நன்றி!"
+
+msgid "Please choose a rating from 1 to 5."
+msgstr "1 முதல் 5 வரை ஒரு மதிப்பீட்டைத் தேர்ந்தெடுக்கவும்."
+
+msgid "Hostel Office"
+msgstr "விடுதி அலுவலகம்"
+
+msgid "Mess & Food Committee"
+msgstr "மெஸ் & உணவுக் குழு"
+
+msgid "IT Services"
+msgstr "IT சேவைகள்"
+
+msgid "Transport Office"
+msgstr "போக்குவரத்து அலுவலகம்"
+
+msgid "Maintenance (Electrical & Plumbing)"
+msgstr "பராமரிப்பு (மின்சாரம் & குழாய்)"
+
+msgid "Housekeeping & Sanitation"
+msgstr "வீட்டுப் பராமரிப்பு & சுகாதாரம்"
+
+msgid "Security Office"
+msgstr "பாதுகாப்பு அலுவலகம்"
+
+msgid "Complaint submitted"
+msgstr "புகார் சமர்ப்பிக்கப்பட்டது"
+
+msgid "Changed in Django admin"
+msgstr "Django நிர்வாகத்தில் மாற்றப்பட்டது"
+
+msgid "Synthetic sample data"
+msgstr "செயற்கை மாதிரி தரவு"
+
+msgid "Category"
+msgstr "வகை"
+
+msgid "Status"
+msgstr "நிலை"
+
+msgid "Submitted"
+msgstr "சமர்ப்பித்தது"
+
+msgid "No complaints yet."
+msgstr "இன்னும் புகார்கள் இல்லை."
+
+msgid "Dashboard"
+msgstr "முகப்பு"
+
+msgid "Complaints"
+msgstr "புகார்கள்"
+
+msgid "Logout"
+msgstr "வெளியேறு"
+
+msgid "Login"
+msgstr "உள்நுழை"
+
+msgid "Register"
+msgstr "பதிவு செய்"
+
+msgid "Language"
+msgstr "மொழி"
+
+msgid "Change"
+msgstr "மாற்று"
+
+msgid "CampusFix · AI complaint system for our campus"
+msgstr "CampusFix · எங்கள் வளாகத்திற்கான AI புகார் அமைப்பு"
+
+msgid "This field is required."
+msgstr "இந்தப் புலம் தேவை."
+
+msgid "Enter a valid email address."
+msgstr "சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்."
+
+msgid "Use only letters, numbers and @ . + - _"
+msgstr "எழுத்துகள், எண்கள் மற்றும் @ . + - _ மட்டும் பயன்படுத்தவும்"
+
+msgid "Password must be at least 8 characters."
+msgstr "கடவுச்சொல் குறைந்தது 8 எழுத்துகள் இருக்க வேண்டும்."
+
+msgid "Passwords do not match."
+msgstr "கடவுச்சொற்கள் பொருந்தவில்லை."
+
+msgid "Delete complaint"
+msgstr "புகாரை நீக்கு"
+
+#, python-format
+msgid "Delete complaint #%(id)s?"
+msgstr "புகார் #%(id)s-ஐ நீக்கவா?"
+
+#, python-format
+msgid "“%(title)s” will be removed. This cannot be undone."
+msgstr "“%(title)s” நீக்கப்படும். இதை மீட்க முடியாது."
+
+msgid "Yes, delete"
+msgstr "ஆம், நீக்கு"
+
+msgid "Cancel"
+msgstr "ரத்து செய்"
+
+#, python-format
+msgid "Complaint #%(id)s"
+msgstr "புகார் #%(id)s"
+
+msgid "Not set yet"
+msgstr "இன்னும் அமைக்கப்படவில்லை"
+
+msgid "Department"
+msgstr "துறை"
+
+msgid "Not assigned yet"
+msgstr "இன்னும் ஒதுக்கப்படவில்லை"
+
+msgid "Urgency"
+msgstr "அவசரம்"
+
+msgid "Edit"
+msgstr "திருத்து"
+
+msgid "Delete"
+msgstr "நீக்கு"
+
+msgid "How CampusFix AI understood your complaint"
+msgstr "CampusFix AI உங்கள் புகாரை எப்படிப் புரிந்துகொண்டது"
+
+msgid "Sent to"
+msgstr "அனுப்பப்பட்டது"
+
+msgid "Problem type"
+msgstr "பிரச்சினை வகை"
+
+msgid "Language detected"
+msgstr "கண்டறியப்பட்ட மொழி"
+
+msgid "Expected fix time"
+msgstr "எதிர்பார்க்கப்படும் தீர்வு நேரம்"
+
+#, python-format
+msgid "about %(days)s days"
+msgstr "சுமார் %(days)s நாட்கள்"
+
+msgid "Decided by"
+msgstr "முடிவு செய்தது"
+
+msgid "AI summary"
+msgstr "AI சுருக்கம்"
+
+#, python-format
+msgid ""
+"Another student already reported this problem (%(percent)s%% similar). Your "
+"complaint was linked to it so it gets fixed faster."
+msgstr ""
+"இந்தப் பிரச்சினையை மற்றொரு மாணவர் ஏற்கனவே புகாரளித்துள்ளார் (%(percent)s%% "
+"ஒத்துள்ளது). விரைவில் சரிசெய்ய உங்கள் புகார் அதனுடன் இணைக்கப்பட்டது."
+
+#, python-format
+msgid ""
+"%(count)s other student(s) reported the same problem. They were linked to "
+"this complaint."
+msgstr ""
+"மேலும் %(count)s மாணவர்(கள்) இதே பிரச்சினையைப் புகாரளித்துள்ளனர். அவை இந்தப்"
+" புகாருடன் இணைக்கப்பட்டன."
+
+msgid ""
+"Our two AI models disagreed about the department, so a staff member will "
+"double-check it."
+msgstr ""
+"எங்கள் இரண்டு AI மாதிரிகளும் துறை குறித்து வேறுபட்டன, எனவே ஒரு பணியாளர் அதை "
+"மீண்டும் சரிபார்ப்பார்."
+
+msgid "AI routing (staff view)"
+msgstr "AI வழிநடத்தல் (பணியாளர் பார்வை)"
+
+msgid "LLM said"
+msgstr "LLM சொன்னது"
+
+msgid "Classifier said"
+msgstr "வகைப்படுத்தி சொன்னது"
+
+msgid "Duplicates merged"
+msgstr "இணைக்கப்பட்ட நகல்கள்"
+
+msgid "The LLM and the classifier disagree. Please check the category."
+msgstr "LLM மற்றும் வகைப்படுத்தி வேறுபடுகின்றன. வகையைச் சரிபார்க்கவும்."
+
+msgid "Update status"
+msgstr "நிலையைப் புதுப்பி"
+
+msgid "Update"
+msgstr "புதுப்பி"
+
+msgid "How was the fix?"
+msgstr "தீர்வு எப்படி இருந்தது?"
+
+msgid "Send feedback"
+msgstr "கருத்தை அனுப்பு"
+
+msgid "Feedback"
+msgstr "கருத்து"
+
+msgid "Status timeline"
+msgstr "நிலை வரலாறு"
+
+#, python-format
+msgid "by %(name)s"
+msgstr "%(name)s மூலம்"
+
+msgid "Edit complaint"
+msgstr "புகாரைத் திருத்து"
+
+msgid "Report a problem"
+msgstr "ஒரு பிரச்சினையைப் புகாரளி"
+
+#, python-format
+msgid "Edit complaint #%(id)s"
+msgstr "புகார் #%(id)s-ஐத் திருத்து"
+
+msgid ""
+"Just describe the problem and where it is. CampusFix AI will find the right "
+"department and how urgent it is."
+msgstr ""
+"பிரச்சினையையும் அது எங்கே என்பதையும் மட்டும் விவரிக்கவும். சரியான துறையையும்"
+" அவசர நிலையையும் CampusFix AI கண்டறியும்."
+
+msgid "Save changes"
+msgstr "மாற்றங்களைச் சேமி"
+
+msgid "Submit complaint"
+msgstr "புகாரைச் சமர்ப்பி"
+
+msgid "My complaints"
+msgstr "எனது புகார்கள்"
+
+#, python-format
+msgid "%(department)s complaints"
+msgstr "%(department)s புகார்கள்"
+
+msgid "All complaints"
+msgstr "அனைத்து புகார்களும்"
+
+msgid "+ New complaint"
+msgstr "+ புதிய புகார்"
+
+msgid "All statuses"
+msgstr "அனைத்து நிலைகளும்"
+
+msgid "Search title, description, location"
+msgstr "தலைப்பு, விளக்கம், இடம் தேடு"
+
+msgid "Filter"
+msgstr "வடிகட்டு"
+
+msgid "Previous"
+msgstr "முந்தையது"
+
+#, python-format
+msgid "Page %(number)s of %(total)s"
+msgstr "பக்கம் %(number)s / %(total)s"
+
+msgid "Next"
+msgstr "அடுத்தது"
+
+#, python-format
+msgid "Hello, %(name)s"
+msgstr "வணக்கம், %(name)s"
+
+msgid ""
+"Submit new complaints and track their status. Statuses refresh "
+"automatically."
+msgstr ""
+"புதிய புகார்களைச் சமர்ப்பித்து அவற்றின் நிலையைக் கண்காணிக்கவும். நிலைகள் "
+"தானாகப் புதுப்பிக்கப்படும்."
+
+msgid "(no department yet, ask an admin)"
+msgstr "(இன்னும் துறை இல்லை, நிர்வாகியிடம் கேட்கவும்)"
+
+#, python-format
+msgid ""
+"You are signed in as staff of %(department)s. You see and update your "
+"department's complaints."
+msgstr ""
+"நீங்கள் %(department)s பணியாளராக உள்நுழைந்துள்ளீர்கள். உங்கள் துறையின் "
+"புகார்களைப் பார்த்துப் புதுப்பிக்கலாம்."
+
+msgid "Open the officials' dashboard →"
+msgstr "அதிகாரிகளின் டாஷ்போர்டைத் திற →"
+
+msgid "You are signed in as admin. You see every complaint."
+msgstr ""
+"நீங்கள் நிர்வாகியாக உள்நுழைந்துள்ளீர்கள். அனைத்து புகார்களையும் பார்க்கலாம்."
+
+msgid "Django admin"
+msgstr "Django நிர்வாகம்"
+
+msgid "Total"
+msgstr "மொத்தம்"
+
+msgid "Latest complaints"
+msgstr "சமீபத்திய புகார்கள்"
+
+msgid "See all →"
+msgstr "அனைத்தையும் பார் →"
+
+msgid "Home"
+msgstr "முகப்பு"
+
+msgid "Report campus problems in your own language"
+msgstr "வளாகப் பிரச்சினைகளை உங்கள் சொந்த மொழியில் புகாரளியுங்கள்"
+
+msgid ""
+"Hostel, mess, Wi-Fi, labs, transport and more. Write in English, Tamil, "
+"Malayalam, or a mix. CampusFix sends your complaint to the right department."
+msgstr ""
+"விடுதி, மெஸ், Wi-Fi, ஆய்வகங்கள், போக்குவரத்து மற்றும் பல. ஆங்கிலம், தமிழ், "
+"மலையாளம் அல்லது கலந்து எழுதலாம். CampusFix உங்கள் புகாரை சரியான துறைக்கு "
+"அனுப்பும்."
+
+msgid "Create a student account"
+msgstr "மாணவர் கணக்கை உருவாக்கு"
+
+msgid "1. Write it your way"
+msgstr "1. உங்கள் விருப்பப்படி எழுதுங்கள்"
+
+msgid ""
+"English, தமிழ், മലയാളം, or Tanglish/Manglish. No need to choose a "
+"department."
+msgstr ""
+"English, தமிழ், മലയാളം அல்லது Tanglish/Manglish. துறையைத் தேர்ந்தெடுக்க "
+"வேண்டியதில்லை."
+
+msgid "2. AI reads it"
+msgstr "2. AI அதைப் படிக்கிறது"
+
+msgid ""
+"CampusFix AI finds the department, how urgent it is and where it happened, "
+"and estimates the fix time."
+msgstr ""
+"CampusFix AI துறை, அவசர நிலை, நடந்த இடம் ஆகியவற்றைக் கண்டறிந்து தீர்வு "
+"நேரத்தை மதிப்பிடுகிறது."
+
+msgid "3. Track it live"
+msgstr "3. நேரலையில் கண்காணியுங்கள்"
+
+msgid ""
+"If others reported the same problem, the complaints are merged. Your status "
+"updates automatically."
+msgstr ""
+"மற்றவர்களும் இதே பிரச்சினையைப் புகாரளித்தால், புகார்கள் இணைக்கப்படும். "
+"உங்கள் நிலை தானாகப் புதுப்பிக்கப்படும்."
+
+msgid "New student?"
+msgstr "புதிய மாணவரா?"
+
+msgid "Create an account"
+msgstr "கணக்கை உருவாக்கு"
+
+msgid "Student registration"
+msgstr "மாணவர் பதிவு"
+
+msgid "Already have an account?"
+msgstr "ஏற்கனவே கணக்கு உள்ளதா?"
+
+msgid "Welcome to CampusFix! Your account is ready."
+msgstr "CampusFix-க்கு வரவேற்கிறோம்! உங்கள் கணக்கு தயாராக உள்ளது."

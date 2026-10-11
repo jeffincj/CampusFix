@@ -8,6 +8,7 @@ from dataclasses import dataclass
 from datetime import timedelta
 
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 MAX_COMPLAINTS_PER_HOUR = 5
 
@@ -68,28 +69,28 @@ def _contains_any(text, words):
 def check_injection(text):
     lowered = text.lower()
     if any(re.search(p, lowered) for p in INJECTION_PATTERNS):
-        return GuardrailResult(False, "injection", "Please describe only the campus problem, without instructions to the system.")
+        return GuardrailResult(False, "injection", _("Please describe only the campus problem, without instructions to the system."))
     return OK
 
 
 def check_spam(text):
     if re.search(r"https?://|www\.", text, re.IGNORECASE):
-        return GuardrailResult(False, "spam", "Links are not allowed in complaints. Please describe the problem in words.")
+        return GuardrailResult(False, "spam", _("Links are not allowed in complaints. Please describe the problem in words."))
     if re.search(r"(.)\1{7,}", text):  # e.g. "aaaaaaaaa" or "!!!!!!!!!"
-        return GuardrailResult(False, "spam", "Your complaint looks like spam (repeated characters). Please write it normally.")
+        return GuardrailResult(False, "spam", _("Your complaint looks like spam (repeated characters). Please write it normally."))
     words = re.findall(r"\S+", text.lower())
     if len(words) >= 6 and max(words.count(w) for w in set(words)) / len(words) > 0.5:
-        return GuardrailResult(False, "spam", "Your complaint repeats the same word many times. Please write it normally.")
+        return GuardrailResult(False, "spam", _("Your complaint repeats the same word many times. Please write it normally."))
     letters = sum(ch.isalpha() for ch in text)
     if len(text) >= 10 and letters / len(text) < 0.4:
-        return GuardrailResult(False, "spam", "Your complaint has too few words. Please describe the problem.")
+        return GuardrailResult(False, "spam", _("Your complaint has too few words. Please describe the problem."))
     return OK
 
 
 def check_abuse(text):
     lowered = text.lower()
     if any(re.search(rf"\b{re.escape(w)}\b", lowered) for w in ABUSE_WORDS):
-        return GuardrailResult(False, "abuse", "Please remove abusive language. You can still report the problem politely.")
+        return GuardrailResult(False, "abuse", _("Please remove abusive language. You can still report the problem politely."))
     return OK
 
 
@@ -103,7 +104,7 @@ def check_off_topic(text, classifier_confidence=None):
         return OK
     if classifier_confidence is None or classifier_confidence >= 0.5:
         return OK
-    return GuardrailResult(False, "off_topic", "This does not look like a campus problem. Please mention what is wrong and where (hostel, mess, Wi-Fi, lab, bus, ...).")
+    return GuardrailResult(False, "off_topic", _("This does not look like a campus problem. Please mention what is wrong and where (hostel, mess, Wi-Fi, lab, bus, ...)."))
 
 
 def check_flooding(student, text, now=None):
@@ -113,10 +114,10 @@ def check_flooding(student, text, now=None):
     now = now or timezone.now()
     recent = Complaint.objects.filter(student=student, created_at__gte=now - timedelta(hours=1)).count()
     if recent >= MAX_COMPLAINTS_PER_HOUR:
-        return GuardrailResult(False, "rate_limit", "You have sent many complaints in the last hour. Please wait a little before sending more.")
+        return GuardrailResult(False, "rate_limit", _("You have sent many complaints in the last hour. Please wait a little before sending more."))
     same = Complaint.objects.filter(student=student, created_at__gte=now - timedelta(days=1), description__iexact=text.strip())
     if same.exists():
-        return GuardrailResult(False, "repeat", f"You already reported this (complaint #{same.first().pk}). You can track it there.")
+        return GuardrailResult(False, "repeat", _("You already reported this (complaint #%(id)s). You can track it there.") % {"id": same.first().pk})
     return OK
 
 
@@ -139,5 +140,5 @@ def check_chat_question(question):
         if not result.allowed:
             return result
     if not _contains_any(question, CAMPUS_WORDS + CHAT_WORDS):
-        return GuardrailResult(False, "off_topic", "I can only answer questions about campus complaints and college rules.")
+        return GuardrailResult(False, "off_topic", _("I can only answer questions about campus complaints and college rules."))
     return OK

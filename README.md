@@ -50,7 +50,7 @@ predicts how long the fix will take. Staff and admins work from a React dashboar
 | FAISS + embeddings | duplicate detection, document search |
 | pypdf | reading rule PDFs |
 | Matplotlib | weekly PDF report (and the sample rule PDFs) |
-| pytest | 199 tests (backend) |
+| pytest | 213 tests (backend) |
 | Docker, docker-compose, gunicorn, WhiteNoise | running and deploying |
 
 ## Architecture
@@ -206,6 +206,25 @@ hard-coded. Main ones:
 and follow it at `/complaints/`. Statuses refresh by themselves every 15 seconds. After a fix
 they can rate it 1–5.
 
+- **AI card**: every complaint page shows "How CampusFix AI understood your complaint": the
+  department it was sent to, problem type, urgency, language detected, expected fix time, who
+  decided (LLM, classifier or the student), the AI summary, and whether it was merged with
+  another student's report.
+- **Language switcher**: the menu in the top bar switches the whole student site between
+  **English, தமிழ் and മലയാളം** (Django i18n; the choice is saved in a cookie). Form errors,
+  status labels, live status refresh and guardrail messages are translated too.
+
+### Editing translations
+
+Translations live in `backend/locale/ta/LC_MESSAGES/django.po` and `backend/locale/ml/...`.
+
+```bash
+cd backend
+python manage.py makemessages -l ta -l ml --no-location --ignore="tests/*" --ignore="data/*"  # after adding new texts (needs GNU gettext)
+# edit the msgstr lines in the .po files
+python manage.py compile_translations   # pure Python, works on Windows without gettext
+```
+
 **Staff/admins** log in at `/dashboard/`:
 
 - **Complaints**: search, filter (status, category, urgency, needs review), sort, page; click a
@@ -322,7 +341,7 @@ curl -s localhost:8000/api/complaints/?status=open -H "Authorization: Bearer $TO
 
 ```bash
 cd backend
-pytest -q            # 199 tests, ~20 s, in-memory SQLite, no MySQL or API key needed
+pytest -q            # 213 tests, ~20 s, in-memory SQLite, no MySQL or API key needed
 ```
 
 Tests never call the real LLM: a `FakeLLM` in `tests/conftest.py` returns scripted replies
@@ -340,6 +359,7 @@ Tests never call the real LLM: a `FakeLLM` in `tests/conftest.py` returns script
 | `test_ml.py` | data generator, each ML training script, hotspots, spikes, evaluation, loader |
 | `test_rag_agent.py` | PDF ingest, retrieval, tools, agent loop, chat + documents API |
 | `test_reports.py` | weekly PDF, report API, health check, dashboard serving |
+| `test_i18n.py` | language switcher (EN/TA/ML), translated pages, messages and statuses, student AI card |
 
 The dashboard is built with `npm run build` (fails on errors).
 
@@ -416,7 +436,7 @@ deploys (their text chunks are in MySQL either way).
   English summaries. A shaping-aware PDF engine (for example WeasyPrint with Noto fonts) would
   show the original text.
 - **Frontend tests.** Add Vitest + Testing Library unit tests and Playwright end-to-end tests to CI.
-- **Accessibility and languages.** Translate the student pages into Tamil and Malayalam
-  (Django i18n) and run an accessibility audit.
+- **Accessibility and languages.** Have native speakers review the Tamil and Malayalam
+  translations, translate the React dashboard too, and run an accessibility audit.
 - **Smarter routing.** Learn hotspot radius and spike thresholds per department, and use the
   campus map for a visual hotspot view.

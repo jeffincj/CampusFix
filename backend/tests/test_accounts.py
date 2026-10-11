@@ -127,8 +127,8 @@ def test_dashboard_requires_login(client):
     "role, expected_text",
     [
         (User.Role.STUDENT, b"+ New complaint"),
-        (User.Role.STAFF, b"signed in as <strong>staff</strong>"),
-        (User.Role.ADMIN, b"signed in as <strong>admin</strong>"),
+        (User.Role.STAFF, b"signed in as staff of"),
+        (User.Role.ADMIN, b"signed in as admin"),
     ],
 )
 def test_dashboard_shows_role_specific_content(client, role, expected_text):

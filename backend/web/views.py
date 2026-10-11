@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import FileResponse, HttpResponse
 from django.shortcuts import redirect, render
+from django.utils.translation import gettext as _
 
 from accounts.forms import LoginForm, StudentRegisterForm
 from complaints.models import Complaint
@@ -29,7 +30,7 @@ def register(request):
         if form.is_valid():  # server-side validation (JS validation is only a helper)
             user = form.save()
             login(request, user)  # log in right after sign-up
-            messages.success(request, "Welcome to CampusFix! Your account is ready.")
+            messages.success(request, _("Welcome to CampusFix! Your account is ready."))
             return redirect("web:dashboard")
     else:
         form = StudentRegisterForm()

@@ -1,5 +1,6 @@
 {% extends "web/base.html" %}
-{% block title %}CampusFix · Complaint #{{ complaint.pk }}{% endblock %}
+{% load i18n %}
+{% block title %}CampusFix · {% blocktranslate trimmed with id=complaint.pk %}Complaint #{{ id }}{% endblocktranslate %}{% endblock %}
 {% block content %}
 <section class="card" data-live-status>
   <div class="card-header">
@@ -8,79 +9,122 @@
   </div>
 
   <dl class="details">
-    <dt>Category</dt><dd>{{ complaint.get_category_display|default:"Not set yet" }}</dd>
-    <dt>Department</dt><dd>{{ complaint.department|default:"Not assigned yet" }}</dd>
-    <dt>Urgency</dt><dd>{{ complaint.get_urgency_display }}</dd>
-    <dt>Location</dt><dd>{{ complaint.location|default:"—" }}{% if complaint.block %} ({{ complaint.block }}){% endif %}</dd>
-    {% if not user.is_student %}<dt>Student</dt><dd>{{ complaint.student.get_full_name|default:complaint.student.username }}</dd>{% endif %}
-    <dt>Submitted</dt><dd>{{ complaint.created_at|date:"d M Y, H:i" }}</dd>
-    {% if complaint.resolved_at %}<dt>Resolved</dt><dd>{{ complaint.resolved_at|date:"d M Y, H:i" }}</dd>{% endif %}
+    <dt>{% translate "Category" %}</dt><dd>{{ complaint.get_category_display|default:_("Not set yet") }}</dd>
+    <dt>{% translate "Department" %}</dt><dd>{% if complaint.department %}{% translate complaint.department.name %}{% else %}{% translate "Not assigned yet" %}{% endif %}</dd>
+    <dt>{% translate "Urgency" %}</dt><dd>{{ complaint.get_urgency_display }}</dd>
+    <dt>{% translate "Location" %}</dt><dd>{{ complaint.location|default:"—" }}{% if complaint.block %} ({{ complaint.block }}){% endif %}</dd>
+    {% if not user.is_student %}<dt>{% translate "Student" %}</dt><dd>{{ complaint.student.get_full_name|default:complaint.student.username }}</dd>{% endif %}
+    <dt>{% translate "Submitted" %}</dt><dd>{{ complaint.created_at|date:"d M Y, H:i" }}</dd>
+    {% if complaint.resolved_at %}<dt>{% translate "Resolved" %}</dt><dd>{{ complaint.resolved_at|date:"d M Y, H:i" }}</dd>{% endif %}
   </dl>
   <p class="description">{{ complaint.description|linebreaksbr }}</p>
-  {% if complaint.predicted_days %}
-    <p class="muted">Expected fix time: about {{ complaint.predicted_days|floatformat:1 }} day{{ complaint.predicted_days|pluralize }} (AI estimate).</p>
-  {% endif %}
 
   {% if can_edit %}
   <div class="actions">
-    <a class="button button-secondary" href="{% url 'web:complaint_edit' complaint.pk %}">Edit</a>
-    <a class="button button-danger" href="{% url 'web:complaint_delete' complaint.pk %}">Delete</a>
+    <a class="button button-secondary" href="{% url 'web:complaint_edit' complaint.pk %}">{% translate "Edit" %}</a>
+    <a class="button button-danger" href="{% url 'web:complaint_delete' complaint.pk %}">{% translate "Delete" %}</a>
   </div>
+  {% endif %}
+</section>
+
+<!-- What the AI decided, explained in plain words (everyone sees this) -->
+<section class="card ai-card">
+  <h3>🤖 {% translate "How CampusFix AI understood your complaint" %}</h3>
+  <ul class="ai-facts">
+    <li>
+      <span class="ai-label">{% translate "Sent to" %}</span>
+      <strong>{% if ai.department %}{% translate ai.department %}{% else %}{% translate "Not assigned yet" %}{% endif %}</strong>
+    </li>
+    <li>
+      <span class="ai-label">{% translate "Problem type" %}</span>
+      <strong>{{ complaint.get_category_display|default:"—" }}</strong>
+    </li>
+    <li>
+      <span class="ai-label">{% translate "Urgency" %}</span>
+      <strong class="urgency-{{ complaint.urgency }}">{{ complaint.get_urgency_display }}</strong>
+    </li>
+    {% if ai.language %}
+    <li>
+      <span class="ai-label">{% translate "Language detected" %}</span>
+      <strong>{{ ai.language }}</strong>
+    </li>
+    {% endif %}
+    {% if complaint.predicted_days %}
+    <li>
+      <span class="ai-label">{% translate "Expected fix time" %}</span>
+      <strong>{% blocktranslate trimmed with days=complaint.predicted_days|floatformat:1 %}about {{ days }} days{% endblocktranslate %}</strong>
+    </li>
+    {% endif %}
+    {% if ai.source %}
+    <li>
+      <span class="ai-label">{% translate "Decided by" %}</span>
+      <strong>{{ ai.source }}</strong>
+    </li>
+    {% endif %}
+  </ul>
+  {% if complaint.summary %}
+    <p class="ai-summary"><span class="ai-label">{% translate "AI summary" %}</span> {{ complaint.summary }}</p>
+  {% endif %}
+  {% if ai.duplicate_similarity is not None %}
+    <div class="alert alert-info">{% blocktranslate trimmed with percent=ai.duplicate_similarity %}Another student already reported this problem ({{ percent }}% similar). Your complaint was linked to it so it gets fixed faster.{% endblocktranslate %}</div>
+  {% endif %}
+  {% if ai.others_reported %}
+    <div class="alert alert-info">{% blocktranslate trimmed with count=ai.others_reported %}{{ count }} other student(s) reported the same problem. They were linked to this complaint.{% endblocktranslate %}</div>
+  {% endif %}
+  {% if complaint.needs_review %}
+    <div class="alert alert-warning">{% translate "Our two AI models disagreed about the department, so a staff member will double-check it." %}</div>
   {% endif %}
 </section>
 
 {% if not user.is_student %}
 <section class="card">
-  <h3>AI routing</h3>
+  <h3>{% translate "AI routing (staff view)" %}</h3>
   <dl class="details">
-    <dt>Summary</dt><dd>{{ complaint.summary|default:"—" }}</dd>
-    <dt>Language</dt><dd>{{ complaint.language|default:"—" }}</dd>
-    <dt>Decided by</dt><dd>{{ complaint.ai_source|default:"—" }}</dd>
-    <dt>LLM said</dt><dd>{{ complaint.llm_category|default:"—" }}</dd>
-    <dt>Classifier said</dt><dd>{{ complaint.ml_category|default:"—" }}{% if complaint.ml_confidence %} ({{ complaint.ml_confidence|floatformat:2 }}){% endif %}</dd>
-    <dt>Duplicates merged</dt><dd>{{ complaint.duplicate_count }}</dd>
+    <dt>{% translate "LLM said" %}</dt><dd>{{ complaint.llm_category|default:"—" }}</dd>
+    <dt>{% translate "Classifier said" %}</dt><dd>{{ complaint.ml_category|default:"—" }}{% if complaint.ml_confidence %} ({{ complaint.ml_confidence|floatformat:2 }}){% endif %}</dd>
+    <dt>{% translate "Duplicates merged" %}</dt><dd>{{ complaint.duplicate_count }}</dd>
   </dl>
-  {% if complaint.needs_review %}<div class="alert alert-warning">The LLM and the classifier disagree. Please check the category.</div>{% endif %}
+  {% if complaint.needs_review %}<div class="alert alert-warning">{% translate "The LLM and the classifier disagree. Please check the category." %}</div>{% endif %}
 </section>
 {% endif %}
 
 {% if can_update_status %}
 <section class="card">
-  <h3>Update status</h3>
+  <h3>{% translate "Update status" %}</h3>
   <form method="post" action="{% url 'web:complaint_update_status' complaint.pk %}" class="inline-fields">
     {% csrf_token %}
     {{ status_form.status }}
     {{ status_form.note }}
-    <button type="submit" class="button">Update</button>
+    <button type="submit" class="button">{% translate "Update" %}</button>
   </form>
 </section>
 {% endif %}
 
 {% if can_give_feedback %}
 <section class="card">
-  <h3>How was the fix?</h3>
+  <h3>{% translate "How was the fix?" %}</h3>
   <form method="post" action="{% url 'web:complaint_feedback' complaint.pk %}">
     {% csrf_token %}
     <div class="rating">{{ feedback_form.rating }}</div>
     {% include "web/_field.html" with field=feedback_form.comment %}
-    <button type="submit" class="button">Send feedback</button>
+    <button type="submit" class="button">{% translate "Send feedback" %}</button>
   </form>
 </section>
 {% elif feedback %}
 <section class="card">
-  <h3>Feedback</h3>
+  <h3>{% translate "Feedback" %}</h3>
   <p><strong>{{ feedback.rating }}/5</strong> {{ feedback.comment }}</p>
 </section>
 {% endif %}
 
 <section class="card">
-  <h3>Status timeline</h3>
+  <h3>{% translate "Status timeline" %}</h3>
   <ol class="timeline">
     {% for entry in history %}
     <li>
       <span class="badge status-{{ entry.new_status }}">{{ entry.get_new_status_display }}</span>
-      <span class="muted">{{ entry.created_at|date:"d M Y, H:i" }}{% if entry.changed_by %} · by {{ entry.changed_by.username }}{% endif %}</span>
-      {% if entry.note %}<div>{{ entry.note }}</div>{% endif %}
+      <span class="muted">{{ entry.created_at|date:"d M Y, H:i" }}{% if entry.changed_by %} · {% blocktranslate trimmed with name=entry.changed_by.username %}by {{ name }}{% endblocktranslate %}{% endif %}</span>
+      {% if entry.note %}<div>{% translate entry.note %}</div>{% endif %}
     </li>
     {% endfor %}
   </ol>

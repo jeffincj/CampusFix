@@ -1,16 +1,20 @@
 {% extends "web/base.html" %}
-{% block title %}CampusFix · {% if is_edit %}Edit{% else %}New{% endif %} complaint{% endblock %}
+{% load i18n %}
+{% block title %}CampusFix · {% if is_edit %}{% translate "Edit complaint" %}{% else %}{% translate "Report a problem" %}{% endif %}{% endblock %}
 {% block content %}
 <section class="card narrow wide">
-  <h2>{% if is_edit %}Edit complaint #{{ complaint.pk }}{% else %}Report a problem{% endif %}</h2>
+  <h2>{% if is_edit %}{% blocktranslate trimmed with id=complaint.pk %}Edit complaint #{{ id }}{% endblocktranslate %}{% else %}{% translate "Report a problem" %}{% endif %}</h2>
+  {% if not is_edit %}
+    <p class="muted">{% translate "Just describe the problem and where it is. CampusFix AI will find the right department and how urgent it is." %}</p>
+  {% endif %}
   <form method="post" novalidate data-validate="complaint">
     {% csrf_token %}
     {% for error in form.non_field_errors %}<div class="alert alert-error">{{ error }}</div>{% endfor %}
     {% for field in form %}
       {% include "web/_field.html" with field=field %}
     {% endfor %}
-    <button type="submit" class="button full">{% if is_edit %}Save changes{% else %}Submit complaint{% endif %}</button>
+    <button type="submit" class="button full">{% if is_edit %}{% translate "Save changes" %}{% else %}{% translate "Submit complaint" %}{% endif %}</button>
   </form>
-  <p class="muted"><a href="{% if is_edit %}{% url 'web:complaint_detail' complaint.pk %}{% else %}{% url 'web:dashboard' %}{% endif %}">Cancel</a></p>
+  <p class="muted"><a href="{% if is_edit %}{% url 'web:complaint_detail' complaint.pk %}{% else %}{% url 'web:dashboard' %}{% endif %}">{% translate "Cancel" %}</a></p>
 </section>
 {% endblock %}

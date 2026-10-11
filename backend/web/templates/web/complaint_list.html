@@ -1,22 +1,23 @@
 {% extends "web/base.html" %}
-{% block title %}CampusFix · Complaints{% endblock %}
+{% load i18n %}
+{% block title %}CampusFix · {% translate "Complaints" %}{% endblock %}
 {% block content %}
 <section class="card">
   <div class="card-header">
-    <h2>{% if user.is_student %}My complaints{% elif user.is_staff_member %}{{ user.department|default:"Department" }} complaints{% else %}All complaints{% endif %}</h2>
-    {% if user.is_student %}<a class="button" href="{% url 'web:complaint_create' %}">+ New complaint</a>{% endif %}
+    <h2>{% if user.is_student %}{% translate "My complaints" %}{% elif user.is_staff_member %}{% blocktranslate trimmed with department=user.department %}{{ department }} complaints{% endblocktranslate %}{% else %}{% translate "All complaints" %}{% endif %}</h2>
+    {% if user.is_student %}<a class="button" href="{% url 'web:complaint_create' %}">{% translate "+ New complaint" %}</a>{% endif %}
   </div>
 
   <!-- Filters: sent as ?status=...&q=... -->
   <form method="get" class="filters">
     <select name="status">
-      <option value="">All statuses</option>
+      <option value="">{% translate "All statuses" %}</option>
       {% for value, label in statuses %}
         <option value="{{ value }}" {% if value == status %}selected{% endif %}>{{ label }}</option>
       {% endfor %}
     </select>
-    <input type="search" name="q" value="{{ query }}" placeholder="Search title, description, location">
-    <button type="submit" class="button button-secondary">Filter</button>
+    <input type="search" name="q" value="{{ query }}" placeholder="{% translate 'Search title, description, location' %}">
+    <button type="submit" class="button button-secondary">{% translate "Filter" %}</button>
   </form>
 
   {% include "web/_complaint_table.html" with complaints=page.object_list %}
@@ -24,9 +25,9 @@
   <!-- Pagination -->
   {% if page.has_other_pages %}
   <div class="pagination">
-    {% if page.has_previous %}<a href="?page={{ page.previous_page_number }}&status={{ status }}&q={{ query|urlencode }}">← Previous</a>{% endif %}
-    <span>Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
-    {% if page.has_next %}<a href="?page={{ page.next_page_number }}&status={{ status }}&q={{ query|urlencode }}">Next →</a>{% endif %}
+    {% if page.has_previous %}<a href="?page={{ page.previous_page_number }}&status={{ status }}&q={{ query|urlencode }}">← {% translate "Previous" %}</a>{% endif %}
+    <span>{% blocktranslate trimmed with number=page.number total=page.paginator.num_pages %}Page {{ number }} of {{ total }}{% endblocktranslate %}</span>
+    {% if page.has_next %}<a href="?page={{ page.next_page_number }}&status={{ status }}&q={{ query|urlencode }}">{% translate "Next" %} →</a>{% endif %}
   </div>
   {% endif %}
 </section>
