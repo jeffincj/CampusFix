@@ -55,3 +55,31 @@ def complaint(student):
         location="Room 214",
         block="B Block",
     )
+
+
+# --- API helpers (Phase 3) ------------------------------------------------------
+
+@pytest.fixture
+def api():
+    """A DRF test client with no login."""
+    from rest_framework.test import APIClient
+
+    return APIClient()
+
+
+@pytest.fixture
+def api_as():
+    """
+    api_as(user) -> APIClient that sends a real JWT access token for that user,
+    exactly like the React app will (Authorization: Bearer <token>).
+    """
+    from rest_framework.test import APIClient
+    from rest_framework_simplejwt.tokens import RefreshToken
+
+    def make(user):
+        client = APIClient()
+        token = RefreshToken.for_user(user).access_token
+        client.credentials(HTTP_AUTHORIZATION=f"Bearer {token}")
+        return client
+
+    return make

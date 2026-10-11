@@ -61,6 +61,23 @@ def can_give_feedback(user, complaint):
     )
 
 
+# Fields each role may change through the API (PATCH /api/complaints/{id}/).
+STUDENT_PATCH_FIELDS = {"title", "description", "location", "block", "category"}
+STAFF_PATCH_FIELDS = {"status", "note", "urgency"}
+ADMIN_PATCH_FIELDS = STAFF_PATCH_FIELDS | {"category", "needs_review"}
+
+
+def allowed_patch_fields(user, complaint):
+    """Return the set of fields this user may change on this complaint."""
+    if user.is_admin:
+        return ADMIN_PATCH_FIELDS
+    if can_update_status(user, complaint):
+        return STAFF_PATCH_FIELDS
+    if can_edit(user, complaint):
+        return STUDENT_PATCH_FIELDS
+    return set()
+
+
 # --- Actions -------------------------------------------------------------------
 
 def department_for_category(category):
@@ -82,6 +99,29 @@ def create_complaint(student, **fields):
     ComplaintStatusHistory.objects.create(
         complaint=complaint, old_status="", new_status=complaint.status, changed_by=student, note="Complaint submitted"
     )
+    return complaint
+
+
+@transaction.atomic
+def update_complaint(complaint, user, data):
+    """
+    Apply an already-validated PATCH. Plain fields are saved first, then a
+    status change goes through change_status(). Everything is in one
+    transaction, so an invalid status change also undoes the field edits.
+    """
+    data = dict(data)
+    new_status = data.pop("status", None)
+    note = data.pop("note", "")
+
+    for field, value in data.items():
+        setattr(complaint, field, value)
+    if "category" in data:
+        complaint.department = department_for_category(complaint.category)  # re-route
+    if data:
+        complaint.save()
+
+    if new_status and new_status != complaint.status:
+        change_status(complaint, new_status, user, note)
     return complaint
 
 

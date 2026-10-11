@@ -4,9 +4,10 @@ AI complaint system for a college campus. Students report problems (hostel, mess
 Wi-Fi, lab, transport, ...) in English, Tamil, Malayalam or mixed language; AI
 routes them to the right department. Staff and admins work from a dashboard.
 
-> Status: **Phase 2 done**. Phase 1: project setup, Docker + MySQL, custom user with
+> Status: **Phase 3 done**. Phase 1: project setup, Docker + MySQL, custom user with
 > roles, register/login. Phase 2: complaint models, CRUD pages, status workflow with
-> history, live status refresh, feedback, Django admin, 8 seeded departments. The full README (architecture diagram, retraining,
+> history, live status refresh, feedback, Django admin, 8 seeded departments.
+> Phase 3: REST API (Django REST Framework) with JWT login and role permissions. The full README (architecture diagram, retraining,
 > Render deployment, "what I would improve") is written in Phase 8.
 
 ## Folder layout (so far)
@@ -82,6 +83,34 @@ Every change writes a row to `complaint_status_history` (who, when, note). The r
 Departments (seeded by a data migration, refresh with `python manage.py seed_departments`):
 Hostel, Mess & Food, IT (Wi-Fi), Labs & Academics, Transport, Maintenance (Electrical &
 Plumbing), Housekeeping & Sanitation, Security.
+
+## REST API (JWT)
+
+Log in to get tokens, then send `Authorization: Bearer <access>` on every request.
+Access tokens last 30 minutes; use the refresh token to get a new one (both set in `.env`).
+
+```bash
+curl -X POST localhost:8000/api/auth/login/ -H 'Content-Type: application/json' \
+     -d '{"username": "warden", "password": "..."}'
+# -> {"access": "...", "refresh": "...", "user": {"role": "staff", ...}}
+curl localhost:8000/api/complaints/?status=open -H "Authorization: Bearer <access>"
+```
+
+| Method & path                     | Who                  | Notes |
+|-----------------------------------|----------------------|-------|
+| `POST /api/auth/register/`        | anyone               | always creates a **student**; rate-limited |
+| `POST /api/auth/login/`           | anyone               | returns `access`, `refresh`, `user`; token carries `role`; rate-limited |
+| `POST /api/auth/refresh/`         | anyone with refresh  | new access token |
+| `GET /api/auth/me/`               | logged in            | current user |
+| `GET /api/departments/`           | logged in            | 8 departments |
+| `GET /api/complaints/`            | logged in            | student: own · staff: own department · admin: all. Filters: `status, category, urgency, department, block, needs_review, q, from, to (YYYY-MM-DD), ordering`; 20 per page |
+| `POST /api/complaints/`           | student              | `title, description, category?, location?, block?` |
+| `GET /api/complaints/{id}/`       | if visible           | includes status `history`; invisible → 404 |
+| `PATCH /api/complaints/{id}/`     | by role              | student (own, while open): `title, description, location, block, category` · staff (own dept): `status, note, urgency` · admin: staff fields + `category, needs_review`. Other fields → 403; bad status move → 400 |
+| `GET /api/complaints/stats/`      | staff, admin         | `total, by_category, by_status, by_urgency, by_block, by_week` (`?weeks=12`) |
+
+No PUT or DELETE on complaints. Endpoints for hotspots, spikes, AI, chat, documents,
+metrics and reports come in later phases.
 
 ## Tests
 

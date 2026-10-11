@@ -5,6 +5,7 @@ All secrets and environment-specific values come from environment
 variables (loaded from a .env file). Nothing secret is hard-coded here.
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Third-party
+    "rest_framework",
     # Our apps
     "accounts",
     "complaints",
@@ -113,6 +116,28 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_URL = "web:login"
 LOGIN_REDIRECT_URL = "web:dashboard"
 LOGOUT_REDIRECT_URL = "web:home"
+
+# --- REST API (Django REST Framework + JWT) ---------------------------------
+REST_FRAMEWORK = {
+    # JWT for the React app; session login also works so the browsable API can be used in the browser.
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    # Every endpoint needs login unless it says otherwise (register/login do).
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 20,
+    # Rate limits: slow down password guessing on login/register.
+    "DEFAULT_THROTTLE_RATES": {"auth": os.getenv("AUTH_THROTTLE_RATE", "20/min")},
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=int(os.getenv("JWT_ACCESS_MINUTES", "30"))),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=int(os.getenv("JWT_REFRESH_DAYS", "1"))),
+    "AUTH_HEADER_TYPES": ("Bearer",),  # header:  Authorization: Bearer <access token>
+    # Tokens are signed with SECRET_KEY (from .env) by default.
+}
 
 # --- Language / time --------------------------------------------------------
 LANGUAGE_CODE = "en-us"

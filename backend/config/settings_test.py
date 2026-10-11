@@ -10,3 +10,6 @@ DATABASES = {
 
 # Fast (insecure) password hashing makes tests run quicker. Test-only.
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
+
+# Don't let rate limits break tests that log in many times.
+REST_FRAMEWORK = {**REST_FRAMEWORK, "DEFAULT_THROTTLE_RATES": {"auth": "10000/min"}}  # noqa: F405
