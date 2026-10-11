@@ -16,4 +16,5 @@ frontend/dist/
 
 # Trained ML models (rebuild with: python manage.py train_models)
 backend/ai/ml/artifacts/
-backend/frontend_dist/
+# Note: backend/frontend_dist/ (the built React dashboard) IS committed, so the dashboard
+# works at /dashboard/ without installing Node.js. Rebuild with: cd frontend && npm run build

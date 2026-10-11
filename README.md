@@ -177,11 +177,12 @@ python manage.py ingest_documents      # optional: sample rule PDFs for the assi
 python manage.py createsuperuser
 python manage.py runserver             # http://localhost:8000
 
-# dashboard, in another terminal
+# dashboard: a built copy is in the repo (backend/frontend_dist), so Django already serves it at
+# http://localhost:8000/dashboard/ without Node.js. To change the dashboard code (needs Node.js):
 cd frontend
 npm install
-npm run dev                            # http://localhost:5173/dashboard/
-# or: npm run build -> Django serves it at http://localhost:8000/dashboard/
+npm run dev                            # http://localhost:5173/dashboard/ (live reload)
+npm run build                          # refresh the copy Django serves
 ```
 
 ### Settings (.env)
