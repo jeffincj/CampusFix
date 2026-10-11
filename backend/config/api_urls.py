@@ -13,6 +13,7 @@ from ai.api import (
     SpikesView,
 )
 from complaints.api import ComplaintViewSet, DepartmentListView
+from reports.api import WeeklyReportView
 
 # The router creates /complaints/, /complaints/{id}/ and /complaints/stats/ from the ViewSet.
 router = DefaultRouter()
@@ -31,5 +32,6 @@ urlpatterns = [
     path("chat/", ChatView.as_view(), name="api-chat"),
     path("documents/", DocumentsView.as_view(), name="api-documents"),
     path("documents/<int:pk>/", DocumentDetailView.as_view(), name="api-document-detail"),
+    path("reports/weekly/", WeeklyReportView.as_view(), name="api-weekly-report"),
     path("", include(router.urls)),
 ]

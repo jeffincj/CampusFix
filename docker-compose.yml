@@ -1,5 +1,9 @@
-# Runs CampusFix locally: MySQL database + Django backend.
-# Usage: cp .env.example .env  (fill values), then  docker compose up --build
+# CampusFix local environment.
+#   cp .env.example .env          (fill in passwords, secret key, optional ANTHROPIC_API_KEY)
+#   docker compose up --build     -> student site  http://localhost:8000
+#                                    dashboard     http://localhost:5173/dashboard/ (Vite, live reload)
+#   docker compose --profile prod up --build app db
+#                                 -> production image (gunicorn + built dashboard) at http://localhost:8080
 
 services:
   db:
@@ -13,30 +17,69 @@ services:
     # utf8mb4 so Tamil and Malayalam text is stored correctly.
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-      - mysql_data:/var/lib/mysql  # keeps data between restarts
+      - mysql_data:/var/lib/mysql
     ports:
       - "3306:3306"
     healthcheck:
-      # The backend waits until MySQL answers this ping.
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
       interval: 5s
       timeout: 5s
-      retries: 20
+      retries: 30
 
+  # Django (development server, code mounted for live reload)
   backend:
     build: ./backend
     env_file: .env
     environment:
       DB_ENGINE: mysql
-      DB_HOST: db  # inside Docker, MySQL is reachable by its service name
+      DB_HOST: db
       DB_PORT: "3306"
+      SEED_DEMO_DATA: ${SEED_DEMO_DATA:-1}
+      ML_ARTIFACT_DIR: /app/ai/ml/artifacts
     volumes:
-      - ./backend:/app  # live code reload during development
+      - ./backend:/app
     ports:
       - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
 
+  # React dashboard (Vite dev server); /api is proxied to the backend service
+  frontend:
+    image: node:22-slim
+    working_dir: /app
+    command: sh -c "npm ci --no-audit --no-fund && npm run dev -- --host 0.0.0.0"
+    environment:
+      VITE_API_PROXY: http://backend:8000
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+  # Production image (same as on Render). Start with: docker compose --profile prod up --build app db
+  app:
+    profiles: ["prod"]
+    build: .
+    env_file: .env
+    environment:
+      DB_ENGINE: mysql
+      DB_HOST: db
+      DB_PORT: "3306"
+      DJANGO_DEBUG: "0"
+      SECURE_COOKIES: "0"  # plain http on localhost
+      SEED_DEMO_DATA: ${SEED_DEMO_DATA:-1}
+    volumes:
+      - media:/app/media
+    ports:
+      - "8080:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
 volumes:
   mysql_data:
+  frontend_node_modules:
+  media:

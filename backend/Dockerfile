@@ -1,4 +1,4 @@
-# Backend image: Python 3.11 + Django app.
+# Development image for docker compose (runserver). The production image is ../Dockerfile.
 FROM python:3.11-slim
 
 # Don't write .pyc files; print logs straight away.

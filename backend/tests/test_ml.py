@@ -161,3 +161,14 @@ def test_metrics_api(api_as, admin_user):
     data = api_as(admin_user).get("/api/metrics/").data
     assert data["models"]["classifier"]["metrics"]["accuracy"] == 0.9
     assert data["models"]["time_model"] is None
+
+
+@pytest.mark.django_db
+def test_train_models_if_needed(ml_dir):
+    import io
+
+    call_command("train_models", "--if-needed", stdout=io.StringIO())
+    assert (ml_dir / "classifier.joblib").exists() and (ml_dir / "time_model.joblib").exists()
+    assert ModelMetric.objects.count() == 2
+    call_command("train_models", "--if-needed", stdout=io.StringIO())  # second run does nothing
+    assert ModelMetric.objects.count() == 2

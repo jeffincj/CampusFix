@@ -13,3 +13,6 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 
 # Don't let rate limits break tests that log in many times.
 REST_FRAMEWORK = {**REST_FRAMEWORK, "DEFAULT_THROTTLE_RATES": {"auth": "10000/min"}}  # noqa: F405
+
+# Tests never run collectstatic, so use plain static file storage.
+STORAGES = {**STORAGES, "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"}}  # noqa: F405

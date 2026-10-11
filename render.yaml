@@ -1,0 +1,67 @@
+# Render Blueprint: Render -> New -> Blueprint -> pick this repository.
+# Creates the web app (Docker) and a private MySQL service with a disk.
+# Disks need a paid instance type; see README "Deploy to Render" for a free alternative.
+services:
+  - type: pserv
+    name: campusfix-mysql
+    runtime: image
+    image:
+      url: docker.io/library/mysql:8.0
+    plan: starter
+    disk:
+      name: mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 5
+    envVars:
+      - key: MYSQL_DATABASE
+        value: campusfix
+      - key: MYSQL_USER
+        value: campusfix
+      - key: MYSQL_PASSWORD
+        generateValue: true
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+
+  - type: web
+    name: campusfix
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /healthz/
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "0"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: .onrender.com
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://campusfix.onrender.com   # change if Render gives the service another URL
+      - key: DB_ENGINE
+        value: mysql
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: campusfix-mysql
+          property: host
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_NAME
+        value: campusfix
+      - key: DB_USER
+        value: campusfix
+      - key: DB_PASSWORD
+        fromService:
+          type: pserv
+          name: campusfix-mysql
+          envVarKey: MYSQL_PASSWORD
+      - key: LLM_PROVIDER
+        value: anthropic
+      - key: ANTHROPIC_API_KEY
+        sync: false        # set it in the Render dashboard (never in this file)
+      - key: LLM_MODEL
+        value: claude-opus-5-5
+      - key: SEED_DEMO_DATA
+        value: "1"
+      - key: WEB_CONCURRENCY
+        value: "2"

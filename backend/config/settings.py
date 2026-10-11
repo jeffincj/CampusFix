@@ -33,6 +33,16 @@ if not SECRET_KEY:
         raise RuntimeError("DJANGO_SECRET_KEY must be set when DEBUG is off.")
 
 ALLOWED_HOSTS = [h.strip() for h in os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if h.strip()]
+# Full origins (with https://) allowed to send forms, e.g. https://campusfix.onrender.com
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if o.strip()]
+
+if not DEBUG:
+    # Behind a proxy that terminates HTTPS (Render, nginx): trust its header and use secure cookies.
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SESSION_COOKIE_SECURE = env_bool("SECURE_COOKIES", "1")
+    CSRF_COOKIE_SECURE = env_bool("SECURE_COOKIES", "1")
+    SECURE_SSL_REDIRECT = env_bool("SECURE_SSL_REDIRECT", "0")
+    SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # --- Apps -------------------------------------------------------------------
 INSTALLED_APPS = [
@@ -48,11 +58,13 @@ INSTALLED_APPS = [
     "accounts",
     "complaints",
     "ai",
+    "reports",
     "web",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # serves static files (incl. the React build) in production
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -149,6 +161,14 @@ USE_TZ = True
 # --- Static files -----------------------------------------------------------
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"  # collectstatic puts files here for production
+# Compressed, cache-busted static files in production (needs "collectstatic"); plain files in development.
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage" if DEBUG
+        else "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 # The React dashboard build (npm run build) lands in frontend_dist/dashboard/ and is served as static files.
 FRONTEND_DIST = BASE_DIR / "frontend_dist"
 STATICFILES_DIRS = [FRONTEND_DIST] if FRONTEND_DIST.exists() else []
@@ -158,3 +178,13 @@ MEDIA_URL = "media/"
 MEDIA_ROOT = Path(os.getenv("MEDIA_ROOT", BASE_DIR / "media"))
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# --- Logging: everything to the console (Docker/Render collect it) -----------
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "root": {"handlers": ["console"], "level": os.getenv("LOG_LEVEL", "INFO")},
+    # faiss logs every CPU feature it probes at start-up; only show real problems.
+    "loggers": {"faiss.loader": {"level": "WARNING"}},
+}
