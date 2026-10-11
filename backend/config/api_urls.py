@@ -3,7 +3,15 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from accounts.api import LoginView, MeView, RefreshView, RegisterView
-from ai.api import ClassifyView, HotspotsView, MetricsView, SpikesView
+from ai.api import (
+    ChatView,
+    ClassifyView,
+    DocumentDetailView,
+    DocumentsView,
+    HotspotsView,
+    MetricsView,
+    SpikesView,
+)
 from complaints.api import ComplaintViewSet, DepartmentListView
 
 # The router creates /complaints/, /complaints/{id}/ and /complaints/stats/ from the ViewSet.
@@ -20,5 +28,8 @@ urlpatterns = [
     path("spikes/", SpikesView.as_view(), name="api-spikes"),
     path("metrics/", MetricsView.as_view(), name="api-metrics"),
     path("ai/classify/", ClassifyView.as_view(), name="api-classify"),
+    path("chat/", ChatView.as_view(), name="api-chat"),
+    path("documents/", DocumentsView.as_view(), name="api-documents"),
+    path("documents/<int:pk>/", DocumentDetailView.as_view(), name="api-document-detail"),
     path("", include(router.urls)),
 ]

@@ -136,3 +136,93 @@ class ClassifyView(APIView):
             "agree": bool(llm["result"] and classifier and llm["result"]["category"] == classifier["label"]),
             "fallback": intake.rule_based_intake(text),
         })
+
+
+# --- Phase 6: chat assistant and documents -------------------------------------------
+
+class ChatView(APIView):
+    """
+    POST /api/chat/ {"message": "...", "session_id": optional}  (staff/admin)
+    GET  /api/chat/?session_id=...  -> the messages of one of your conversations
+    """
+
+    permission_classes = [IsStaffOrAdmin]
+
+    def post(self, request):
+        from .agent import run_chat
+
+        message = str(request.data.get("message", "")).strip()
+        if not 2 <= len(message) <= 2000:
+            return Response({"detail": "message must be 2 to 2000 characters."}, status=400)
+        session_id = str(request.data.get("session_id") or "")[:40] or None
+        return Response(run_chat(request.user, message, session_id=session_id))
+
+    def get(self, request):
+        from .models import ChatHistory
+
+        session_id = request.query_params.get("session_id", "")
+        rows = ChatHistory.objects.filter(user=request.user, session_id=session_id).exclude(role="tool")
+        return Response([{"role": r.role, "content": r.content, "sources": r.sources, "refused": r.refused,
+                          "created_at": r.created_at} for r in rows])
+
+
+MAX_PDF_BYTES = 10 * 1024 * 1024
+
+
+def document_row(document):
+    return {"id": document.id, "title": document.title, "file_name": document.file_name, "pages": document.pages,
+            "chunks": document.chunks.count(), "created_at": document.created_at}
+
+
+class DocumentsView(APIView):
+    """
+    GET  /api/documents/        list of rule documents (staff/admin)
+    POST /api/documents/        upload a PDF (admin): multipart form with "file" and optional "title"
+    """
+
+    def get_permissions(self):
+        return [IsAdmin()] if self.request.method == "POST" else [IsStaffOrAdmin()]
+
+    def get(self, request):
+        from .models import Document
+
+        return Response([document_row(d) for d in Document.objects.all()])
+
+    def post(self, request):
+        from . import rag
+        from .models import Document
+
+        upload = request.FILES.get("file")
+        if upload is None:
+            return Response({"detail": "Send the PDF in a form field called 'file'."}, status=400)
+        if upload.size > MAX_PDF_BYTES:
+            return Response({"detail": "The PDF must be 10 MB or smaller."}, status=400)
+        if not upload.name.lower().endswith(".pdf") or upload.read(5) != b"%PDF-":
+            return Response({"detail": "Only PDF files are accepted."}, status=400)
+        upload.seek(0)
+
+        title = str(request.data.get("title") or upload.name.rsplit(".", 1)[0])[:200]
+        document = Document.objects.create(title=title, file=upload, file_name=upload.name[:200], uploaded_by=request.user)
+        try:
+            rag.ingest(document)
+        except Exception as error:  # unreadable PDF: remove it and explain
+            document.file.delete(save=False)
+            document.delete()
+            return Response({"detail": f"Could not read this PDF: {error}"}, status=400)
+        return Response(document_row(document), status=201)
+
+
+class DocumentDetailView(APIView):
+    """DELETE /api/documents/{id}/ (admin) -> removes the PDF and its chunks."""
+
+    permission_classes = [IsAdmin]
+
+    def delete(self, request, pk):
+        from .models import Document
+
+        document = Document.objects.filter(pk=pk).first()
+        if document is None:
+            return Response(status=404)
+        document.file.delete(save=False)
+        document.delete()
+        return Response(status=204)
